@@ -41,9 +41,9 @@ class User(db.Model, UserMixin):
         "state": self.state,
         "level": self.level,
         "profileImage": self.profileImageUrl,
-        "rides": [ride.to_dict() for ride in self.rides],
+        "personal_rides": [ride.to_dict() for ride in self.rides],
         "commitments": [commitment.to_dict() for commitment in self.committed_rides],
-        "following": [user.to_dict() for user in self.following]
+        "following": [user.to_dict() for user in self.following],
       }
 
 
@@ -56,12 +56,12 @@ class Ride(db.Model):
   content = db.Column(db.Text, nullable=True)
   startTime = db.Column(db.DateTime, nullable=False)
   endTime = db.Column(db.DateTime, nullable=False)
-  latitude = db.Column(db.Float, precision=8, nullable=False)
-  longitude = db.Column(db.Float, precision=8, nullable=False)
+  latitude = db.Column(db.Float(precision=8), nullable=False)
+  longitude = db.Column(db.Float(precision=8), nullable=False)
   isLocal = db.Column(db.Boolean, nullable=False, default=False)
 
   posts = db.relationship("Post", cascade="all,delete", back_populates="rides")
-  committed_riders = db.relationship("User", secondary="users_committed_rides", back_populate="committed_rides")
+  committed_riders = db.relationship("User", secondary="users_committed_rides", back_populates="committed_rides")
 
 
   def to_dict(self):
@@ -75,7 +75,7 @@ class Ride(db.Model):
       "endTime": self.endTime,
       "latitude": self.latitude,
       "longitude": self.longitude,
-      "isLocal" = self.isLocal,
+      "isLocal": self.isLocal,
       "committedRiders": [rider.to_dict() for rider in self.committed_riders],
       "posts": [post.to_dict() for post in self.posts]
     }
@@ -98,12 +98,12 @@ users_committed_rides = db.Table(
 following = db.Table(
   "followings",
     db.Column(
-      "follower_id",
+      "user_id",
       db.Integer,
       db.ForeignKey("users.id"),
     ),
     db.Column(
-      "follower_id",
+      "following_user_id",
       db.Integer,
       db.ForeignKey("users.id"),
     )

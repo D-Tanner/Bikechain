@@ -5,7 +5,7 @@ class Post(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   userId = db.Column(db.Integer, db.ForeignKey("users.id"))
-  rideId = db.Columen(db.Integer, db.ForeingKey("rides.id"))
+  rideId = db.Column(db.Integer, db.ForeignKey("rides.id"))
   content = db.Column(db.Text, nullable=True)
 
   user = db.relationship("User", back_populates="posts")

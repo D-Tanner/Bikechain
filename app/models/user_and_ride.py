@@ -59,6 +59,7 @@ class Ride(db.Model):
   latitude = db.Column(db.Float(precision=8), nullable=False)
   longitude = db.Column(db.Float(precision=8), nullable=False)
   isLocal = db.Column(db.Boolean, nullable=False, default=False)
+  level = db.Column(db.String(50), nullable=False)
 
   posts = db.relationship("Post", cascade="all,delete", back_populates="rides")
   committed_riders = db.relationship("User", secondary="users_committed_rides", back_populates="committed_rides")

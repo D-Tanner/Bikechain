@@ -34,6 +34,7 @@ def upgrade():
     sa.Column('latitude', sa.Float(precision=8), nullable=False),
     sa.Column('longitude', sa.Float(precision=8), nullable=False),
     sa.Column('isLocal', sa.Boolean(), nullable=False),
+    sa.Column('level', sa.String(50), nullable=False),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

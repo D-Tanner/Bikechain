@@ -9,7 +9,7 @@ class Post(db.Model):
   content = db.Column(db.Text, nullable=True)
 
   user = db.relationship("User", back_populates="posts")
-  images = db.relationship("Image", cascade="all,delete", back_populates="posts")
+  images = db.relationship("Image", cascade="all,delete", back_populates="post")
 
   def to_dict(self):
     return {
@@ -17,6 +17,6 @@ class Post(db.Model):
       "userId": self.userId,
       "rideId": self.rideId,
       "content": self.content,
-      "user": self.user.to_dict()
-      "images" = [image.to_dict() for image in self.images]
+      "user": self.user.to_dict(),
+      "images": [image.to_dict() for image in self.images],
     }

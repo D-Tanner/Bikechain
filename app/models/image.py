@@ -8,12 +8,12 @@ class Image(db.Model):
     postId = db.Column(db.Integer, db.ForeignKey("posts.id"))
     imageUrl = db.Column(db.String(255), nullable=False)
 
-    post = db.relationship("Posts", back_populates="images")
+    post = db.relationship("Post", back_populates="images")
 
     def to_dict(self):
         return {
             "postId": self.postId,
             "imageUrl": self.imageUrl,
-            "post": self.post.name,
+            "post": self.post,
             "id": self.id
         }

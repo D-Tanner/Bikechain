@@ -20,9 +20,8 @@ export const ModalProvider = ({ children }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showSearchBarModal, setShowSearchBarModal] = useState(false);
-  const [showDonateModal, setShowDonateModal] = useState(false);
-  const [showEditProjectModal, setShowEditProjectModal] = useState(false);
-  const [showEditCommentModal, setShowEditCommentModal] = useState(false);
+
+
   useEffect(() => {
     setValue(modalRef.current);
   }, []);
@@ -38,12 +37,6 @@ export const ModalProvider = ({ children }) => {
           setShowSignUpModal,
           showSearchBarModal,
           setShowSearchBarModal,
-          setShowDonateModal,
-          showDonateModal,
-          showEditProjectModal,
-          setShowEditProjectModal,
-          showEditCommentModal,
-          setShowEditCommentModal,
         }}
       >
         {children}

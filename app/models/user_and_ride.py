@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
   # rides = db.relationship("Ride", back_populates="users")
   rides = db.relationship("Ride")
   committed_rides = db.relationship("Ride", secondary="users_committed_rides", back_populates="committed_riders")
-  following = db.relationship("User", secondary="following")
+  following = db.relationship("User", secondary="followings")
 
   @property
   def password(self):
@@ -97,7 +97,7 @@ users_committed_rides = db.Table(
     )
 )
 
-following = db.Table(
+followings = db.Table(
   "followings",
     db.Column(
       "user_id",

@@ -109,6 +109,6 @@ class Ride(db.Model):
       "latitude": self.latitude,
       "longitude": self.longitude,
       "isLocal": self.isLocal,
-      "committedRiders": [rider.to_dict() for rider in self.committed_riders],
-      "posts": [post.to_dict() for post in self.posts]
+      # "committedRiders": [rider.to_dict() for rider in self.committed_riders],
+      # "posts": [post.to_dict() for post in self.posts],
     }

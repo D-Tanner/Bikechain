@@ -5,7 +5,7 @@ import datetime
 # Adds a demo user, you can add other users here if you want
 def seed_rides():
 
-    one = User(userId=1,
+    one = Ride(userId=1,
               title="Get stoked!",
               content="riding very soon",
               startTime=datetime.datetime.utcnow,
@@ -16,7 +16,7 @@ def seed_rides():
               level="Easy",
               )
 
-    two = User(userId=2,
+    two = Ride(userId=2,
               title="Bring a helmet",
               content="riding very soon",
               startTime=datetime.datetime.utcnow,
@@ -27,7 +27,7 @@ def seed_rides():
               level="Easy",
               )
 
-    three = User(userId=3,
+    three = Ride(userId=3,
               title="Ever ridden in snow?",
               content="riding very soon",
               startTime=datetime.datetime.utcnow,
@@ -38,7 +38,7 @@ def seed_rides():
               level="More Difficult",
               )
 
-    four = User(userId=3,
+    four = Ride(userId=3,
               title="Get ready for drops",
               content="riding very soon",
               startTime=datetime.datetime.utcnow,

@@ -53,6 +53,19 @@ def seed_users():
         {"userId": 4, "rideId": 4},
     ])
 
+    op.bulk_insert(following,
+    [
+        {"user_id": 1, "following_user_id": 2},
+        {"user_id": 1, "following_user_id": 3},
+        {"user_id": 2, "following_user_id": 1},
+        {"user_id": 2, "following_user_id": 3},
+        {"user_id": 2, "following_user_id": 4},
+        {"user_id": 3, "following_user_id": 4},
+        {"user_id": 4, "following_user_id": 1},
+        {"user_id": 4, "following_user_id": 2},
+
+    ])
+
     db.session.commit()
 # Uses a raw SQL query to TRUNCATE the users table.
 # SQLAlchemy doesn't have a built in function to do this
@@ -60,4 +73,6 @@ def seed_users():
 # the auto incrementing primary key
 def undo_users():
     db.session.execute('TRUNCATE users;')
+    db.session.execute('TRUNCATE users_committed_rides;')
+    db.session.execute('TRUNCATE followings;')
     db.session.commit()

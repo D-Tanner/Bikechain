@@ -72,9 +72,9 @@ class User(db.Model, UserMixin):
         "state": self.state,
         "level": self.level,
         "profileImage": self.profileImageUrl,
-        "personal_rides": [ride.to_dict() for ride in self.rides],
-        "commitments": [commitment.to_dict() for commitment in self.committed_rides],
-        "following": [user.to_dict() for user in self.followers],
+        # "personal_rides": [ride.to_dict() for ride in self.rides],
+        # "commitments": [commitment.to_dict() for commitment in self.committed_rides],
+        # "following": [user.to_dict() for user in self.followers],
       }
 
 

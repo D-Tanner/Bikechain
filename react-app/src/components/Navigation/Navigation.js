@@ -1,11 +1,24 @@
 import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+
+import LoginForm from "../auth/LoginForm"
+import SignUpForm from "../auth/SignUpForm"
 import LogoutButton from '../auth/LogoutButton';
+import { useModalContext } from "../../context/Modal"
 
 
+const Navigation = ({ setAuthenticated }) => {
+
+  // const {
+  //   showLoginModal,
+  //   setShowLoginModal,
+  //   showSignUpModal,
+  //   setShowSignUpModal,
+  //   showSearchBarModal,
+  //   setShowSearchBarModal,
+  // } = useModalContext();
 
 
-const NavBar = ({ setAuthenticated }) => {
   return (
     <nav>
       <ul>
@@ -37,4 +50,4 @@ const NavBar = ({ setAuthenticated }) => {
   );
 }
 
-export default NavBar;
+export default Navigation;

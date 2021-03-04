@@ -14,7 +14,8 @@ class User(db.Model, UserMixin):
   state = db.Column(db.String(50), nullable=False)
   level = db.Column(db.String(50), nullable=False)
 
-  rides = db.relationship("Ride", back_populates="users")
+  # rides = db.relationship("Ride", back_populates="users")
+  rides = db.relationship("Ride")
   committed_rides = db.relationship("Ride", secondary="users_committed_rides", back_populates="committed_riders")
   following = db.relationship("User", secondary="following")
 

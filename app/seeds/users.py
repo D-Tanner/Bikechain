@@ -1,10 +1,7 @@
 from werkzeug.security import generate_password_hash
 from app.models import db
-from app.models.user_and_ride import User
-from sqlalchemy.sql import table, column
-from sqlalchemy import String, Integer
-from alembic import op
-
+from app.models.user_and_ride import User, Ride
+import datetime
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
@@ -26,45 +23,73 @@ def seed_users():
                 state="Colorado",
                 level="Advanced+")
 
-    db.session.add_all([one, two, three, four])
+    ride_one = Ride(userId=1,
+              title="Get stoked!",
+              content="riding very soon",
+              startTime=datetime.datetime.now().strftime("%c"),
+              endTime=datetime.datetime.now().strftime("%c"),
+              latitude=39.739235,
+              longitude=-104.990250,
+              isLocal=True,
+              level="Easy",
+              )
+
+    ride_two = Ride(userId=2,
+              title="Bring a helmet",
+              content="riding very soon",
+              startTime=datetime.datetime.now().strftime("%c"),
+              endTime=datetime.datetime.now().strftime("%c"),
+              latitude=38.833881,
+              longitude=-104.821365,
+              isLocal=False,
+              level="Easy",
+              )
+
+    ride_three = Ride(userId=3,
+              title="Ever ridden in snow?",
+              content="riding very soon",
+              startTime=datetime.datetime.now().strftime("%c"),
+              endTime=datetime.datetime.now().strftime("%c"),
+              latitude=38.841770,
+              longitude=-106.132561,
+              isLocal=True,
+              level="More Difficult",
+              )
+
+    ride_four = Ride(userId=3,
+              title="Get ready for drops",
+              content="riding very soon",
+              startTime=datetime.datetime.now().strftime("%c"),
+              endTime=datetime.datetime.now().strftime("%c"),
+              latitude=39.654251,
+              longitude=-106.823601,
+              isLocal=True,
+              level="Extremely Difficult",
+              )
 
 
-    users_committed_rides = table('users_committed_rides',
-        column('userId', Integer),
-        column('rideId', Integer),
-    )
+    db.session.add_all([one,
+                        two,
+                        three,
+                        four,
+                        ride_one,
+                        ride_two,
+                        ride_three,
+                        ride_four
+                        ])
 
-    follows = table('follows',
-        column('follower_id', Integer),
-        column('followed_id', Integer),
-    )
+    one.committed_rides.extend([ride_one, ride_two, ride_three])
+    one.followers.extend([two, three])
 
-    op.bulk_insert(users_committed_rides,
-    [
-        {"userId": 1, "rideId": 1},
-        {"userId": 1, "rideId": 2},
-        {"userId": 2, "rideId": 3},
-        {"userId": 2, "rideId": 4},
-        {"userId": 3, "rideId": 2},
-        {"userId": 3, "rideId": 4},
-        {"userId": 4, "rideId": 1},
-        {"userId": 4, "rideId": 2},
-        {"userId": 4, "rideId": 3},
-        {"userId": 4, "rideId": 4},
-    ])
+    two.committed_rides.extend([ride_two, ride_three])
+    two.followers.extend([three, four])
 
-    op.bulk_insert(follows,
-    [
-        {"follower_id": 1, "followed_id": 2},
-        {"follower_id": 1, "followed_id": 3},
-        {"follower_id": 2, "followed_id": 1},
-        {"follower_id": 2, "followed_id": 3},
-        {"follower_id": 2, "followed_id": 4},
-        {"follower_id": 3, "followed_id": 4},
-        {"follower_id": 4, "followed_id": 1},
-        {"follower_id": 4, "followed_id": 2},
+    three.committed_rides.extend([ride_two, ride_four, ride_one])
+    three.followers.extend([one, four, two])
 
-    ])
+    four.committed_rides.extend([ride_two, ride_one])
+    four.followers.extend([one, three, two])
+
 
     db.session.commit()
 # Uses a raw SQL query to TRUNCATE the users table.
@@ -72,7 +97,7 @@ def seed_users():
 # TRUNCATE Removes all the data from the table, and resets
 # the auto incrementing primary key
 def undo_users():
-    db.session.execute('TRUNCATE users;')
+    db.session.execute('TRUNCATE users CASCADE;')
     db.session.execute('TRUNCATE users_committed_rides;')
-    db.session.execute('TRUNCATE followings;')
+    db.session.execute('TRUNCATE follows;')
     db.session.commit()

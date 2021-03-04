@@ -54,5 +54,5 @@ def seed_posts():
 # TRUNCATE Removes all the data from the table, and resets
 # the auto incrementing primary key
 def undo_posts():
-    db.session.execute('TRUNCATE posts;')
+    db.session.execute('TRUNCATE posts CASCADE;')
     db.session.commit()

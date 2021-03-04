@@ -37,8 +37,8 @@ class User(db.Model, UserMixin):
   state = db.Column(db.String(50), nullable=False)
   level = db.Column(db.String(50), nullable=False)
 
-  # rides = db.relationship("Ride", back_populates="users")
-  rides = db.relationship("Ride")
+  rides = db.relationship("Ride", back_populates="user")
+  posts = db.relationship("Post", back_populates="user")
   committed_rides = db.relationship("Ride", secondary="users_committed_rides", back_populates="committed_riders")
   followers = db.relationship(
         "User",
@@ -74,7 +74,7 @@ class User(db.Model, UserMixin):
         "profileImage": self.profileImageUrl,
         "personal_rides": [ride.to_dict() for ride in self.rides],
         "commitments": [commitment.to_dict() for commitment in self.committed_rides],
-        "following": [user.to_dict() for user in self.following],
+        "following": [user.to_dict() for user in self.followers],
       }
 
 
@@ -92,7 +92,8 @@ class Ride(db.Model):
   isLocal = db.Column(db.Boolean, nullable=False, default=False)
   level = db.Column(db.String(50), nullable=False)
 
-  posts = db.relationship("Post", cascade="all,delete")
+  user = db.relationship("User", back_populates="rides")
+  posts = db.relationship("Post", cascade="all,delete", back_populates="ride")
   committed_riders = db.relationship("User", secondary="users_committed_rides", back_populates="committed_rides")
 
 

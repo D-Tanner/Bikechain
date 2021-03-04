@@ -28,9 +28,18 @@ const Navigation = ({ setAuthenticated }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/login" exact={true} activeClassName="active">
+          {/* <NavLink to="/login" exact={true} activeClassName="active">
             Login
-          </NavLink>
+          </NavLink> */}
+
+          <button
+            onClick={() => {
+              setShowSignUpModal(false);
+              setShowLoginModal((prev) => !prev);
+            }}
+          >
+            Login
+              </button>
         </li>
         <li>
           <NavLink to="/sign-up" exact={true} activeClassName="active">

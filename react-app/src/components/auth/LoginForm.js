@@ -1,20 +1,32 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { login } from "../../services/auth";
+import { Modal, useModalContext } from "../../context/Modal"
 
 const LoginForm = ({ authenticated, setAuthenticated }) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // const { showLoginModal, setShowLoginModal } = useModalContext();
+
   const onLogin = async (e) => {
     e.preventDefault();
     const user = await login(email, password);
     if (!user.errors) {
       setAuthenticated(true);
+      // setShowLoginModal(false)
     } else {
       setErrors(user.errors);
     }
+  };
+
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    const demoEmail = "demo@aa.io";
+    const demoPassword = "password";
+    setTimeout(await login(demoEmail, demoPassword), 1000);
+    // setShowLoginModal(false);
   };
 
   const updateEmail = (e) => {

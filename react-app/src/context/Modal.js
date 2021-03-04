@@ -21,7 +21,6 @@ export const ModalProvider = ({ children }) => {
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showSearchBarModal, setShowSearchBarModal] = useState(false);
 
-
   useEffect(() => {
     setValue(modalRef.current);
   }, []);

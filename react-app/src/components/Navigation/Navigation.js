@@ -9,14 +9,14 @@ import { useModalContext } from "../../context/Modal"
 
 const Navigation = ({ setAuthenticated }) => {
 
-  // const {
-  //   showLoginModal,
-  //   setShowLoginModal,
-  //   showSignUpModal,
-  //   setShowSignUpModal,
-  //   showSearchBarModal,
-  //   setShowSearchBarModal,
-  // } = useModalContext();
+  const {
+    showLoginModal,
+    setShowLoginModal,
+    showSignUpModal,
+    setShowSignUpModal,
+    showSearchBarModal,
+    setShowSearchBarModal,
+  } = useModalContext();
 
 
   return (

@@ -3,9 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
+import { ModalProvider } from "./context/Modal"
+
+const Root = () => (
+
+  <ModalProvider>
+
+    <App />
+
+  </ModalProvider>
+
+);
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Root />
   </React.StrictMode>,
   document.getElementById('root')
 );

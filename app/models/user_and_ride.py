@@ -2,6 +2,29 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+
+users_committed_rides = db.Table(
+  "users_committed_rides",
+    db.Column(
+      "userId",
+      db.Integer,
+      db.ForeignKey("users.id"),
+    ),
+    db.Column(
+      "rideId",
+      db.Integer,
+      db.ForeignKey("rides.id"),
+    )
+)
+
+follows = db.Table(
+    "follows",
+    db.Column("follower_id", db.Integer, db.ForeignKey("users.id")),
+    db.Column("followed_id", db.Integer, db.ForeignKey("users.id"))
+)
+
+
+
 class User(db.Model, UserMixin):
   __tablename__ = 'users'
 
@@ -17,7 +40,14 @@ class User(db.Model, UserMixin):
   # rides = db.relationship("Ride", back_populates="users")
   rides = db.relationship("Ride")
   committed_rides = db.relationship("Ride", secondary="users_committed_rides", back_populates="committed_riders")
-  following = db.relationship("User", secondary="followings")
+  followers = db.relationship(
+        "User",
+        secondary=follows,
+        primaryjoin=(follows.c.follower_id == id),
+        secondaryjoin=(follows.c.followed_id == id),
+        backref=db.backref("follows", lazy="dynamic"),
+        lazy="dynamic"
+    )
 
   @property
   def password(self):
@@ -62,7 +92,7 @@ class Ride(db.Model):
   isLocal = db.Column(db.Boolean, nullable=False, default=False)
   level = db.Column(db.String(50), nullable=False)
 
-  posts = db.relationship("Post", cascade="all,delete", back_populates="rides")
+  posts = db.relationship("Post", cascade="all,delete")
   committed_riders = db.relationship("User", secondary="users_committed_rides", back_populates="committed_rides")
 
 
@@ -81,32 +111,3 @@ class Ride(db.Model):
       "committedRiders": [rider.to_dict() for rider in self.committed_riders],
       "posts": [post.to_dict() for post in self.posts]
     }
-
-
-users_committed_rides = db.Table(
-  "users_committed_rides",
-    db.Column(
-      "userId",
-      db.Integer,
-      db.ForeignKey("users.id"),
-    ),
-    db.Column(
-      "rideId",
-      db.Integer,
-      db.ForeignKey("rides.id"),
-    )
-)
-
-followings = db.Table(
-  "followings",
-    db.Column(
-      "user_id",
-      db.Integer,
-      db.ForeignKey("users.id"),
-    ),
-    db.Column(
-      "following_user_id",
-      db.Integer,
-      db.ForeignKey("users.id"),
-    )
-)

@@ -8,7 +8,8 @@ class Post(db.Model):
   rideId = db.Column(db.Integer, db.ForeignKey("rides.id"))
   content = db.Column(db.Text, nullable=True)
 
-  user = db.relationship("User", back_populates="posts")
+  # user = db.relationship("User", back_populates="posts")
+  user = db.relationship("User")
   images = db.relationship("Image", cascade="all,delete", back_populates="post")
 
   def to_dict(self):

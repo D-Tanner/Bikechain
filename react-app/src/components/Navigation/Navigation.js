@@ -71,11 +71,20 @@ const Navigation = () => {
                 </button>
               )}
             </div>
-          </div>
-          <div>
-            {authenticated && <LogoutButton
-              className="nav-logout"
-              setAuthenticated={setAuthenticated} />}
+            <div>
+              {authenticated && <LogoutButton
+                className="nav-logout"
+                setAuthenticated={setAuthenticated} />}
+            </div>
+            <div>
+              <button onClick={() => {
+                if (authenticated) {
+                  history.push("/new-ride")
+                } else {
+                  setShowLoginModal((prev) => !prev)
+                }
+              }}>Create a Ride</button>
+            </div>
           </div>
         </div>
 

@@ -1,8 +1,10 @@
 import React from 'react';
+import "./CreateRide.css"
+
 
 const CreateRide = () => {
   return (
-    <h1>CreateRide</h1>
+    <div className="container">CreateRide</div>
   )
 }
 

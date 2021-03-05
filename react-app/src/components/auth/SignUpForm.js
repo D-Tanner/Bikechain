@@ -1,20 +1,46 @@
 import React, { useState } from "react";
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../services/auth';
+import { Modal, useModalContext } from "../../context/Modal"
+import csc from "country-state-city";
 
-const SignUpForm = ({authenticated, setAuthenticated}) => {
+const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [stateCode, setStateCode] = useState("");
+  const [level, setLevel] = useState("");
+  const [errors, setErrors] = useState([]);
+  // const [profileImage, setProfileImage] = useState(null)
+
+  const {
+    authenticated,
+    setAuthenticated,
+    showSignUpModal,
+    setShowSignUpModal, } = useModalContext();
+
+  const listOfStates = csc.getStatesOfCountry("US");
+  const listOfCities = csc.getCitiesOfState("US", stateCode);
+
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await signUp(username, email, password);
+      const user = await signUp(username, email, password, city, state, level);
       if (!user.errors) {
         setAuthenticated(true);
+        setShowSignUpModal(false);
+      } else {
+        const errors = user.errors.map(error => error.split(' : ')[1]);
+        setErrors(errors);
       }
+    } else {
+      setErrors([
+        "Confirm Password field must be the same as the Password field",
+      ]);
     }
   };
 
@@ -34,51 +60,128 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
     setRepeatPassword(e.target.value);
   };
 
+
+  const updateState = (e) => {
+    setState(e.target.value);
+    const stateName = e.target.value;
+    let result = "";
+    listOfStates.forEach((state) => {
+      if (state.name === stateName) {
+        result = state.isoCode;
+      }
+    });
+    setStateCode(result);
+  };
+
+  const updateCity = (e) => {
+    setCity(e.target.value);
+  };
+
+  const updateLevel = (e) => {
+    setLevel(e.target.value)
+  }
+
+  // const chooseImage = () => {
+  //   document.getElementById('file').click();
+  // };
+
+  // const updateProfileImage = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) setProfileImage(file);
+  // };
+
   if (authenticated) {
     return <Redirect to="/" />;
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
-        <label>User Name</label>
-        <input
-          type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
-        ></input>
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="text"
-          name="email"
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type="submit">Sign Up</button>
-    </form>
+    <>
+      {showSignUpModal && (
+        <Modal onClose={() => setShowSignUpModal(false)}>
+          <form onSubmit={onSignUp}>
+            <button
+              onClick={() => setShowSignUpModal((prev) => !prev)}
+            >
+              <i id="close-icon" className="far fa-times fa-2x"></i>
+            </button>
+            <div >
+              <ul >
+                {errors.map((error, idx) => (
+                  <li key={idx}>{error}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <label>User Name</label>
+              <input
+                type="text"
+                name="username"
+                onChange={updateUsername}
+                value={username}
+              ></input>
+            </div>
+            <div>
+              <label>Email</label>
+              <input
+                type="text"
+                name="email"
+                onChange={updateEmail}
+                value={email}
+              ></input>
+            </div>
+            <div>
+              <select name="state" onChange={updateState} value={state}>
+                <option value="" disabled selected>
+                  State
+                </option>
+                {listOfStates.map((state) => (
+                  <option key={state.name}>{state.name}</option>
+                ))}
+              </select>
+              <select name="city" onChange={updateCity} value={city}>
+                <option value="" disabled selected>
+                  City
+                </option>
+                {stateCode !== "" &&
+                  listOfCities.map((city) => (
+                    <option key={city.name}>{city.name}</option>
+                  ))}
+              </select>
+            </div>
+            <div>
+              <select name="level" onChange={updateLevel} value={level}>
+                <option value="" disabled selected>Level</option>
+                <option value="Novice">Novice</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Intermediate+">Intermediate+</option>
+                <option value="Advanced">Advanced</option>
+                <option value="Advanced+">Advanced+</option>
+              </select>
+            </div>
+            <div>
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                onChange={updatePassword}
+                value={password}
+              ></input>
+            </div>
+            <div>
+              <label>Repeat Password</label>
+              <input
+                type="password"
+                name="repeat_password"
+                onChange={updateRepeatPassword}
+                value={repeatPassword}
+                required={true}
+              ></input>
+            </div>
+            <button type="submit">Sign Up</button>
+          </form>
+        </Modal>
+      )}
+    </>
   );
 };
 

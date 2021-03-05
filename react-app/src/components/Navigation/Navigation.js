@@ -5,11 +5,14 @@ import LoginForm from "../auth/LoginForm"
 import SignUpForm from "../auth/SignUpForm"
 import LogoutButton from '../auth/LogoutButton';
 import { useModalContext } from "../../context/Modal"
+import { authenticate } from '../../services/auth';
 
 
-const Navigation = ({ setAuthenticated }) => {
+const Navigation = () => {
 
   const {
+    authenticated,
+    setAuthenticated,
     showLoginModal,
     setShowLoginModal,
     showSignUpModal,
@@ -19,43 +22,66 @@ const Navigation = ({ setAuthenticated }) => {
   } = useModalContext();
 
 
+
   return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink to="/" exact={true} activeClassName="active">
-            Home
+    <>
+      {showLoginModal && <LoginForm />}
+      {showSignUpModal && <SignUpForm />}
+      <nav>
+        <ul>
+          <li>
+            <NavLink to="/" exact={true}
+              className="active"
+              onClick={() => {
+                setShowSignUpModal(false)
+                setShowLoginModal(false)
+              }}>
+              Bikechain
           </NavLink>
-        </li>
-        <li>
-          {/* <NavLink to="/login" exact={true} activeClassName="active">
+          </li>
+          <li>
+            {/* <NavLink to="/login" exact={true} activeClassName="active">
             Login
           </NavLink> */}
+            {!authenticated && (
 
-          <button
-            onClick={() => {
-              setShowSignUpModal(false);
-              setShowLoginModal((prev) => !prev);
-            }}
-          >
-            Login
+              <button
+                onClick={() => {
+                  setShowSignUpModal(false);
+                  setShowLoginModal((prev) => !prev);
+
+                }}
+              >
+                Login
               </button>
-        </li>
-        <li>
-          <NavLink to="/sign-up" exact={true} activeClassName="active">
-            Sign Up
-          </NavLink>
-        </li>
-        <li>
+            )}
+          </li>
+          <li>
+            {!authenticated && (
+
+              <button
+                onClick={() => {
+                  console.log(showSignUpModal)
+                  setShowLoginModal(false);
+                  setShowSignUpModal((prev) => !prev);
+
+                }}
+              >
+                Sign Up
+              </button>
+            )}
+          </li>
+          {/* <li>
           <NavLink to="/users" exact={true} activeClassName="active">
-            Users
+          Users
           </NavLink>
-        </li>
-        <li>
-          <LogoutButton setAuthenticated={setAuthenticated} />
-        </li>
-      </ul>
-    </nav>
+        </li> */}
+          <li>
+            {authenticated && <LogoutButton setAuthenticated={setAuthenticated} />}
+          </li>
+        </ul>
+      </nav>
+    </>
   );
 }
 

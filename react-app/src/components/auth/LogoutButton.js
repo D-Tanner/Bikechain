@@ -1,7 +1,14 @@
 import React from "react";
 import { logout } from "../../services/auth";
+import { Modal, useModalContext } from "../../context/Modal"
 
-const LogoutButton = ({setAuthenticated}) => {
+const LogoutButton = () => {
+
+  const {
+
+    setAuthenticated,
+  } = useModalContext();
+
   const onLogout = async (e) => {
     await logout();
     setAuthenticated(false);

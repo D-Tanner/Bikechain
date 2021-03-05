@@ -3,12 +3,17 @@ import { Redirect } from "react-router-dom";
 import { login } from "../../services/auth";
 import { Modal, useModalContext } from "../../context/Modal"
 
-const LoginForm = ({ authenticated, setAuthenticated }) => {
+
+const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { showLoginModal, setShowLoginModal } = useModalContext();
+  const {
+    authenticated,
+    setAuthenticated,
+    showLoginModal,
+    setShowLoginModal, } = useModalContext();
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -26,6 +31,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     const demoEmail = "demo@aa.io";
     const demoPassword = "password";
     setTimeout(await login(demoEmail, demoPassword), 1000);
+    setAuthenticated(true)
     setShowLoginModal(false);
   };
 

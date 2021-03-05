@@ -24,49 +24,53 @@ const Navigation = () => {
 
 
   return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink to="/" exact={true}
-            className="active"
-            onClick={() => {
-              setShowSignUpModal(false)
-              setShowLoginModal(false)
-            }}>
-            Bikechain
+    <>
+      {showLoginModal && <LoginForm />}
+      <nav>
+        <ul>
+          <li>
+            <NavLink to="/" exact={true}
+              className="active"
+              onClick={() => {
+                setShowSignUpModal(false)
+                setShowLoginModal(false)
+              }}>
+              Bikechain
           </NavLink>
-        </li>
-        <li>
-          {/* <NavLink to="/login" exact={true} activeClassName="active">
+          </li>
+          <li>
+            {/* <NavLink to="/login" exact={true} activeClassName="active">
             Login
           </NavLink> */}
-          {!authenticated && (
+            {!authenticated && (
 
-            <button
-              onClick={() => {
-                setShowSignUpModal(false);
-                setShowLoginModal((prev) => !prev);
-              }}
-            >
-              Login
-            </button>
-          )}
-        </li>
-        <li>
-          <NavLink to="/sign-up" exact={true} activeClassName="active">
-            Sign Up
+              <button
+                onClick={() => {
+                  setShowSignUpModal(false);
+                  setShowLoginModal((prev) => !prev);
+
+                }}
+              >
+                Login
+              </button>
+            )}
+          </li>
+          <li>
+            <NavLink to="/sign-up" exact={true} activeClassName="active">
+              Sign Up
           </NavLink>
-        </li>
-        <li>
+          </li>
+          {/* <li>
           <NavLink to="/users" exact={true} activeClassName="active">
-            Users
+          Users
           </NavLink>
-        </li>
-        <li>
-          {authenticated && <LogoutButton setAuthenticated={setAuthenticated} />}
-        </li>
-      </ul>
-    </nav>
+        </li> */}
+          <li>
+            {authenticated && <LogoutButton setAuthenticated={setAuthenticated} />}
+          </li>
+        </ul>
+      </nav>
+    </>
   );
 }
 

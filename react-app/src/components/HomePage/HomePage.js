@@ -3,7 +3,6 @@ import { Modal, useModalContext } from "../../context/Modal"
 
 const HomePage = () => {
 
-
   const {
     authenticated,
     setAuthenticated,

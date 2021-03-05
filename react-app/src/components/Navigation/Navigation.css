@@ -1,0 +1,30 @@
+.navigation {
+  height: 8vh;
+  width: 100%;
+  display: grid;
+  position: fixed;
+  grid-template-columns: 17.5% 32.5% 32.5% 17.5%;
+  grid-template-rows: 1fr;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: 1;
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
+}
+
+
+.navigation-first {
+  grid-column-start: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.navigation-home {
+  display: inline-flex;
+  text-decoration: none;
+  color: #df901a;
+  font-size: 35px;
+}

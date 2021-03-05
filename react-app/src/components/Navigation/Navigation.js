@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 
+import "./Navigation.css"
 import LoginForm from "../auth/LoginForm"
 import SignUpForm from "../auth/SignUpForm"
 import LogoutButton from '../auth/LogoutButton';
@@ -28,21 +29,18 @@ const Navigation = () => {
       {showLoginModal && <LoginForm />}
       {showSignUpModal && <SignUpForm />}
       <nav>
-        <ul>
-          <li>
+        <div className="navigation">
+          <div className="navigation-first">
             <NavLink to="/" exact={true}
-              className="active"
+              className="navigation-home"
               onClick={() => {
                 setShowSignUpModal(false)
                 setShowLoginModal(false)
               }}>
               Bikechain
           </NavLink>
-          </li>
-          <li>
-            {/* <NavLink to="/login" exact={true} activeClassName="active">
-            Login
-          </NavLink> */}
+          </div>
+          <div>
             {!authenticated && (
 
               <button
@@ -55,8 +53,8 @@ const Navigation = () => {
                 Login
               </button>
             )}
-          </li>
-          <li>
+          </div>
+          <div>
             {!authenticated && (
 
               <button
@@ -70,16 +68,16 @@ const Navigation = () => {
                 Sign Up
               </button>
             )}
-          </li>
+          </div>
           {/* <li>
           <NavLink to="/users" exact={true} activeClassName="active">
           Users
           </NavLink>
         </li> */}
-          <li>
+          <div>
             {authenticated && <LogoutButton setAuthenticated={setAuthenticated} />}
-          </li>
-        </ul>
+          </div>
+        </div>
       </nav>
     </>
   );

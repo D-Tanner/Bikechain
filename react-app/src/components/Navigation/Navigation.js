@@ -26,6 +26,7 @@ const Navigation = () => {
   return (
     <>
       {showLoginModal && <LoginForm />}
+      {showSignUpModal && <SignUpForm />}
       <nav>
         <ul>
           <li>
@@ -56,9 +57,19 @@ const Navigation = () => {
             )}
           </li>
           <li>
-            <NavLink to="/sign-up" exact={true} activeClassName="active">
-              Sign Up
-          </NavLink>
+            {!authenticated && (
+
+              <button
+                onClick={() => {
+                  console.log(showSignUpModal)
+                  setShowLoginModal(false);
+                  setShowSignUpModal((prev) => !prev);
+
+                }}
+              >
+                Sign Up
+              </button>
+            )}
           </li>
           {/* <li>
           <NavLink to="/users" exact={true} activeClassName="active">

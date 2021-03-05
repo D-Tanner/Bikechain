@@ -81,6 +81,7 @@ const Navigation = () => {
                 if (authenticated) {
                   history.push("/new-ride")
                 } else {
+                  setShowSignUpModal(false)
                   setShowLoginModal((prev) => !prev)
                 }
               }}>Create a Ride</button>

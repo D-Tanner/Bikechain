@@ -14,6 +14,15 @@
   box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
 }
 
+.navigation-second-fraction {
+  grid-column-start: 3;
+  display: flex;
+  justify-content: space-around;
+}
+
+#navigation-button-container {
+  text-align: center;
+}
 
 .navigation-first {
   grid-column-start: 2;
@@ -27,4 +36,34 @@
   text-decoration: none;
   color: #df901a;
   font-size: 35px;
+}
+
+.nav-login {
+  height: 30px;
+  width: 55px;
+  font-size: 25px;
+  background-color: transparent;
+  color: black;
+  border: transparent;
+  margin-right: 55px;
+}
+
+.nav-signup {
+  height: 30px;
+  width: 85px;
+  font-size: 25px;
+  background-color: transparent;
+  color: black;
+  border: transparent;
+  margin-right: 40px;
+}
+
+.nav-logout {
+  height: 30px;
+  width: 55px;
+  font-size: 25px;
+  background-color: transparent;
+  color: black;
+  border: transparent;
+  margin-right: 55px;
 }

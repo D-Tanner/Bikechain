@@ -11,6 +11,8 @@ import { authenticate } from '../../services/auth';
 
 const Navigation = () => {
 
+  const history = useHistory();
+
   const {
     authenticated,
     setAuthenticated,
@@ -40,44 +42,43 @@ const Navigation = () => {
               Bikechain
           </NavLink>
           </div>
-          <div>
-            {!authenticated && (
+          <div className="navigation-second-fraction">
 
-              <button
-                onClick={() => {
-                  setShowSignUpModal(false);
-                  setShowLoginModal((prev) => !prev);
-
-                }}
-              >
-                Login
-              </button>
-            )}
+            <div>
+              {!authenticated && (
+                <button
+                  className="nav-login"
+                  onClick={() => {
+                    setShowSignUpModal(false);
+                    setShowLoginModal((prev) => !prev);
+                  }}
+                >
+                  Login
+                </button>
+              )}
+            </div>
+            <div>
+              {!authenticated && (
+                <button
+                  className="nav-signup"
+                  onClick={() => {
+                    console.log(showSignUpModal)
+                    setShowLoginModal(false);
+                    setShowSignUpModal((prev) => !prev);
+                  }}
+                >
+                  Sign Up
+                </button>
+              )}
+            </div>
           </div>
           <div>
-            {!authenticated && (
-
-              <button
-                onClick={() => {
-                  console.log(showSignUpModal)
-                  setShowLoginModal(false);
-                  setShowSignUpModal((prev) => !prev);
-
-                }}
-              >
-                Sign Up
-              </button>
-            )}
-          </div>
-          {/* <li>
-          <NavLink to="/users" exact={true} activeClassName="active">
-          Users
-          </NavLink>
-        </li> */}
-          <div>
-            {authenticated && <LogoutButton setAuthenticated={setAuthenticated} />}
+            {authenticated && <LogoutButton
+              className="nav-logout"
+              setAuthenticated={setAuthenticated} />}
           </div>
         </div>
+
       </nav>
     </>
   );

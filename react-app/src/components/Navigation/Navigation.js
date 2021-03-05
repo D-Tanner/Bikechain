@@ -10,7 +10,7 @@ import { useModalContext } from "../../context/Modal"
 const Navigation = () => {
 
   const {
-    authenticate,
+    authenticated,
     setAuthenticated,
     showLoginModal,
     setShowLoginModal,
@@ -20,6 +20,7 @@ const Navigation = () => {
     setShowSearchBarModal,
   } = useModalContext();
 
+  console.log(authenticated)
 
   return (
     <nav>
@@ -59,7 +60,7 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li>
-          <LogoutButton setAuthenticated={setAuthenticated} />
+          {authenticated && <LogoutButton setAuthenticated={setAuthenticated} />}
         </li>
       </ul>
     </nav>

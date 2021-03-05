@@ -20,7 +20,7 @@ const Navigation = () => {
     setShowSearchBarModal,
   } = useModalContext();
 
-  console.log(authenticated)
+
 
   return (
     <nav>

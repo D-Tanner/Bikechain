@@ -5,6 +5,7 @@ import LoginForm from "../auth/LoginForm"
 import SignUpForm from "../auth/SignUpForm"
 import LogoutButton from '../auth/LogoutButton';
 import { useModalContext } from "../../context/Modal"
+import { authenticate } from '../../services/auth';
 
 
 const Navigation = () => {
@@ -39,15 +40,17 @@ const Navigation = () => {
           {/* <NavLink to="/login" exact={true} activeClassName="active">
             Login
           </NavLink> */}
+          {!authenticated && (
 
-          <button
-            onClick={() => {
-              setShowSignUpModal(false);
-              setShowLoginModal((prev) => !prev);
-            }}
-          >
-            Login
-              </button>
+            <button
+              onClick={() => {
+                setShowSignUpModal(false);
+                setShowLoginModal((prev) => !prev);
+              }}
+            >
+              Login
+            </button>
+          )}
         </li>
         <li>
           <NavLink to="/sign-up" exact={true} activeClassName="active">

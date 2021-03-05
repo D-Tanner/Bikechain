@@ -15,6 +15,8 @@ const HomePage = () => {
   } = useModalContext();
 
 
+  const [lat, setLat] = useState()
+  const [long, setLong] = useState()
 
   const [viewport, setViewport] = useState({
     latitude: 37.7577,
@@ -22,11 +24,12 @@ const HomePage = () => {
     zoom: 8
   });
 
-  console.log(process.env)
+
 
   return (
     <div className="home-container">
       <ReactMapGL
+        // onClick={(e) => setLatandLong(e)}
         {...viewport} width="100%" height="100%"
         mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
         onViewportChange={nextViewport => setViewport(nextViewport)}

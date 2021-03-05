@@ -28,7 +28,6 @@ const HomePage = () => {
 
   useEffect(async () => {
     const rides = await getRides()
-    console.log(rides.Rides)
     setRides(rides.Rides)
   }, [])
 
@@ -44,12 +43,14 @@ const HomePage = () => {
         <div>RIDE</div>
       </Marker> */}
 
-        {/* {rides.map((ride, idx) => (
+        {rides.map((ride, idx) => (
           <Marker key={idx} latitude={ride.latitude} longitude={ride.longitude}>
-            <div>RIDE</div>
+
+            <img src="icons8-marker-48.png"></img>
+
           </Marker>
 
-        ))} */}
+        ))}
       </ReactMapGL>
     </div>
   )

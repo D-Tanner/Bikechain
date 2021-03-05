@@ -50,7 +50,7 @@ const LoginForm = () => {
   return (
     <>
       {showLoginModal && (
-        <Modal onClose={() => setShowLoginModal((prev) => !prev)}>
+        <Modal onClose={() => setShowLoginModal(false)}>
           <form onSubmit={onLogin}>
             <button
               onClick={() => setShowLoginModal((prev) => !prev)}

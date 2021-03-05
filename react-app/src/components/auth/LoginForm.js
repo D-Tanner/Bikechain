@@ -26,6 +26,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     const demoEmail = "demo@aa.io";
     const demoPassword = "password";
     setTimeout(await login(demoEmail, demoPassword), 1000);
+    setAuthenticated(true)
     setShowLoginModal(false);
   };
 
@@ -44,7 +45,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   return (
     <>
       {showLoginModal && (
-        <Modal onClose={() => setShowLoginModal(false)}>
+        <Modal onClose={() => setShowLoginModal((prev) => !prev)}>
           <form onSubmit={onLogin}>
             <button
               onClick={() => setShowLoginModal((prev) => !prev)}

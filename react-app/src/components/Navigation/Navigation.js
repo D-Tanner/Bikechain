@@ -10,6 +10,8 @@ import { useModalContext } from "../../context/Modal"
 const Navigation = ({ setAuthenticated }) => {
 
   const {
+    authenticate,
+    // setAuthenticated,
     showLoginModal,
     setShowLoginModal,
     showSignUpModal,
@@ -23,8 +25,13 @@ const Navigation = ({ setAuthenticated }) => {
     <nav>
       <ul>
         <li>
-          <NavLink to="/" exact={true} activeClassName="active">
-            Home
+          <NavLink to="/" exact={true}
+            className="active"
+            onClick={() => {
+              setShowSignUpModal(false)
+              setShowLoginModal(false)
+            }}>
+            Bikechain
           </NavLink>
         </li>
         <li>

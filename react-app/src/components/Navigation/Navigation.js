@@ -7,11 +7,11 @@ import LogoutButton from '../auth/LogoutButton';
 import { useModalContext } from "../../context/Modal"
 
 
-const Navigation = ({ setAuthenticated }) => {
+const Navigation = () => {
 
   const {
     authenticate,
-    // setAuthenticated,
+    setAuthenticated,
     showLoginModal,
     setShowLoginModal,
     showSignUpModal,

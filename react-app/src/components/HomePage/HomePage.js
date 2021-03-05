@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import { Modal, useModalContext } from "../../context/Modal"
+
+const HomePage = () => {
 
 
-const HomePage = ({ authenticated, setAuthenticated }) => {
+  const {
+    authenticated,
+    setAuthenticated,
+  } = useModalContext();
+
   return (
     <h1>
       Home Page

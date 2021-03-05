@@ -11,7 +11,7 @@ import { authenticate } from "./services/auth";
 import { useModalContext } from "./context/Modal";
 
 function App() {
-  const { authenticated, setAuthenticated } = useModalContext;
+  const { authenticated, setAuthenticated } = useModalContext();
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -30,24 +30,22 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navigation setAuthenticated={setAuthenticated} />
+      <Navigation />
       <Switch>
         <Route path="/login" exact={true}>
           <LoginForm
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
           />
         </Route>
         <Route path="/sign-up" exact={true}>
-          <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+          <SignUpForm />
         </Route>
-        <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <HomePage setAuthenticated={setAuthenticated} authenticated={authenticated} />
+        <ProtectedRoute path="/" exact={true} >
+          <HomePage />
         </ProtectedRoute>
-        <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
+        <ProtectedRoute path="/users" exact={true} >
           <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
+        <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
       </Switch>

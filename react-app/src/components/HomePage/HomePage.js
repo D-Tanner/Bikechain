@@ -4,8 +4,10 @@ import { Modal, useModalContext } from "../../context/Modal"
 // import MapBoxWorker from 'mapbox-gl'
 import ReactMapGL, { Marker } from 'react-map-gl';
 import { getRides } from '../../services/rides'
+import RoomIcon from '@material-ui/icons/Room';
 
 import "./HomePage.css"
+import Room from "@material-ui/icons/Room";
 
 
 const HomePage = () => {
@@ -39,14 +41,11 @@ const HomePage = () => {
         mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
         onViewportChange={nextViewport => setViewport(nextViewport)}
       >
-        {/* <Marker latitude={37.78} longitude={-105.41} offsetLeft={-20} offsetTop={-10}>
-        <div>RIDE</div>
-      </Marker> */}
 
         {rides.map((ride, idx) => (
           <Marker key={idx} latitude={ride.latitude} longitude={ride.longitude}>
 
-            <img src="icons8-marker-48.png"></img>
+            <RoomIcon />
 
           </Marker>
 

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import Navigation from "./components/Navigation/Navigation";
+import CreateRide from "./components/CreateRide/CreateRide"
 import HomePage from "./components/HomePage/HomePage"
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
@@ -50,6 +51,9 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>
+        <Route path="/new-ride" exact={true} authenticated={authenticated}>
+          <CreateRide />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

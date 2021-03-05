@@ -51,9 +51,9 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
           <User />
         </ProtectedRoute>
-        <Route path="/new-ride" exact={true} authenticated={authenticated}>
+        <ProtectedRoute path="/new-ride" exact={true} authenticated={authenticated}>
           <CreateRide />
-        </Route>
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );

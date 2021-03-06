@@ -7,7 +7,7 @@ export const getRides = async () => {
   return await response.json()
 }
 
-export const createNewRide = async () => {
+export const createNewRide = async (userId, title, content, startTime, endTime, latitude, longitude, isLocal, level) => {
   const response = await fetch('/api/rides/new-ride', {
     methods: "POST",
     headers: {

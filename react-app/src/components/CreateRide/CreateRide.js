@@ -27,10 +27,32 @@ const CreateRide = ({ user }) => {
     }
   }
 
+  const updateTitle = (e) => {
+    setTitle(e.target.value)
+  };
+
   return (
-    <div className="container">
-      Create Ride
-    </div>
+    <>
+      <div className="container">
+        <h1>Create a Ride!</h1>
+        <form onSubmit={postRide} className="create-form">
+          <div>
+            {errors.map((error, idx) => (
+              <ul classname="errors" key={idx}>{error}</ul>
+            ))}
+          </div>
+          <div>
+            <input
+              type="text"
+              className="input-text"
+              name="name"
+              placeholder="Title of Ride"
+              onChange={updateTitle}
+            ></input>
+          </div>
+        </form>
+      </div>
+    </>
   )
 }
 

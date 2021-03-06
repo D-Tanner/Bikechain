@@ -28,30 +28,30 @@ const HomePage = () => {
     zoom: 8
   });
 
-  useEffect(async () => {
-    const rides = await getRides()
-    setRides(rides.Rides)
+  useEffect(() => {
+    (async () => {
+      const rides = await getRides()
+      setRides(rides.Rides)
+    })();
   }, [])
 
   return (
-    <div className="home-container">
-      <ReactMapGL
-        onClick={(e) => console.log(e.lngLat)}
-        {...viewport} width="100%" height="100%"
-        mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
-        onViewportChange={nextViewport => setViewport(nextViewport)}
-      >
+    <>
+      <div className="home-container">
+        <ReactMapGL
+          {...viewport} width="100%" height="100%"
+          mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
+          onViewportChange={nextViewport => setViewport(nextViewport)}
+        >
 
-        {rides.map((ride, idx) => (
-          <Marker key={idx} latitude={ride.latitude} longitude={ride.longitude}>
-
-            <RoomIcon />
-
-          </Marker>
-
-        ))}
-      </ReactMapGL>
-    </div>
+          {rides.map((ride, idx) => (
+            <Marker key={idx} latitude={ride.latitude} longitude={ride.longitude}>
+              <RoomIcon />
+            </Marker>
+          ))}
+        </ReactMapGL>
+      </div>
+    </>
   )
 }
 

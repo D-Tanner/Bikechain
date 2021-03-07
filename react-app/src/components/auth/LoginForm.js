@@ -17,13 +17,12 @@ const LoginForm = () => {
     showLoginModal,
     setShowLoginModal, } = useModalContext();
 
-
   const onLogin = async (e) => {
     e.preventDefault();
     const user = await login(email, password);
     if (!user.errors) {
-      setAuthenticated(true);
       setUser(user)
+      setAuthenticated(true);
       setShowLoginModal(false);
     } else {
       setErrors(user.errors);
@@ -34,12 +33,13 @@ const LoginForm = () => {
     e.preventDefault();
     const demoEmail = "demo@aa.io";
     const demoPassword = "password";
-    const user = await login(demoEmail, demoPassword);
-    console.log(user)
+    const users = await login(demoEmail, demoPassword);
+    setUser(users)
     setAuthenticated(true);
-    setUser(user)
     setShowLoginModal(false);
   };
+
+
 
   const updateEmail = (e) => {
     setEmail(e.target.value);

@@ -3,9 +3,11 @@ import { useHistory } from 'react-router-dom'
 import { createNewRide } from '../../services/rides';
 import { enGB } from 'date-fns/locale'
 import { DatePicker, useDateInput } from 'react-nice-dates'
+import ReactMapGL, { Marker } from 'react-map-gl';
 
 import 'react-nice-dates/build/style.css'
 import "./CreateRide.css"
+import { LngLat, LngLatBounds } from 'mapbox-gl';
 
 
 const CreateRide = ({ user }) => {
@@ -30,9 +32,6 @@ const CreateRide = ({ user }) => {
     }
   }
 
-
-  console.log(typeof date)
-
   const updateTitle = (e) => {
     setTitle(e.target.value)
   };
@@ -44,6 +43,19 @@ const CreateRide = ({ user }) => {
     setDate(e.target.value)
 
   };
+  const updateLevel = (e) => {
+    setLevel(e.target.value)
+  }
+  const updateisLocal = (e) => {
+    setIsLocal((prev) => !prev)
+  }
+
+  const [viewport, setViewport] = useState({
+    latitude: 39.703683999394386,
+    longitude: -105.0444,
+    zoom: 8
+  });
+
 
   return (
     <>
@@ -84,6 +96,45 @@ const CreateRide = ({ user }) => {
               )}
             </DatePicker>
 
+          </div>
+          <div className="map-location"> Where
+            <ReactMapGL
+              onClick={(e) => console.log(lngLat)}
+              {...viewport} width="100%" height="100%"
+              mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
+              onViewportChange={nextViewport => setViewport(nextViewport)}
+            >
+
+              {/* {rides.map((ride, idx) => (
+                <Marker key={idx} latitude={ride.latitude} longitude={ride.longitude}>
+                  <RoomIcon />
+                </Marker>
+              ))} */}
+            </ReactMapGL>
+          </div>
+          <div>
+            <select name="level" onChange={updateLevel} value={level}>
+              <option value="" disabled selected>Level</option>
+              <option value="Easiest">Novice</option>
+              <option value="Easy">Intermediate</option>
+              <option value="More Difficult">Intermediate+</option>
+              <option value="Very Difficult">Advanced</option>
+              <option value="Extremely Difficult">Advanced+</option>
+            </select>
+          </div>
+          <div className="is-local-container">
+            <input
+              type="checkbox"
+              className="private-check"
+              name="local"
+              checked={isLocal}
+              onClick={updateisLocal}
+            ></input>
+            <label
+              for="local"
+            >
+              Could you ride this trail in your sleep?
+              </label>
           </div>
         </form>
       </div>

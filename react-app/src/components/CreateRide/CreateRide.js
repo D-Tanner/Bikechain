@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useHistory } from 'react-router-dom'
 import { createNewRide } from '../../services/rides';
 import { enGB } from 'date-fns/locale'
 import { DatePicker, useDateInput } from 'react-nice-dates'
 import ReactMapGL, { Marker } from 'react-map-gl';
+import Geocoder from 'react-map-gl-geocoder'
 
+import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'react-nice-dates/build/style.css'
 import "./CreateRide.css"
-import { LngLat, LngLatBounds } from 'mapbox-gl';
 
 
 const CreateRide = ({ user }) => {
@@ -31,7 +32,6 @@ const CreateRide = ({ user }) => {
       history.push("/")
     }
   }
-
 
   const updateTitle = (e) => {
     setTitle(e.target.value)
@@ -57,6 +57,23 @@ const CreateRide = ({ user }) => {
     zoom: 8
   });
 
+  const mapRef = useRef();
+  const handleViewportChange = useCallback(
+    (newViewport) => setViewport(newViewport),
+    []
+  );
+
+  const handleGeocoderViewportChange = useCallback(
+    (newViewport) => {
+      const geocoderDefaultOverrides = { transitionDuration: 1000 };
+
+      return handleViewportChange({
+        ...newViewport,
+        ...geocoderDefaultOverrides
+      });
+    },
+    [handleViewportChange]
+  );
 
   return (
     <>
@@ -105,15 +122,19 @@ const CreateRide = ({ user }) => {
                 setLat(e.lngLat[1])
               }}
               {...viewport} width="100%" height="100%"
+              ref={mapRef}
+              mapStyle="mapbox://styles/dft609/cklyko9gp16fx17qkfkqteipz"
               mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
-              onViewportChange={nextViewport => setViewport(nextViewport)}
+              // onViewportChange={nextViewport => setViewport(nextViewport)}
+              onViewportChange={handleViewportChange}
             >
+              <Geocoder
+                mapRef={mapRef}
+                onViewportChange={handleGeocoderViewportChange}
+                mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
+                position="top-left"
+              />
 
-              {/* {rides.map((ride, idx) => (
-                <Marker key={idx} latitude={ride.latitude} longitude={ride.longitude}>
-                  <RoomIcon />
-                </Marker>
-              ))} */}
             </ReactMapGL>
           </div>
           <div>

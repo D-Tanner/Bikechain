@@ -40,6 +40,7 @@ const HomePage = () => {
       <div className="home-container">
         <ReactMapGL
           {...viewport} width="100%" height="100%"
+          mapStyle="mapbox://styles/dft609/cklyko9gp16fx17qkfkqteipz"
           mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
           onViewportChange={nextViewport => setViewport(nextViewport)}
         >

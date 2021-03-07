@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom'
 import { createNewRide } from '../../services/rides';
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
-import MobileTimePicker from '@material-ui/lab/MobileTimePicker';
 
 import 'react-nice-dates/build/style.css'
 import "./CreateRide.css"

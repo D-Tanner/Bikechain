@@ -30,6 +30,9 @@ const CreateRide = ({ user }) => {
     }
   }
 
+
+  console.log(typeof date)
+
   const updateTitle = (e) => {
     setTitle(e.target.value)
   };
@@ -71,7 +74,7 @@ const CreateRide = ({ user }) => {
             ></textarea>
           </div>
           <div> When
-            <DatePicker date={date} onDateChange={setDate} locale={enGB}>
+            <DatePicker date={date} onDateChange={setDate} locale={enGB} format={'MM-dd-yyyy'}>
               {({ inputProps, focused }) => (
 
                 <input

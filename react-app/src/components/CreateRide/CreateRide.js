@@ -32,6 +32,7 @@ const CreateRide = ({ user }) => {
     }
   }
 
+
   const updateTitle = (e) => {
     setTitle(e.target.value)
   };
@@ -99,7 +100,10 @@ const CreateRide = ({ user }) => {
           </div>
           <div className="map-location"> Where
             <ReactMapGL
-              // onClick={(e) => console.log(lngLat)}
+              onClick={(e) => {
+                setLong(e.lngLat[0])
+                setLat(e.lngLat[1])
+              }}
               {...viewport} width="100%" height="100%"
               mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
               onViewportChange={nextViewport => setViewport(nextViewport)}

@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useHistory } from 'react-router-dom'
 import { createNewRide } from '../../services/rides';
 import { enGB } from 'date-fns/locale'
-import { DatePicker, useDateInput } from 'react-nice-dates'
+import { DatePicker } from 'react-nice-dates'
 import ReactMapGL, { Marker } from 'react-map-gl';
-
+import Geocoder from 'react-map-gl-geocoder'
+import RoomIcon from '@material-ui/icons/Room';
+import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'react-nice-dates/build/style.css'
 import "./CreateRide.css"
-import { LngLat, LngLatBounds } from 'mapbox-gl';
 
 
 const CreateRide = ({ user }) => {
@@ -22,14 +23,17 @@ const CreateRide = ({ user }) => {
   const [isLocal, setIsLocal] = useState(false);
   const [errors, setErrors] = useState([]);
 
+
+
   const postRide = async (e) => {
     e.preventDefault()
-    const newRide = await createNewRide(user.id, title, content, date, lat, long, isLocal, level)
-    if (newRide.errors) {
-      setErrors(newRide.errors)
-    } else {
-      history.push("/")
-    }
+    updateDate()
+    // const newRide = await createNewRide(user.id, title, content, date, lat, long, isLocal, level)
+    // if (newRide.errors) {
+    //   setErrors(newRide.errors)
+    // } else {
+    //   history.push("/")
+    // }
   }
 
   const updateTitle = (e) => {
@@ -39,15 +43,17 @@ const CreateRide = ({ user }) => {
   const updateContent = (e) => {
     setContent(e.target.value)
   };
-  const updateDate = (e) => {
-    setDate(e.target.value)
 
-  };
   const updateLevel = (e) => {
     setLevel(e.target.value)
   }
   const updateisLocal = (e) => {
     setIsLocal((prev) => !prev)
+  }
+
+  const updateDate = (date) => {
+    const x = document.getElementById("input-date-value")
+    setDate(x.value)
   }
 
   const [viewport, setViewport] = useState({
@@ -56,6 +62,23 @@ const CreateRide = ({ user }) => {
     zoom: 8
   });
 
+  const mapRef = useRef();
+  const handleViewportChange = useCallback(
+    (newViewport) => setViewport(newViewport),
+    []
+  );
+
+  const handleGeocoderViewportChange = useCallback(
+    (newViewport) => {
+      const geocoderDefaultOverrides = { transitionDuration: 1000 };
+
+      return handleViewportChange({
+        ...newViewport,
+        ...geocoderDefaultOverrides
+      });
+    },
+    [handleViewportChange]
+  );
 
   return (
     <>
@@ -92,24 +115,47 @@ const CreateRide = ({ user }) => {
                 <input
                   className={'input' + (focused ? ' -focused' : '')}
                   {...inputProps}
+                  id="input-date-value"
+                  required
                 />
               )}
             </DatePicker>
 
           </div>
-          <div className="map-location"> Where
+          <div className="map-location"> Where: Click and Drag
             <ReactMapGL
-              // onClick={(e) => console.log(lngLat)}
+              onClick={(e) => {
+                setLong(e.lngLat[0])
+                setLat(e.lngLat[1])
+              }}
               {...viewport} width="100%" height="100%"
+              ref={mapRef}
+              mapStyle="mapbox://styles/dft609/cklyko9gp16fx17qkfkqteipz"
               mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
-              onViewportChange={nextViewport => setViewport(nextViewport)}
+              onViewportChange={handleViewportChange}
             >
-
-              {/* {rides.map((ride, idx) => (
-                <Marker key={idx} latitude={ride.latitude} longitude={ride.longitude}>
-                  <RoomIcon />
+              <Geocoder
+                mapRef={mapRef}
+                onViewportChange={handleGeocoderViewportChange}
+                mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
+                position="top-right"
+                marker={false}
+              />
+              {lat && long && (
+                <Marker key={1}
+                  latitude={lat}
+                  longitude={long}
+                  offsetLeft={-30}
+                  offsetTop={-40}
+                  draggable={true}
+                  onDragEnd={(e) => {
+                    setLong(e.lngLat[0])
+                    setLat(e.lngLat[1])
+                    console.log(lat, long)
+                  }}>
+                  <RoomIcon style={{ fontSize: 50 }} />
                 </Marker>
-              ))} */}
+              )}
             </ReactMapGL>
           </div>
           <div>
@@ -136,6 +182,8 @@ const CreateRide = ({ user }) => {
               Could you ride this trail in your sleep?
               </label>
           </div>
+          <button type="submit">Create</button>
+          <button onClick={() => history.push('/')}>Cancel</button>
         </form>
       </div>
     </>

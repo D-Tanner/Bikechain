@@ -9,7 +9,7 @@ export const getRides = async () => {
 
 export const createNewRide = async (userId, title, content, date, latitude, longitude, isLocal, level) => {
   const response = await fetch('/api/rides/new-ride', {
-    methods: "POST",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },

@@ -141,8 +141,8 @@ const CreateRide = ({ user }) => {
                 <Marker key={1}
                   latitude={lat}
                   longitude={long}
-                  offsetLeft={0}
-                  offsetTop={0}
+                  offsetLeft={-30}
+                  offsetTop={-40}
                   draggable={true}
                   onDragEnd={(e) => {
                     setLong(e.lngLat[0])

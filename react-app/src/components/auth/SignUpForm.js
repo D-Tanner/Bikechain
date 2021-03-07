@@ -17,6 +17,8 @@ const SignUpForm = () => {
   // const [profileImage, setProfileImage] = useState(null)
 
   const {
+    user,
+    setUser,
     authenticated,
     setAuthenticated,
     showSignUpModal,
@@ -31,6 +33,7 @@ const SignUpForm = () => {
     if (password === repeatPassword) {
       const user = await signUp(username, email, password, city, state, level);
       if (!user.errors) {
+        setUser(user)
         setAuthenticated(true);
         setShowSignUpModal(false);
       } else {

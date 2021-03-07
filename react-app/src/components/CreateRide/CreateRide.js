@@ -110,6 +110,9 @@ const CreateRide = ({ user }) => {
           </div>
           <div> When
             <DatePicker date={date} onDateChange={setDate} locale={enGB} format={'MM-dd-yyyy'}>
+              {/* <DatePicker date={date} onDateChange={(event) => {
+
+            }} locale={enGB} format={'MM-dd-yyyy'}> */}
               {({ inputProps, focused }) => (
 
                 <input
@@ -151,7 +154,7 @@ const CreateRide = ({ user }) => {
                   onDragEnd={(e) => {
                     setLong(e.lngLat[0])
                     setLat(e.lngLat[1])
-                    console.log(lat, long)
+                    // console.log(lat, long)
                   }}>
                   <RoomIcon style={{ fontSize: 50 }} />
                 </Marker>

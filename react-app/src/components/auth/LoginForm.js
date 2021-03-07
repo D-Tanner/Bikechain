@@ -10,6 +10,8 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
 
   const {
+    user,
+    setUser,
     authenticated,
     setAuthenticated,
     showLoginModal,
@@ -19,8 +21,9 @@ const LoginForm = () => {
     e.preventDefault();
     const user = await login(email, password);
     if (!user.errors) {
+      setUser(user)
       setAuthenticated(true);
-      setShowLoginModal(false)
+      setShowLoginModal(false);
     } else {
       setErrors(user.errors);
     }
@@ -30,10 +33,13 @@ const LoginForm = () => {
     e.preventDefault();
     const demoEmail = "demo@aa.io";
     const demoPassword = "password";
-    setTimeout(await login(demoEmail, demoPassword), 1000);
-    setAuthenticated(true)
+    const users = await login(demoEmail, demoPassword);
+    setUser(users)
+    setAuthenticated(true);
     setShowLoginModal(false);
   };
+
+
 
   const updateEmail = (e) => {
     setEmail(e.target.value);

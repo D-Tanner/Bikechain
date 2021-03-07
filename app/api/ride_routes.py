@@ -12,6 +12,13 @@ def get_rides():
     rides = Ride.query.all()
     return {"Rides": [ride.to_dict() for ride in rides]}
 
+@ride_routes.route('/<int:id>')
+def get_ride_by_id(id):
+    ride = Ride.query.get(id)
+    print(ride.to_dict())
+    return ride.to_dict()
+
+
 @ride_routes.route('/new-ride', methods=["POST"])
 def create_ride():
     form = CreateRide()

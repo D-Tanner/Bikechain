@@ -5,12 +5,14 @@ import { useHistory } from "react-router-dom"
 const LogoutButton = () => {
   const history = useHistory();
   const {
-
+    user,
+    setUser,
     setAuthenticated,
   } = useModalContext();
 
   const onLogout = async (e) => {
     await logout();
+    setUser(null)
     setAuthenticated(false);
     history.push("/")
   };

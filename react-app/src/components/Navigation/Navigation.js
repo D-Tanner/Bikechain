@@ -14,6 +14,7 @@ const Navigation = () => {
   const history = useHistory();
 
   const {
+    user,
     authenticated,
     setAuthenticated,
     showLoginModal,
@@ -23,7 +24,6 @@ const Navigation = () => {
     showSearchBarModal,
     setShowSearchBarModal,
   } = useModalContext();
-
 
 
   return (
@@ -62,7 +62,7 @@ const Navigation = () => {
                 <button
                   className="nav-signup"
                   onClick={() => {
-                    console.log(showSignUpModal)
+                    // console.log(showSignUpModal)
                     setShowLoginModal(false);
                     setShowSignUpModal((prev) => !prev);
                   }}
@@ -75,6 +75,16 @@ const Navigation = () => {
               {authenticated && <LogoutButton
                 className="nav-logout"
                 setAuthenticated={setAuthenticated} />}
+            </div>
+            <div>
+              <button onClick={() => {
+                if (authenticated && user) {
+                  history.push(`/your-profile/${user.id}`)
+                } else {
+                  setShowSignUpModal(false)
+                  setShowLoginModal((prev) => !prev)
+                }
+              }}>Your Profile</button>
             </div>
             <div>
               <button onClick={() => {

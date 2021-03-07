@@ -5,7 +5,7 @@ import { enGB } from 'date-fns/locale'
 import { DatePicker, useDateInput } from 'react-nice-dates'
 import ReactMapGL, { Marker } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder'
-
+import RoomIcon from '@material-ui/icons/Room';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'react-nice-dates/build/style.css'
 import "./CreateRide.css"
@@ -22,6 +22,8 @@ const CreateRide = ({ user }) => {
   const [level, setLevel] = useState();
   const [isLocal, setIsLocal] = useState(false);
   const [errors, setErrors] = useState([]);
+
+
 
   const postRide = async (e) => {
     e.preventDefault()
@@ -132,9 +134,24 @@ const CreateRide = ({ user }) => {
                 mapRef={mapRef}
                 onViewportChange={handleGeocoderViewportChange}
                 mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
-                position="top-left"
+                position="top-right"
+                marker={false}
               />
-
+              {lat && long && (
+                <Marker key={1}
+                  latitude={lat}
+                  longitude={long}
+                  offsetLeft={0}
+                  offsetTop={0}
+                  draggable={true}
+                  onDragEnd={(e) => {
+                    setLong(e.lngLat[0])
+                    setLat(e.lngLat[1])
+                    console.log(lat, long)
+                  }}>
+                  <RoomIcon style={{ fontSize: 50 }} />
+                </Marker>
+              )}
             </ReactMapGL>
           </div>
           <div>

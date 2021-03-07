@@ -23,7 +23,7 @@ const CreateRide = ({ user }) => {
   const [isLocal, setIsLocal] = useState(false);
   const [errors, setErrors] = useState([]);
 
-
+  console.log(date)
 
   const postRide = async (e) => {
     e.preventDefault()

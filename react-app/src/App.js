@@ -4,6 +4,7 @@ import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import Navigation from "./components/Navigation/Navigation";
 import CreateRide from "./components/CreateRide/CreateRide"
+import RidePage from "./components/RidePage/RidePage"
 import HomePage from "./components/HomePage/HomePage"
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
@@ -44,6 +45,9 @@ function App() {
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
+        </Route>
+        <Route path="/rides/:rideId" exact={true}>
+          <RidePage />
         </Route>
         <Route path="/" exact={true}>
           <HomePage />

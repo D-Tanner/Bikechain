@@ -5,5 +5,9 @@
     left: 0;
     top: 90px;
     background: rgba(51,51,51,0.7);
+}
 
+.popup-container {
+    height: 200px;
+    width: 200px;
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Modal, useModalContext } from "../../context/Modal"
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { getRides } from '../../services/rides'
+import { Link } from 'react-router-dom'
 import RoomIcon from '@material-ui/icons/Room';
 import "./HomePage.css"
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
@@ -88,7 +89,7 @@ const HomePage = () => {
             latitude={selectedRide.latitude}
             longitude={selectedRide.longitude}
             closeButton={true}
-            closeOnClick={true}
+            closeOnClick={false}
             offsetLeft={25}
             onClose={() => {
               setSelectedRide(null)
@@ -98,6 +99,7 @@ const HomePage = () => {
           >
             <div className="popup-container">
               <div>{selectedRide.title}</div>
+              <Link to={`rides/${selectedRide.id}`}>See more</Link>
             </div>
           </Popup>}
         </ReactMapGL>

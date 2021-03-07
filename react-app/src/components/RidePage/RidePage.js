@@ -9,6 +9,7 @@ const RidePage = () => {
   const { rideId } = useParams();
 
   const [ride, setRide] = useState();
+  console.log(ride)
 
   useEffect(() => {
     (async () => {
@@ -20,7 +21,6 @@ const RidePage = () => {
   return (
     <div className="ride-page-container">
       <h1>{rideId}</h1>
-      <div>{ride}</div>
     </div>
   )
 }

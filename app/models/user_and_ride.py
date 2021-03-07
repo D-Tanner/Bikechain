@@ -85,10 +85,9 @@ class Ride(db.Model):
   userId = db.Column(db.Integer, db.ForeignKey("users.id"))
   title = db.Column(db.String(100), nullable=False)
   content = db.Column(db.Text, nullable=True)
-  startTime = db.Column(db.DateTime, nullable=False)
-  endTime = db.Column(db.DateTime, nullable=False)
-  latitude = db.Column(db.Float(precision=8), nullable=False)
-  longitude = db.Column(db.Float(precision=8), nullable=False)
+  date = db.Column(db.DateTime, nullable=False)
+  latitude = db.Column(db.Float(precision=20), nullable=False)
+  longitude = db.Column(db.Float(precision=20), nullable=False)
   isLocal = db.Column(db.Boolean, nullable=False, default=False)
   level = db.Column(db.String(50), nullable=False)
 
@@ -104,8 +103,7 @@ class Ride(db.Model):
       "id": self.id,
       "title": self.title,
       "content": self.content,
-      "startTime": self.startTime,
-      "endTime": self.endTime,
+      "date": self.date,
       "latitude": self.latitude,
       "longitude": self.longitude,
       "isLocal": self.isLocal,

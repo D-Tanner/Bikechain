@@ -5,6 +5,8 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@material-ui/pickers": "^3.2.10",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -21,7 +23,8 @@
     "react-native-geocoding": "^0.5.0",
     "react-nice-dates": "^3.0.7",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "react-time-picker": "^4.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

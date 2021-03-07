@@ -14,16 +14,19 @@ import { useModalContext } from "./context/Modal";
 function App() {
   const { authenticated, setAuthenticated } = useModalContext();
   const [loaded, setLoaded] = useState(false);
+  const [user, setUser] = useState({})
 
   useEffect(() => {
     (async () => {
       const user = await authenticate();
       if (!user.errors) {
+        setUser(user)
         setAuthenticated(true);
       }
       setLoaded(true);
     })();
   }, []);
+
 
   if (!loaded) {
     return null;
@@ -52,7 +55,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/new-ride" exact={true} authenticated={authenticated}>
-          <CreateRide />
+          <CreateRide user={user} />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

@@ -108,6 +108,6 @@ class Ride(db.Model):
       "longitude": self.longitude,
       "isLocal": self.isLocal,
       "user": self.user.to_dict(),
-      # "committedRiders": [rider.to_dict() for rider in self.committed_riders],
-      # "posts": [post.to_dict() for post in self.posts],
+      "committedRiders": [rider.to_dict() for rider in self.committed_riders],
+      "posts": [post.to_dict() for post in self.posts],
     }

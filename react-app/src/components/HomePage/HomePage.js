@@ -11,9 +11,11 @@ import Geocoder from 'react-map-gl-geocoder'
 const HomePage = () => {
 
   const {
+    user,
     authenticated,
     setAuthenticated,
   } = useModalContext();
+
 
 
   const [rides, setRides] = useState([])

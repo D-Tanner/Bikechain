@@ -16,6 +16,7 @@ export const useModalContext = () => useContext(ModalContext);
 export const ModalProvider = ({ children }) => {
   const modalRef = useRef();
 
+  const [user, setUser] = useState()
   const [value, setValue] = useState();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
@@ -31,6 +32,8 @@ export const ModalProvider = ({ children }) => {
       <ModalContext.Provider
         value={{
           value,
+          user,
+          setUser,
           authenticated,
           setAuthenticated,
           showLoginModal,

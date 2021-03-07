@@ -62,7 +62,7 @@ const Navigation = () => {
                 <button
                   className="nav-signup"
                   onClick={() => {
-                    console.log(showSignUpModal)
+                    // console.log(showSignUpModal)
                     setShowLoginModal(false);
                     setShowSignUpModal((prev) => !prev);
                   }}

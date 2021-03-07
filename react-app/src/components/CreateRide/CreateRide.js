@@ -117,7 +117,7 @@ const CreateRide = ({ user }) => {
             </DatePicker>
 
           </div>
-          <div className="map-location"> Where
+          <div className="map-location"> Where: Click and Drag
             <ReactMapGL
               onClick={(e) => {
                 setLong(e.lngLat[0])
@@ -178,6 +178,8 @@ const CreateRide = ({ user }) => {
               Could you ride this trail in your sleep?
               </label>
           </div>
+          <button type="submit">Create</button>
+          <button onClick={() => history.push('/')}>Cancel</button>
         </form>
       </div>
     </>

@@ -64,7 +64,8 @@ const HomePage = () => {
             mapRef={mapRef}
             onViewportChange={handleGeocoderViewportChange}
             mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
-            position="top-left"
+            position="top-right"
+
           />
           {rides.map((ride, idx) => (
             <Marker key={idx} latitude={ride.latitude} longitude={ride.longitude}>

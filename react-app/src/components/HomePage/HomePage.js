@@ -16,12 +16,9 @@ const HomePage = () => {
   } = useModalContext();
 
 
-  const [lat, setLat] = useState()
-  const [long, setLong] = useState()
   const [rides, setRides] = useState([])
   const [popup, setPopup] = useState(false)
-  const [selectedRideLat, setSelectedRideLat] = useState()
-  const [selectedRideLong, setSelectedRideLong] = useState()
+
   const [selectedRide, setSelectedRide] = useState(null)
   const [viewport, setViewport] = useState({
     latitude: 39.703683999394386,

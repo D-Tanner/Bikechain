@@ -110,6 +110,9 @@ const CreateRide = ({ user }) => {
           </div>
           <div> When
             <DatePicker date={date} onDateChange={setDate} locale={enGB} format={'MM-dd-yyyy'}>
+              {/* <DatePicker date={date} onDateChange={(event) => {
+              console.log('from the datePicker', event)
+            }} locale={enGB} format={'MM-dd-yyyy'}> */}
               {({ inputProps, focused }) => (
 
                 <input

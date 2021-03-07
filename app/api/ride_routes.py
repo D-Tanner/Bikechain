@@ -3,6 +3,7 @@ from flask_login import login_required
 from app.models.user_and_ride import Ride
 from app.forms import CreateRide
 from app.helpers import validation_errors_to_error_messages
+import datetime
 ride_routes = Blueprint('rides', __name__)
 
 
@@ -15,11 +16,11 @@ def get_rides():
 def create_ride():
     form = CreateRide()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(request.data)
+    print(request)
     if form.validate_on_submit():
         ride = Ride()
         form.populate_obj(ride)
-        db.session.add(project)
+        db.session.add(ride)
         db.session.commit()
 
         return ride.to_dict()

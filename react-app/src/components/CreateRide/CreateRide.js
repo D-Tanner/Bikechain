@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { useHistory } from 'react-router-dom'
 import { createNewRide } from '../../services/rides';
 import { enGB } from 'date-fns/locale'
-import { DatePicker, useDateInput } from 'react-nice-dates'
+import { DatePicker } from 'react-nice-dates'
 import ReactMapGL, { Marker } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder'
 import RoomIcon from '@material-ui/icons/Room';
@@ -23,16 +23,17 @@ const CreateRide = ({ user }) => {
   const [isLocal, setIsLocal] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  console.log(date)
+
 
   const postRide = async (e) => {
     e.preventDefault()
-    const newRide = await createNewRide(user.id, title, content, date, lat, long, isLocal, level)
-    if (newRide.errors) {
-      setErrors(newRide.errors)
-    } else {
-      history.push("/")
-    }
+    updateDate()
+    // const newRide = await createNewRide(user.id, title, content, date, lat, long, isLocal, level)
+    // if (newRide.errors) {
+    //   setErrors(newRide.errors)
+    // } else {
+    //   history.push("/")
+    // }
   }
 
   const updateTitle = (e) => {
@@ -42,15 +43,17 @@ const CreateRide = ({ user }) => {
   const updateContent = (e) => {
     setContent(e.target.value)
   };
-  const updateDate = (e) => {
-    setDate(e.target.value)
 
-  };
   const updateLevel = (e) => {
     setLevel(e.target.value)
   }
   const updateisLocal = (e) => {
     setIsLocal((prev) => !prev)
+  }
+
+  const updateDate = (date) => {
+    const x = document.getElementById("input-date-value")
+    setDate(x.value)
   }
 
   const [viewport, setViewport] = useState({
@@ -112,6 +115,8 @@ const CreateRide = ({ user }) => {
                 <input
                   className={'input' + (focused ? ' -focused' : '')}
                   {...inputProps}
+                  id="input-date-value"
+                  required
                 />
               )}
             </DatePicker>
@@ -127,7 +132,6 @@ const CreateRide = ({ user }) => {
               ref={mapRef}
               mapStyle="mapbox://styles/dft609/cklyko9gp16fx17qkfkqteipz"
               mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
-              // onViewportChange={nextViewport => setViewport(nextViewport)}
               onViewportChange={handleViewportChange}
             >
               <Geocoder

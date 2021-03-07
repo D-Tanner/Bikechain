@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import { createNewRide } from '../../services/rides';
 import { enGB } from 'date-fns/locale'
-import { DatePicker } from 'react-nice-dates'
+import { DatePicker, useDateInput } from 'react-nice-dates'
 
 import 'react-nice-dates/build/style.css'
 import "./CreateRide.css"
@@ -13,19 +13,16 @@ const CreateRide = ({ user }) => {
   const history = useHistory();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [startTime, setStartTime] = useState();
-  const [endTime, setEndTime] = useState("");
+  const [date, setDate] = useState();
   const [lat, setLat] = useState();
   const [long, setLong] = useState();
+  const [level, setLevel] = useState();
   const [isLocal, setIsLocal] = useState(false);
-  const [level, setLevel] = useState("");
-  const [errors, setErrors] = useState([])
-  const [startDate, setStartDate] = useState()
-  const [endDate, setEndDate] = useState()
+  const [errors, setErrors] = useState([]);
 
   const postRide = async (e) => {
     e.preventDefault()
-    const newRide = await createNewRide(user.id, title, content, startTime, endTime, lat, long, isLocal, level)
+    const newRide = await createNewRide(user.id, title, content, date, lat, long, isLocal, level)
     if (newRide.errors) {
       setErrors(newRide.errors)
     } else {
@@ -40,9 +37,9 @@ const CreateRide = ({ user }) => {
   const updateContent = (e) => {
     setContent(e.target.value)
   };
-  const updateStartTime = (e) => {
-    setStartTime(e.target.value)
-    console.log(startTime)
+  const updateDate = (e) => {
+    setDate(e.target.value)
+
   };
 
   return (
@@ -73,18 +70,17 @@ const CreateRide = ({ user }) => {
               onChange={updateContent}
             ></textarea>
           </div>
-          <div> Start Time
-            <DatePicker date={startDate} onDateChange={setStartDate} locale={enGB}>
+          <div> When
+            <DatePicker date={date} onDateChange={setDate} locale={enGB}>
               {({ inputProps, focused }) => (
+
                 <input
                   className={'input' + (focused ? ' -focused' : '')}
                   {...inputProps}
                 />
               )}
             </DatePicker>
-            {startDate && <span>
 
-            </span>}
           </div>
         </form>
       </div>

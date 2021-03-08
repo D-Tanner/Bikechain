@@ -7,6 +7,10 @@ import "./ProfilePage.css"
 const ProfilePage = () => {
 
   const [user, setUser] = useState({});
+  const [rides, setRides] = useState({});
+  const [committedRides, setCommittedRides] = useState({})
+
+
 
   const { userId } = useParams();
 
@@ -17,17 +21,19 @@ const ProfilePage = () => {
     (async () => {
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
-      setUser(user);
+      setUser(user.user);
+      setRides(user.rides);
+      setCommittedRides(user.committedRides);
     })();
   }, [userId]);
 
   return (
     <>
-      <div className="profile-page-container">
+      { user && <div className="profile-page-container">
         <h1>
           Welcome, {user.username}
         </h1>
-      </div>
+      </div>}
 
 
     </>

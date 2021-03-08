@@ -14,9 +14,9 @@ import { authenticate } from "./services/auth";
 import { useModalContext } from "./context/Modal";
 
 function App() {
-  const { authenticated, setAuthenticated } = useModalContext();
+  const { authenticated, setAuthenticated, user, setUser } = useModalContext();
   const [loaded, setLoaded] = useState(false);
-  const [user, setUser] = useState({})
+  // const [user, setUser] = useState({})
 
   useEffect(() => {
     (async () => {

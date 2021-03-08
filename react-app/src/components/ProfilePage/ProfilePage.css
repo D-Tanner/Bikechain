@@ -16,19 +16,24 @@
 .item1 { grid-area: rides; }
 .item2 {grid-area: commit;}
 .item3 {grid-area: following;}
-.item4 { grid-area: profile; }
-.item5 { grid-area: main; height: 100px; }
+.item4 { grid-area: profile; height: 50%}
+.item5 { grid-area: main;}
 .item6 { grid-area: right; }
 .item7 { grid-area: left; }
-.item8 { grid-area: footer; }
+/* .item8 { grid-area: footer; } */
 
+/* .item1, .item2, .item3 {
+  height: 100%;
+} */
 
 .grid-container {
   display: grid;
   grid-template-areas:
     'profile profile rides commit following'
-    'profile profile main main main'
-    'footer footer footer footer footer';
+    'profile profile main main main';
+    /* 'footer footer footer footer footer'; */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 10% 90%;
   grid-gap: 10px;
   background-color: #2196F3;
   padding: 10px;

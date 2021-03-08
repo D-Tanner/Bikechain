@@ -38,7 +38,7 @@ const ProfilePage = () => {
           <div class="item5">Main</div>
           {/* <div class="item6">Right</div> */}
           {/* <div class="item7">Left</div> */}
-          <div class="item8">Footer</div>
+          {/* <div class="item8">Footer</div> */}
         </div>
       </div>}
 

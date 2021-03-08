@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import Moment from "react-moment"
 import { Modal, useModalContext } from "../../context/Modal"
 import { useParams, Link } from "react-router-dom"
 import "./ProfilePage.css"
@@ -61,8 +62,14 @@ const ProfilePage = () => {
             {ridePage && rides && (
               <div className='ride-feed-container'>{
                 rides.map((ride, idx) => (
+
                   <Link key={idx} to={`/rides/${ride.id}`} className="link">
-                    <div className="ride-div">{ride.title}</div>
+                    <div className="ride-grid-container">
+                      <div className="level-image">image</div>
+                      <div className="ride-title">{ride.title}</div>
+                      <div className="ride-content">{ride.content}</div>
+                      <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>
+                    </div>
                   </Link>
                 ))
               }

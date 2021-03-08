@@ -7,9 +7,26 @@
   color: black;
 }
 
-.ride-div {
-  border-bottom: 1px solid black;
-  padding: 20px;
+.ride-title {
+  grid-area: title;
+}
+
+.level-image {
+  grid-area: image
+}
+
+.ride-content {
+  grid-area: content
+
+}
+
+.ride-grid-container {
+  /* border-bottom: 1px solid black; */
+  display: grid;
+  grid-template-areas:
+    'image title title date'
+    'image content content date'
+  ;
 }
 
 .profile-page-container {

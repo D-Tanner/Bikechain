@@ -7,26 +7,74 @@
   color: black;
 }
 
+
 .ride-title {
   grid-area: title;
+  display: flex;
+  text-align: left;
 }
 
-.level-image {
+.ride-level-image {
   grid-area: image
 }
 
 .ride-content {
-  grid-area: content
+  grid-area: content;
+  display: flex;
+  text-align: left;
 
 }
 
+.ride-date {
+  grid-area: date;
+}
+
 .ride-grid-container {
-  /* border-bottom: 1px solid black; */
+  border-bottom: 1px solid black;
   display: grid;
   grid-template-areas:
-    'image title title date'
+    'image title title title'
     'image content content date'
   ;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 20px;
+}
+
+.ride-grid-container:hover {
+  background-color: blanchedalmond;
+}
+
+.profile-image {
+  grid-area: profileImage;
+}
+
+.user-level {
+  grid-area: level;
+  display: flex;
+  text-align: left;
+}
+
+.user-username {
+  grid-area: username;
+  display: flex;
+  text-align: left;
+}
+
+.following-grid-container {
+  border-bottom: 1px solid black;
+  display: grid;
+  grid-template-areas:
+    'profileImage level username username'
+    'profileImage location location location'
+  ;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 20px;
+}
+
+.following-grid-container:hover {
+  background-color: blanchedalmond;
 }
 
 .profile-page-container {

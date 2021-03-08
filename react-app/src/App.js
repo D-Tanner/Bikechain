@@ -56,7 +56,7 @@ function App() {
         <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
           <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path="/your-profile/:userId" exact={true} authenticated={authenticated}>
+        <ProtectedRoute path="/profile/:userId" exact={true} authenticated={authenticated}>
           <ProfilePage />
         </ProtectedRoute>
         <ProtectedRoute path="/new-ride" exact={true} authenticated={authenticated}>

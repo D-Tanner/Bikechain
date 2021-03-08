@@ -7,8 +7,9 @@ import "./ProfilePage.css"
 const ProfilePage = () => {
 
   const [user, setUser] = useState({});
-  const [rides, setRides] = useState({});
-  const [committedRides, setCommittedRides] = useState({})
+  const [rides, setRides] = useState();
+  const [committedRides, setCommittedRides] = useState()
+  const [following, setFollowing] = useState()
   const [ridePage, setRidePage] = useState(true)
   const [commitPage, setCommitPage] = useState(false)
   const [followingPage, setFollowingPage] = useState(false)
@@ -27,6 +28,7 @@ const ProfilePage = () => {
       setUser(user.user);
       setRides(user.rides);
       setCommittedRides(user.committedRides);
+      setFollowing(user.following);
     })();
   }, [userId]);
 
@@ -34,11 +36,39 @@ const ProfilePage = () => {
     <>
       { user && <div className="profile-page-container">
         <div className="grid-container">
-          <div className="item1">Your rides</div>
-          <div className="item2">Committments</div>
-          <div className="item3">Following</div>
+          <div className="item1"
+            onClick={() => {
+              setRidePage(true)
+              setCommitPage(false)
+              setFollowingPage(false)
+            }}
+          >Your rides</div>
+          <div className="item2"
+            onClick={() => {
+              setRidePage(false)
+              setCommitPage(true)
+              setFollowingPage(false)
+            }}
+          >Committments</div>
+          <div className="item3"
+            onClick={() => {
+              setRidePage(false)
+              setCommitPage(false)
+              setFollowingPage(true)
+            }}
+          >Following</div>
           <div className="profile-info">Profile</div>
-          <div className="main-feed">Main</div>
+          <div className="main-feed">
+            {ridePage && (
+              <div>Rides</div>
+            )}
+            {commitPage && (
+              <div>Commitments</div>
+            )}
+            {followingPage && (
+              <div>Following</div>
+            )}
+          </div>
         </div>
       </div>}
 

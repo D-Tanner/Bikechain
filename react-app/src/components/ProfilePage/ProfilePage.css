@@ -19,7 +19,10 @@
 .profile-info { grid-area: profile; height: 50%}
 .main-feed { grid-area: main;}
 
-
+.item1:hover, .item2:hover, .item3:hover {
+  cursor: pointer;
+  background-color: beige;
+}
 
 .grid-container {
   display: grid;

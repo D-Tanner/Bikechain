@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Modal, useModalContext } from "../../context/Modal"
 import { useParams, Link } from "react-router-dom"
-// import { getRideById } from "../../services/rides"
 import "./ProfilePage.css"
 
 const ProfilePage = () => {
@@ -62,7 +61,9 @@ const ProfilePage = () => {
             {ridePage && rides && (
               <div className='ride-feed-container'>{
                 rides.map((ride, idx) => (
-                  <div>{ride.title}</div>
+                  <Link key={idx} to={`/rides/${ride.id}`} className="link">
+                    <div className="ride-div">{ride.title}</div>
+                  </Link>
                 ))
               }
               </div>

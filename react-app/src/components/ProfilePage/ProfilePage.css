@@ -2,6 +2,15 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.ride-div {
+  border-bottom: 1px solid black;
+  padding: 20px;
+}
 
 .profile-page-container {
   /* margin-top: 90px; */

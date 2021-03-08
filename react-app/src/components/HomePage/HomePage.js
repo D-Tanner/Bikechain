@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Modal, useModalContext } from "../../context/Modal"
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl';
 import { getRides } from '../../services/rides'
 import { Link } from 'react-router-dom'
 import RoomIcon from '@material-ui/icons/Room';
@@ -27,6 +27,11 @@ const HomePage = () => {
     longitude: -105.0444,
     zoom: 8
   });
+
+  const navControlStyle = {
+    left: 10,
+    top: 20,
+  }
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -71,6 +76,7 @@ const HomePage = () => {
             position="top-right"
 
           />
+          <NavigationControl style={navControlStyle} />
           {rides.map((ride, idx) => (
             <Marker key={idx}
               latitude={ride.latitude}

@@ -8,6 +8,8 @@ const ProfilePage = () => {
 
   const [user, setUser] = useState({});
 
+  console.log(user)
+
   const { userId } = useParams();
 
   useEffect(() => {
@@ -24,9 +26,9 @@ const ProfilePage = () => {
   return (
     <>
       <div className="profile-page-container">
-        <h1>
-          Welcome, {user.username}
-        </h1>
+        {/* <h1>
+          Welcome, {user.user.username}
+        </h1> */}
       </div>
 
 

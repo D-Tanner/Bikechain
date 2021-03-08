@@ -24,6 +24,10 @@
   background-color: beige;
 }
 
+#is-selected {
+  background-color: cadetblue;
+}
+
 .grid-container {
   display: grid;
   grid-template-areas:

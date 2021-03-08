@@ -36,21 +36,21 @@ const ProfilePage = () => {
     <>
       { user && <div className="profile-page-container">
         <div className="grid-container">
-          <div className="item1"
+          <div className="item1" id={ridePage ? "is-selected" : ""}
             onClick={() => {
               setRidePage(true)
               setCommitPage(false)
               setFollowingPage(false)
             }}
           >Your rides</div>
-          <div className="item2"
+          <div className="item2" id={commitPage ? "is-selected" : ""}
             onClick={() => {
               setRidePage(false)
               setCommitPage(true)
               setFollowingPage(false)
             }}
           >Committments</div>
-          <div className="item3"
+          <div className="item3" id={followingPage ? "is-selected" : ""}
             onClick={() => {
               setRidePage(false)
               setCommitPage(false)

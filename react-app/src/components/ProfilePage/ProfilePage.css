@@ -7,18 +7,22 @@
   margin-top: 90px;
 }
 
-.item1 { grid-area: header; }
-.item2 { grid-area: menu; }
-.item3 { grid-area: main; }
-.item4 { grid-area: right; }
-.item6 { grid-area: footer; }
+.item1 { grid-area: rides; }
+.item2 {grid-area: commit;}
+.item3 {grid-area: following;}
+.item4 { grid-area: profile; }
+.item5 { grid-area: main; }
+.item6 { grid-area: right; }
+.item7 { grid-area: left; }
+.item8 { grid-area: footer; }
+
 
 .grid-container {
   display: grid;
   grid-template-areas:
-    'menu header header header header header'
-    'menu main main main left right'
-    'menu footer footer footer footer footer';
+    'profile profile rides commit following'
+    'profile profile main main main'
+    'footer footer footer footer footer';
   grid-gap: 10px;
   background-color: #2196F3;
   padding: 10px;

@@ -35,17 +35,15 @@ const ProfilePage = () => {
         </h1>
       </div>}
 
-      <h1>Grid Layout</h1>
-
-      <p>This grid layout contains six columns and three rows:</p>
-
       <div class="grid-container">
-        <div class="item1">Header</div>
-        <div class="item2">Menu</div>
-        <div class="item3">Main</div>
-        <div class="item4">Right</div>
-        <div class="item5">Left</div>
-        <div class="item6">Footer</div>
+        <div class="item1">Your rides</div>
+        <div class="item2">Committments</div>
+        <div class="item3">Following</div>
+        <div class="item4">Profile</div>
+        <div class="item5">Main</div>
+        {/* <div class="item6">Right</div> */}
+        {/* <div class="item7">Left</div> */}
+        <div class="item8">Footer</div>
       </div>
 
     </>

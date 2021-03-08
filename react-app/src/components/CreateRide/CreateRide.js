@@ -26,8 +26,6 @@ const CreateRide = ({ user }) => {
 
   const postRide = async (e) => {
     e.preventDefault()
-
-    // console.log(date)
     const newRide = await createNewRide(user.id, title, content, date.toISOString(), lat, long, isLocal, level)
     if (newRide.errors) {
       setErrors(newRide.errors)

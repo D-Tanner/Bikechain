@@ -1,3 +1,35 @@
 .ride-page-container {
   margin-top: 90px;
 }
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.item1 { grid-area: rides; }
+.item2 {grid-area: commit;}
+.item3 {grid-area: following;}
+.item4 { grid-area: profile; }
+.item5 { grid-area: main; }
+.item6 { grid-area: right; }
+.item7 { grid-area: left; }
+.item8 { grid-area: footer; }
+
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'profile profile rides commit following'
+    'profile profile main main main'
+    'footer footer footer footer footer';
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}

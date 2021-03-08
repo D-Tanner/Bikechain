@@ -9,7 +9,9 @@ const ProfilePage = () => {
   const [user, setUser] = useState({});
   const [rides, setRides] = useState({});
   const [committedRides, setCommittedRides] = useState({})
-
+  const [ridePage, setRidePage] = useState(true)
+  const [commitPage, setCommitPage] = useState(false)
+  const [followingPage, setFollowingPage] = useState(false)
 
 
   const { userId } = useParams();
@@ -21,6 +23,7 @@ const ProfilePage = () => {
     (async () => {
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
+      console.log(user)
       setUser(user.user);
       setRides(user.rides);
       setCommittedRides(user.committedRides);
@@ -30,15 +33,12 @@ const ProfilePage = () => {
   return (
     <>
       { user && <div className="profile-page-container">
-        <div class="grid-container">
-          <div class="item1">Your rides</div>
-          <div class="item2">Committments</div>
-          <div class="item3">Following</div>
-          <div class="item4">Profile</div>
-          <div class="item5">Main</div>
-          {/* <div class="item6">Right</div> */}
-          {/* <div class="item7">Left</div> */}
-          {/* <div class="item8">Footer</div> */}
+        <div className="grid-container">
+          <div className="item1">Your rides</div>
+          <div className="item2">Committments</div>
+          <div className="item3">Following</div>
+          <div className="profile-info">Profile</div>
+          <div className="main-feed">Main</div>
         </div>
       </div>}
 

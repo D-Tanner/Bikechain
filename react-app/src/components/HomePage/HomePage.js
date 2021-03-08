@@ -74,7 +74,7 @@ const HomePage = () => {
             onViewportChange={handleGeocoderViewportChange}
             mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
             position="top-right"
-
+            marker={false}
           />
           <NavigationControl style={navControlStyle} />
           {rides.map((ride, idx) => (

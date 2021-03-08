@@ -78,7 +78,7 @@ const Navigation = () => {
             </div>
             <div>
               <button onClick={() => {
-                if (authenticated && user) {
+                if (authenticated) {
                   history.push(`/your-profile/${user.id}`)
                 } else {
                   setShowSignUpModal(false)

@@ -30,21 +30,17 @@ const ProfilePage = () => {
   return (
     <>
       { user && <div className="profile-page-container">
-        <h1>
-          Welcome, {user.username}
-        </h1>
+        <div class="grid-container">
+          <div class="item1">Your rides</div>
+          <div class="item2">Committments</div>
+          <div class="item3">Following</div>
+          <div class="item4">Profile</div>
+          <div class="item5">Main</div>
+          {/* <div class="item6">Right</div> */}
+          {/* <div class="item7">Left</div> */}
+          <div class="item8">Footer</div>
+        </div>
       </div>}
-
-      <div class="grid-container">
-        <div class="item1">Your rides</div>
-        <div class="item2">Committments</div>
-        <div class="item3">Following</div>
-        <div class="item4">Profile</div>
-        <div class="item5">Main</div>
-        {/* <div class="item6">Right</div> */}
-        {/* <div class="item7">Left</div> */}
-        <div class="item8">Footer</div>
-      </div>
 
     </>
   )

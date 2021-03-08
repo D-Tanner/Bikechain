@@ -4,14 +4,20 @@
 
 
 .profile-page-container {
-  margin-top: 90px;
+  /* margin-top: 90px; */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 90px;
+    background: rgba(51,51,51,0.7);
 }
 
 .item1 { grid-area: rides; }
 .item2 {grid-area: commit;}
 .item3 {grid-area: following;}
 .item4 { grid-area: profile; }
-.item5 { grid-area: main; }
+.item5 { grid-area: main; height: 100px; }
 .item6 { grid-area: right; }
 .item7 { grid-area: left; }
 .item8 { grid-area: footer; }
@@ -26,6 +32,9 @@
   grid-gap: 10px;
   background-color: #2196F3;
   padding: 10px;
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .grid-container > div {

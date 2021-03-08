@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Modal, useModalContext } from "../../context/Modal"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 // import { getRideById } from "../../services/rides"
 import "./ProfilePage.css"
 
@@ -14,7 +14,7 @@ const ProfilePage = () => {
   const [commitPage, setCommitPage] = useState(false)
   const [followingPage, setFollowingPage] = useState(false)
 
-
+  console.log(rides)
   const { userId } = useParams();
 
   useEffect(() => {
@@ -59,8 +59,13 @@ const ProfilePage = () => {
           >Following</div>
           <div className="profile-info">Profile</div>
           <div className="main-feed">
-            {ridePage && (
-              <div>Rides</div>
+            {ridePage && rides && (
+              <div className='ride-feed-container'>{
+                rides.map((ride, idx) => (
+                  <div>{ride.title}</div>
+                ))
+              }
+              </div>
             )}
             {commitPage && (
               <div>Commitments</div>

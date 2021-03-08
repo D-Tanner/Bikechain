@@ -30,7 +30,7 @@ const HomePage = () => {
 
   const navControlStyle = {
     left: 10,
-    top: 20,
+    top: 10,
   }
 
   const mapRef = useRef();

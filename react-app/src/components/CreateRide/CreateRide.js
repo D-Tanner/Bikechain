@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { createNewRide } from '../../services/rides';
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { Marker, NavigationControl } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder'
 import RoomIcon from '@material-ui/icons/Room';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
@@ -24,16 +24,16 @@ const CreateRide = ({ user }) => {
   const [errors, setErrors] = useState([]);
 
 
-
   const postRide = async (e) => {
     e.preventDefault()
-    updateDate()
-    // const newRide = await createNewRide(user.id, title, content, date, lat, long, isLocal, level)
-    // if (newRide.errors) {
-    //   setErrors(newRide.errors)
-    // } else {
-    //   history.push("/")
-    // }
+
+    // console.log(date)
+    const newRide = await createNewRide(user.id, title, content, date.toISOString(), lat, long, isLocal, level)
+    if (newRide.errors) {
+      setErrors(newRide.errors)
+    } else {
+      history.push("/")
+    }
   }
 
   const updateTitle = (e) => {
@@ -61,6 +61,11 @@ const CreateRide = ({ user }) => {
     longitude: -105.0444,
     zoom: 8
   });
+
+  const navControlStyle = {
+    left: 10,
+    top: 10,
+  }
 
   const mapRef = useRef();
   const handleViewportChange = useCallback(
@@ -109,7 +114,9 @@ const CreateRide = ({ user }) => {
             ></textarea>
           </div>
           <div> When
-            <DatePicker date={date} onDateChange={setDate} locale={enGB} format={'MM-dd-yyyy'}>
+            <DatePicker date={date} onDateChange={setDate}
+              locale={enGB}
+              format={'MM-dd-yyyy'}>
               {/* <DatePicker date={date} onDateChange={(event) => {
 
             }} locale={enGB} format={'MM-dd-yyyy'}> */}
@@ -144,6 +151,7 @@ const CreateRide = ({ user }) => {
                 position="top-right"
                 marker={false}
               />
+              <NavigationControl style={navControlStyle} />
               {lat && long && (
                 <Marker key={1}
                   latitude={lat}

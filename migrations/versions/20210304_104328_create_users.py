@@ -29,7 +29,7 @@ def upgrade():
     sa.Column('userId', sa.Integer(), nullable=True),
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('content', sa.Text(), nullable=True),
-    sa.Column('date', sa.DateTime(), nullable=False),
+    sa.Column('date', sa.Date(), nullable=False),
     sa.Column('latitude', sa.Float(precision=20), nullable=False),
     sa.Column('longitude', sa.Float(precision=20), nullable=False),
     sa.Column('isLocal', sa.Boolean(), nullable=False),

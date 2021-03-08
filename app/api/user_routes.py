@@ -18,7 +18,11 @@ def user(id):
     user = User.query.get(id)
     rides = Ride.query.filter(Ride.userId == id).all()
     rides_dict = [ride.to_dict() for ride in rides]
-    # committed_rides = Ride.query.filter(Ride.committed_riders).all()
+
     committed_rides_dict = [ride.to_dict() for ride in user.committed_rides]
-    return {"user": user.to_dict(), "rides": rides_dict, "committedRides": committed_rides_dict}
-    # return {"user": user.to_dict(), "rides": rides_dict}
+    following_dict = [following.to_dict() for following in user.followers]
+    return {"user": user.to_dict(),
+            "rides": rides_dict,
+            "committedRides": committed_rides_dict,
+            "following": following_dict
+            }

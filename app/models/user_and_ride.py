@@ -85,7 +85,7 @@ class Ride(db.Model):
   userId = db.Column(db.Integer, db.ForeignKey("users.id"))
   title = db.Column(db.String(100), nullable=False)
   content = db.Column(db.Text, nullable=True)
-  date = db.Column(db.DateTime, nullable=False)
+  date = db.Column(db.Date, nullable=False)
   latitude = db.Column(db.Float(precision=20), nullable=False)
   longitude = db.Column(db.Float(precision=20), nullable=False)
   isLocal = db.Column(db.Boolean, nullable=False, default=False)

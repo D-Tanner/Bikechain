@@ -1,3 +1,125 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+
+.ride-title {
+  grid-area: title;
+  display: flex;
+  text-align: left;
+}
+
+.ride-level-image {
+  grid-area: image
+}
+
+.ride-content {
+  grid-area: content;
+  display: flex;
+  text-align: left;
+
+}
+
+.ride-date {
+  grid-area: date;
+}
+
+.ride-grid-container {
+  border-bottom: 1px solid black;
+  display: grid;
+  grid-template-areas:
+    'image title title title'
+    'image content content date'
+  ;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 20px;
+}
+
+.ride-grid-container:hover {
+  background-color: blanchedalmond;
+}
+
+.profile-image {
+  grid-area: profileImage;
+}
+
+.user-level {
+  grid-area: level;
+  display: flex;
+  text-align: left;
+}
+
+.user-username {
+  grid-area: username;
+  display: flex;
+  text-align: left;
+}
+
+.following-grid-container {
+  border-bottom: 1px solid black;
+  display: grid;
+  grid-template-areas:
+    'profileImage level username username'
+    'profileImage location location location'
+  ;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 20px;
+}
+
+.following-grid-container:hover {
+  background-color: blanchedalmond;
+}
+
 .profile-page-container {
-  margin-top: 90px;
+  /* margin-top: 90px; */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 90px;
+    background: rgba(51,51,51,0.7);
+}
+
+.item1 { grid-area: rides; }
+.item2 {grid-area: commit;}
+.item3 {grid-area: following;}
+.profile-info { grid-area: profile; height: 50%}
+.main-feed { grid-area: main;}
+
+.item1:hover, .item2:hover, .item3:hover {
+  cursor: pointer;
+  background-color: beige;
+}
+
+#is-selected {
+  background-color: cadetblue;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'profile profile rides commit following'
+    'profile profile main main main';
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 10% 90%;
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
 }

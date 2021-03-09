@@ -2,12 +2,12 @@
   grid-area: form;
   background-color: aquamarine;
   padding: 20px;
-
 }
 
 .map-grid-container {
   grid-area: map;
   background-color: cadetblue;
+  padding: 20px;
 }
 
 .create-grid-container {
@@ -31,11 +31,12 @@
   border: 1px solid #ccc;
   box-sizing: border-box;
   border-radius: 5px;
+  font-size: 16px;
 }
 
 .map-location {
-  height: 100%;
-  width: 100%;
+  height: 700px;
+  width: 700px;
   background-color: aqua;
 }
 
@@ -51,6 +52,7 @@
   border: 1px solid #ccc;
   box-sizing: border-box;
   border-radius: 5px;
+  font-size: 16px;
 }
 
 #input-date-value {
@@ -61,12 +63,27 @@
   border: 1px solid #ccc;
   box-sizing: border-box;
   border-radius: 5px;
+  font-size: 16px;
 }
 
 .submit-cancel-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.is-local-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  margin-left: 50px;
+  padding: 20px 0 20px 0px;
+}
+
+.private-check {
+  height: 20px;
+  width: 20px;
+  margin: 0 10px 0 0;
 }
 
 .submit-button:hover,

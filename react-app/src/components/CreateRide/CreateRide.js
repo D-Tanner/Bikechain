@@ -133,7 +133,7 @@ const CreateRide = ({ user }) => {
               ></textarea>
             </div>
             <div>
-              <select className="input-select" name="level" onChange={updateLevel} value={level}>
+              <select className="input-select" name="level" onChange={updateLevel} value={level} required>
                 <option value="" disabled selected>Level of the Ride</option>
                 <option value="Easiest">Novice</option>
                 <option value="Easy">Intermediate</option>
@@ -162,8 +162,9 @@ const CreateRide = ({ user }) => {
         </div>
 
         <div className="map-grid-container">
-          <div className="map-location"> Where: Click and Drag
-            {/* <ReactMapGL
+          <h1>Click and Drag to select location</h1>
+          <div className="map-location">
+            <ReactMapGL
               onClick={(e) => {
                 setLong(e.lngLat[0])
                 setLat(e.lngLat[1])
@@ -173,31 +174,31 @@ const CreateRide = ({ user }) => {
               mapStyle="mapbox://styles/dft609/cklyko9gp16fx17qkfkqteipz"
               mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
               onViewportChange={handleViewportChange}
-              >
+            >
               <Geocoder
-              mapRef={mapRef}
-              onViewportChange={handleGeocoderViewportChange}
-              mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
-              position="top-right"
-              marker={false}
+                mapRef={mapRef}
+                onViewportChange={handleGeocoderViewportChange}
+                mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
+                position="top-right"
+                marker={false}
               />
               <NavigationControl style={navControlStyle} />
               {lat && long && (
                 <Marker key={1}
-                latitude={lat}
-                longitude={long}
-                offsetLeft={-30}
-                offsetTop={-40}
-                draggable={true}
-                onDragEnd={(e) => {
-                  setLong(e.lngLat[0])
-                  setLat(e.lngLat[1])
-                  // console.log(lat, long)
-                }}>
-                <RoomIcon style={{ fontSize: 50 }} />
+                  latitude={lat}
+                  longitude={long}
+                  offsetLeft={-30}
+                  offsetTop={-40}
+                  draggable={true}
+                  onDragEnd={(e) => {
+                    setLong(e.lngLat[0])
+                    setLat(e.lngLat[1])
+                    // console.log(lat, long)
+                  }}>
+                  <RoomIcon style={{ fontSize: 50 }} />
                 </Marker>
-                )}
-              </ReactMapGL> */}
+              )}
+            </ReactMapGL>
           </div>
         </div>
       </div>

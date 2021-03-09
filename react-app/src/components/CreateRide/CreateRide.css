@@ -1,9 +1,23 @@
-.container {
+.form-grid-container {
+  grid-area: form;
+  background-color: aquamarine;
+}
+
+.map-grid-container {
+  grid-area: map;
+  background-color: cadetblue;
+}
+
+.create-grid-container {
   margin-top: 90px;
+  display: grid;
+  grid-template-areas:
+  'form map';
+  grid-template-columns: 1fr 1fr;
 }
 
 .map-location {
-  height: 600px;
-  width: 600px;
-
+  height: 100%;
+  width: 100%;
+  background-color: aqua;
 }

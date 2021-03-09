@@ -24,7 +24,10 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
-        return current_user.to_dict()
+        following_dict = [following.to_dict() for following in current_user.followers]
+
+        return {"user": current_user.to_dict(),
+                "following": following_dict}
     return {'errors': ['Unauthorized']}, 401
 
 

@@ -29,11 +29,12 @@
   grid-area: date;
 }
 
+
 .ride-grid-container {
   border-bottom: 1px solid black;
   display: grid;
   grid-template-areas:
-    'image title title title'
+    'image title title uncommit'
     'image content content date'
   ;
   grid-template-columns: 1fr 1fr 1fr 1fr;

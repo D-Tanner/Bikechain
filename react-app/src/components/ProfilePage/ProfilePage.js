@@ -13,8 +13,10 @@ const ProfilePage = () => {
   const [ridePage, setRidePage] = useState(true)
   const [commitPage, setCommitPage] = useState(false)
   const [followingPage, setFollowingPage] = useState(false)
+  const [isFollowing, setIsFollowing] = useState(false)
   const { user } = useModalContext();
 
+  console.log(user)
   const { userId } = useParams();
 
   useEffect(() => {
@@ -32,9 +34,10 @@ const ProfilePage = () => {
     })();
   }, [userId]);
 
+
   return (
     <>
-      { currentUser && user && <div className="profile-page-container">
+      { currentUser && user.user && following !== undefined && <div className="profile-page-container">
         <div className="grid-container">
           <div className="item1" id={ridePage ? "is-selected" : ""}
             onClick={() => {
@@ -42,7 +45,7 @@ const ProfilePage = () => {
               setCommitPage(false)
               setFollowingPage(false)
             }}
-          >{currentUser.id === user.id ? "Your rides" : "Their rides"}</div>
+          >{currentUser.id === user.user.id ? "Your rides" : "Their rides"}</div>
           <div className="item2" id={commitPage ? "is-selected" : ""}
             onClick={() => {
               setRidePage(false)
@@ -61,6 +64,12 @@ const ProfilePage = () => {
             <div>{currentUser.username}</div>
             <div>{currentUser.city}, {currentUser.state}</div>
             <div>{currentUser.level}</div>
+            {/* {currentUser && user && (<div>
+              {currentUser.id === user.user.id ? <button>Edit</button> : <button>Follow</button>}
+              {following && following.map((followers) => (
+                <div>{followers.id}, {user.id}</div>
+              ))}
+            </div>)} */}
           </div>
           <div className="main-feed">
             {ridePage && rides && (
@@ -100,7 +109,7 @@ const ProfilePage = () => {
                 following.map((user, idx) => (
 
                   <Link key={idx}
-                    to={`/profile/${user.id}`}
+                    to={`/profile/${user.user.id}`}
                     className="link"
                     onClick={() => {
                       setRidePage(true)
@@ -110,9 +119,9 @@ const ProfilePage = () => {
                   >
                     <div className="following-grid-container">
                       <div className="profile-image"></div>
-                      <div className="user-level">{user.level}</div>
-                      <div className="user-username">{user.username}</div>
-                      <div className="user-location">{user.city}, {user.state}</div>
+                      <div className="user-level">{user.user.level}</div>
+                      <div className="user-username">{user.user.username}</div>
+                      <div className="user-location">{user.user.city}, {user.user.state}</div>
                     </div>
                   </Link>
                 ))

@@ -4,6 +4,8 @@ import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl';
 import { getRides } from '../../services/rides'
 import { Link } from 'react-router-dom'
 import RoomIcon from '@material-ui/icons/Room';
+import deepOrange from '@material-ui/core/colors/deepOrange'
+import lightBlue from '@material-ui/core/colors/lightBlue'
 import "./HomePage.css"
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import Geocoder from 'react-map-gl-geocoder'
@@ -82,7 +84,7 @@ const HomePage = () => {
               latitude={ride.latitude}
               longitude={ride.longitude}
             >
-              <RoomIcon style={{ fontSize: 50 }}
+              <RoomIcon style={{ fontSize: 50, color: (ride.isLocal) ? lightBlue[600] : deepOrange[600] }}
                 onClick={() => {
                   setSelectedRide(ride)
                   setPopup((prev) => !prev)

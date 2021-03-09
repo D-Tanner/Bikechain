@@ -6,6 +6,8 @@ import { DatePicker } from 'react-nice-dates'
 import ReactMapGL, { Marker, NavigationControl } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder'
 import RoomIcon from '@material-ui/icons/Room';
+import deepOrange from '@material-ui/core/colors/deepOrange'
+import lightBlue from '@material-ui/core/colors/lightBlue'
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'react-nice-dates/build/style.css'
 import "./CreateRide.css"
@@ -85,52 +87,86 @@ const CreateRide = ({ user }) => {
 
   return (
     <>
-      <div className="container">
-        <h1>Create a Ride!</h1>
-        <form onSubmit={postRide} className="create-form">
-          <div>
-            {errors.map((error, idx) => (
-              <ul classname="errors" key={idx}>{error}</ul>
-            ))}
-          </div>
-          <div>
-            <input
-              type="text"
-              className="input-text"
-              name="name"
-              placeholder="Title of Ride"
-              onChange={updateTitle}
-            ></input>
-          </div>
-          <div>
-            <textarea
-              type="text"
-              className="input-text"
-              name="content"
-              placeholder="Additional Information"
-              onChange={updateContent}
-            ></textarea>
-          </div>
-          <div> When
-            <DatePicker date={date} onDateChange={setDate}
-              locale={enGB}
-              format={'MM-dd-yyyy'}>
-              {/* <DatePicker date={date} onDateChange={(event) => {
+      <div className="create-grid-container">
+        <div className="form-grid-container">
+          <h1>Create a Ride!</h1>
+          <form onSubmit={postRide} className="create-form">
+            <div>
+              {errors.map((error, idx) => (
+                <ul classname="errors" key={idx}>{error}</ul>
+              ))}
+            </div>
+            <div>
+              <input
+                type="text"
+                className="input-text"
+                name="name"
+                placeholder="Title of Ride"
+                onChange={updateTitle}
+              ></input>
+            </div>
+            <div className="input-number">
+              <DatePicker date={date} onDateChange={setDate}
+                locale={enGB}
+                format={'MM-dd-yyyy'}>
+                {/* <DatePicker date={date} onDateChange={(event) => {
 
             }} locale={enGB} format={'MM-dd-yyyy'}> */}
-              {({ inputProps, focused }) => (
+                {({ inputProps, focused }) => (
 
-                <input
-                  className={'input' + (focused ? ' -focused' : '')}
-                  {...inputProps}
-                  id="input-date-value"
-                  required
-                />
-              )}
-            </DatePicker>
+                  <input
+                    className={'input' + (focused ? ' -focused' : '')}
+                    {...inputProps}
+                    id="input-date-value"
+                    required
+                  />
+                )}
+              </DatePicker>
 
-          </div>
-          <div className="map-location"> Where: Click and Drag
+            </div>
+            <div>
+              <textarea
+                type="text"
+                className="input-text"
+                name="content"
+                placeholder="Additional Information. When? What should you bring? What socks should you wear?"
+                onChange={updateContent}
+                rows="10"
+              ></textarea>
+            </div>
+            <div>
+              <select className="input-select" name="level" onChange={updateLevel} value={level} required>
+                <option value="" disabled selected>Level of the Ride</option>
+                <option value="Easiest">Novice</option>
+                <option value="Easy">Intermediate</option>
+                <option value="More Difficult">Intermediate+</option>
+                <option value="Very Difficult">Advanced</option>
+                <option value="Extremely Difficult">Advanced+</option>
+              </select>
+            </div>
+            <div className="is-local-container">
+              <input
+                type="checkbox"
+                className="private-check"
+                name="local"
+                checked={isLocal}
+                onClick={updateisLocal}
+              ></input>
+
+              <label className="main-label" for="local">
+                Are you a local? Feel comfortable taking others on this ride?
+                </label>
+            </div>
+            <div className="submit-cancel-container">
+              <button className="submit-button" type="submit">Create</button>
+              <button className="cancel-button" onClick={() => history.push('/')}>Cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <div className="map-grid-container">
+          <h1>Click and Drag to select location</h1>
+          <div className="map-location">
             <ReactMapGL
               onClick={(e) => {
                 setLong(e.lngLat[0])
@@ -162,38 +198,13 @@ const CreateRide = ({ user }) => {
                     setLat(e.lngLat[1])
                     // console.log(lat, long)
                   }}>
-                  <RoomIcon style={{ fontSize: 50 }} />
+                  {/* <RoomIcon style={{ fontSize: 50, color: lightBlue[600] }} /> */}
+                  <RoomIcon style={{ fontSize: 50, color: (isLocal) ? lightBlue[600] : deepOrange[600] }} />
                 </Marker>
               )}
             </ReactMapGL>
           </div>
-          <div>
-            <select name="level" onChange={updateLevel} value={level}>
-              <option value="" disabled selected>Level</option>
-              <option value="Easiest">Novice</option>
-              <option value="Easy">Intermediate</option>
-              <option value="More Difficult">Intermediate+</option>
-              <option value="Very Difficult">Advanced</option>
-              <option value="Extremely Difficult">Advanced+</option>
-            </select>
-          </div>
-          <div className="is-local-container">
-            <input
-              type="checkbox"
-              className="private-check"
-              name="local"
-              checked={isLocal}
-              onClick={updateisLocal}
-            ></input>
-            <label
-              for="local"
-            >
-              Could you ride this trail in your sleep?
-              </label>
-          </div>
-          <button type="submit">Create</button>
-          <button onClick={() => history.push('/')}>Cancel</button>
-        </form>
+        </div>
       </div>
     </>
   )

@@ -38,11 +38,11 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (currentUser) {
+      console.log(user.following)
       user.following.map((followers) => {
         if (followers.id === currentUser.id) {
           setIsFollowing(true)
         }
-
       })
     }
   }, [currentUser])
@@ -79,12 +79,18 @@ const ProfilePage = () => {
             <div>{currentUser.level}</div>
             {currentUser && user && (<div>
               {currentUser.id === user.user.id && <button>Edit</button>}
-              {isFollowing ?
+              {currentUser.id !== user.user.id && <div>{isFollowing ?
                 <button
                   onClick={() => unFollowRider(user.user.id, currentUser.id)}
                 >Unfollow</button> :
                 <button>Follow</button>
-              }
+              }</div>}
+              {/* {isFollowing ?
+                <button
+                  onClick={() => unFollowRider(user.user.id, currentUser.id)}
+                >Unfollow</button> :
+                <button>Follow</button>
+              } */}
             </div>)}
           </div>
           <div className="main-feed">
@@ -128,6 +134,7 @@ const ProfilePage = () => {
                     to={`/profile/${user.id}`}
                     className="link"
                     onClick={() => {
+                      setIsFollowing(false)
                       setRidePage(true)
                       setCommitPage(false)
                       setFollowingPage(false)

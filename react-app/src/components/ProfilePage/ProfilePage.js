@@ -13,29 +13,48 @@ const ProfilePage = () => {
   const [ridePage, setRidePage] = useState(true)
   const [commitPage, setCommitPage] = useState(false)
   const [followingPage, setFollowingPage] = useState(false)
+  const [isFollowing, setIsFollowing] = useState(false)
   const { user } = useModalContext();
 
   const { userId } = useParams();
 
   useEffect(() => {
+
     if (!userId) {
       return
     }
     (async () => {
       const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      console.log(user)
-      setCurrentUser(user.user);
-
-      setRides(user.rides);
-      setCommittedRides(user.committedRides);
-      setFollowing(user.following);
+      const users = await response.json();
+      console.log(users)
+      setCurrentUser(users.user);
+      setRides(users.rides);
+      setCommittedRides(users.committedRides);
+      setFollowing(users.following);
     })();
   }, [userId]);
 
+
+  useEffect(() => {
+    if (currentUser) {
+      user.following.map((followers) => {
+        if (followers.id === currentUser.id) {
+          setIsFollowing(true)
+        }
+      })
+    }
+  }, [currentUser])
+  // if (user && currentUser) {
+  //   user.following.map(followers => {
+  //     if (followers.id === currentUser.id) {
+  //       setIsFollowing(true)
+  //     }
+  //   })
+  // }
+
   return (
     <>
-      { currentUser && user.user && following !== undefined && <div className="profile-page-container">
+      { currentUser && user.user && <div className="profile-page-container">
         <div className="grid-container">
           <div className="item1" id={ridePage ? "is-selected" : ""}
             onClick={() => {
@@ -64,7 +83,7 @@ const ProfilePage = () => {
             <div>{currentUser.level}</div>
             {currentUser && user && (<div>
               {currentUser.id === user.user.id && <button>Edit</button>}
-
+              {/* { currentUser.id !== user.user.id && isFollowing ? <button>Unfollow</button> : <button>Follow</button>} */}
             </div>)}
           </div>
           <div className="main-feed">

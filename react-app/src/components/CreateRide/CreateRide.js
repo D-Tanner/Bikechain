@@ -103,18 +103,8 @@ const CreateRide = ({ user }) => {
                 onChange={updateTitle}
               ></input>
             </div>
-            <div>
-              <textarea
-                type="text"
-                className="input-text"
-                name="content"
-                placeholder="Additional Information. When? What should you bring? What socks should you wear?"
-                onChange={updateContent}
-                rows="10"
-              ></textarea>
-            </div>
-            <div className="input-number"> When
-            <DatePicker date={date} onDateChange={setDate}
+            <div className="input-number">
+              <DatePicker date={date} onDateChange={setDate}
                 locale={enGB}
                 format={'MM-dd-yyyy'}>
                 {/* <DatePicker date={date} onDateChange={(event) => {
@@ -133,8 +123,18 @@ const CreateRide = ({ user }) => {
 
             </div>
             <div>
+              <textarea
+                type="text"
+                className="input-text"
+                name="content"
+                placeholder="Additional Information. When? What should you bring? What socks should you wear?"
+                onChange={updateContent}
+                rows="10"
+              ></textarea>
+            </div>
+            <div>
               <select className="input-select" name="level" onChange={updateLevel} value={level}>
-                <option value="" disabled selected>Level</option>
+                <option value="" disabled selected>Level of the Ride</option>
                 <option value="Easiest">Novice</option>
                 <option value="Easy">Intermediate</option>
                 <option value="More Difficult">Intermediate+</option>
@@ -150,14 +150,14 @@ const CreateRide = ({ user }) => {
                 checked={isLocal}
                 onClick={updateisLocal}
               ></input>
-              <label
-                for="local"
-              >
-                Could you ride this trail in your sleep?
+              <label for="local">
+                Are you a local? Feel comfortable taking others on this ride?
                 </label>
             </div>
-            <button type="submit">Create</button>
-            <button onClick={() => history.push('/')}>Cancel</button>
+            <div className="submit-cancel-container">
+              <button className="submit-button" type="submit">Create</button>
+              <button className="cancel-button" onClick={() => history.push('/')}>Cancel</button>
+            </div>
           </form>
         </div>
 

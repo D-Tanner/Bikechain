@@ -12,9 +12,9 @@ const LogoutButton = () => {
 
   const onLogout = async (e) => {
     await logout();
+    history.push("/")
     setUser(null)
     setAuthenticated(false);
-    history.push("/")
   };
 
   return <button onClick={onLogout}>Logout</button>;

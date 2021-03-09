@@ -3,6 +3,7 @@ import Moment from "react-moment"
 import { Modal, useModalContext } from "../../context/Modal"
 import { useParams, Link } from "react-router-dom"
 import "./ProfilePage.css"
+import { unFollowRider, followRider } from "../../services/rides"
 
 const ProfilePage = () => {
 
@@ -13,7 +14,9 @@ const ProfilePage = () => {
   const [ridePage, setRidePage] = useState(true)
   const [commitPage, setCommitPage] = useState(false)
   const [followingPage, setFollowingPage] = useState(false)
-  const { user } = useModalContext();
+  const [isFollowing, setIsFollowing] = useState(false)
+  const { user, setUser } = useModalContext();
+
 
   const { userId } = useParams();
 
@@ -23,18 +26,33 @@ const ProfilePage = () => {
     }
     (async () => {
       const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      console.log(user)
-      setCurrentUser(user.user);
-      setRides(user.rides);
-      setCommittedRides(user.committedRides);
-      setFollowing(user.following);
+      const users = await response.json();
+      console.log(users)
+      setCurrentUser(users.user);
+      setRides(users.rides);
+      setCommittedRides(users.committedRides);
+      setFollowing(users.following);
     })();
   }, [userId]);
 
+
+
+
+  useEffect(() => {
+    if (currentUser) {
+      user.following.map((followers) => {
+        if (followers.id === currentUser.id) {
+          setIsFollowing(true)
+        }
+      })
+    }
+  }, [currentUser, user])
+
+
+
   return (
     <>
-      { currentUser && user && <div className="profile-page-container">
+      { currentUser && user.user && <div className="profile-page-container">
         <div className="grid-container">
           <div className="item1" id={ridePage ? "is-selected" : ""}
             onClick={() => {
@@ -42,7 +60,7 @@ const ProfilePage = () => {
               setCommitPage(false)
               setFollowingPage(false)
             }}
-          >{currentUser.id === user.id ? "Your rides" : "Their rides"}</div>
+          >{currentUser.id === user.user.id ? "Your rides" : "Their rides"}</div>
           <div className="item2" id={commitPage ? "is-selected" : ""}
             onClick={() => {
               setRidePage(false)
@@ -61,6 +79,25 @@ const ProfilePage = () => {
             <div>{currentUser.username}</div>
             <div>{currentUser.city}, {currentUser.state}</div>
             <div>{currentUser.level}</div>
+            {currentUser && user && (<div>
+              {currentUser.id === user.user.id && <button>Edit</button>}
+              {currentUser.id !== user.user.id && <div>{isFollowing ?
+                <button
+                  onClick={async () => {
+                    const result = await unFollowRider(user.user.id, currentUser.id)
+                    setIsFollowing(false)
+                    setUser(result)
+                  }}
+                >Unfollow</button> :
+                <button
+                  onClick={async () => {
+                    const result = await followRider(user.user.id, currentUser.id)
+                    setIsFollowing(true)
+                    setUser(result)
+                  }}
+                >Follow</button>
+              }</div>}
+            </div>)}
           </div>
           <div className="main-feed">
             {ridePage && rides && (
@@ -103,6 +140,7 @@ const ProfilePage = () => {
                     to={`/profile/${user.id}`}
                     className="link"
                     onClick={() => {
+                      setIsFollowing(false)
                       setRidePage(true)
                       setCommitPage(false)
                       setFollowingPage(false)

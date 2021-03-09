@@ -13,7 +13,6 @@ const ProfilePage = () => {
   const [ridePage, setRidePage] = useState(true)
   const [commitPage, setCommitPage] = useState(false)
   const [followingPage, setFollowingPage] = useState(false)
-  const [isFollowing, setIsFollowing] = useState(false)
   const { user } = useModalContext();
 
   const { userId } = useParams();
@@ -64,8 +63,7 @@ const ProfilePage = () => {
             <div>{currentUser.city}, {currentUser.state}</div>
             <div>{currentUser.level}</div>
             {currentUser && user && (<div>
-              {currentUser.id === user.user.id ?
-                <button>Edit</button> : <button>Follow</button>}
+              {currentUser.id === user.user.id && <button>Edit</button>}
 
             </div>)}
           </div>
@@ -107,7 +105,7 @@ const ProfilePage = () => {
                 following.map((user, idx) => (
 
                   <Link key={idx}
-                    to={`/profile/${user.user.id}`}
+                    to={`/profile/${user.id}`}
                     className="link"
                     onClick={() => {
                       setRidePage(true)
@@ -117,9 +115,9 @@ const ProfilePage = () => {
                   >
                     <div className="following-grid-container">
                       <div className="profile-image"></div>
-                      <div className="user-level">{user.user.level}</div>
-                      <div className="user-username">{user.user.username}</div>
-                      <div className="user-location">{user.user.city}, {user.user.state}</div>
+                      <div className="user-level">{user.level}</div>
+                      <div className="user-username">{user.username}</div>
+                      <div className="user-location">{user.city}, {user.state}</div>
                     </div>
                   </Link>
                 ))

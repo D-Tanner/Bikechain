@@ -16,7 +16,6 @@ const ProfilePage = () => {
   const [isFollowing, setIsFollowing] = useState(false)
   const { user } = useModalContext();
 
-  console.log(user)
   const { userId } = useParams();
 
   useEffect(() => {
@@ -28,12 +27,12 @@ const ProfilePage = () => {
       const user = await response.json();
       console.log(user)
       setCurrentUser(user.user);
+
       setRides(user.rides);
       setCommittedRides(user.committedRides);
       setFollowing(user.following);
     })();
   }, [userId]);
-
 
   return (
     <>
@@ -64,12 +63,11 @@ const ProfilePage = () => {
             <div>{currentUser.username}</div>
             <div>{currentUser.city}, {currentUser.state}</div>
             <div>{currentUser.level}</div>
-            {/* {currentUser && user && (<div>
-              {currentUser.id === user.user.id ? <button>Edit</button> : <button>Follow</button>}
-              {following && following.map((followers) => (
-                <div>{followers.id}, {user.id}</div>
-              ))}
-            </div>)} */}
+            {currentUser && user && (<div>
+              {currentUser.id === user.user.id ?
+                <button>Edit</button> : <button>Follow</button>}
+
+            </div>)}
           </div>
           <div className="main-feed">
             {ridePage && rides && (

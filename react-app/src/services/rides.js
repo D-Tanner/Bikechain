@@ -35,3 +35,8 @@ export const createNewRide = async (userId, title, content, date, latitude, long
   })
   return await response.json();
 }
+
+
+export const unFollowRider = async (follower_id, followed_id) => {
+
+}

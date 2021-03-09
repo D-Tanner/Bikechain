@@ -3,6 +3,7 @@ import Moment from "react-moment"
 import { Modal, useModalContext } from "../../context/Modal"
 import { useParams, Link } from "react-router-dom"
 import "./ProfilePage.css"
+import { unFollowRider } from "../../services/rides"
 
 const ProfilePage = () => {
 
@@ -15,6 +16,7 @@ const ProfilePage = () => {
   const [followingPage, setFollowingPage] = useState(false)
   const [isFollowing, setIsFollowing] = useState(false)
   const { user } = useModalContext();
+
 
   const { userId } = useParams();
 
@@ -40,6 +42,7 @@ const ProfilePage = () => {
         if (followers.id === currentUser.id) {
           setIsFollowing(true)
         }
+
       })
     }
   }, [currentUser])
@@ -76,7 +79,12 @@ const ProfilePage = () => {
             <div>{currentUser.level}</div>
             {currentUser && user && (<div>
               {currentUser.id === user.user.id && <button>Edit</button>}
-              {currentUser.id !== user.user.id && isFollowing ? <button>Unfollow</button> : <button>Follow</button>}
+              {isFollowing ?
+                <button
+                  onClick={() => unFollowRider(user.user.id, currentUser.id)}
+                >Unfollow</button> :
+                <button>Follow</button>
+              }
             </div>)}
           </div>
           <div className="main-feed">

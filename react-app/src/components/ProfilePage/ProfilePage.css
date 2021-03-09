@@ -61,6 +61,13 @@
   text-align: left;
 }
 
+.user-location {
+  grid-area: location;
+  font-size: 20px;
+  text-align: end;
+
+}
+
 .following-grid-container {
   border-bottom: 1px solid black;
   display: grid;
@@ -68,7 +75,7 @@
     'profileImage level username username'
     'profileImage location location location'
   ;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 3fr 1fr;
   grid-template-rows: 1fr 1fr;
   padding: 20px;
 }

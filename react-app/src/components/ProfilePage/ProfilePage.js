@@ -14,8 +14,7 @@ const ProfilePage = () => {
   const [commitPage, setCommitPage] = useState(false)
   const [followingPage, setFollowingPage] = useState(false)
   const { user } = useModalContext();
-  console.log(user)
-  console.log(rides)
+
   const { userId } = useParams();
 
   useEffect(() => {

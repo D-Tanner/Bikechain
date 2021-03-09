@@ -80,7 +80,10 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        return user.to_dict()
+        following_dict = [following.to_dict() for following in user.followers]
+
+        return {"user": user.to_dict(),
+                "following": following_dict}
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 

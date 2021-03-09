@@ -19,7 +19,6 @@ const ProfilePage = () => {
   const { userId } = useParams();
 
   useEffect(() => {
-
     if (!userId) {
       return
     }
@@ -44,13 +43,7 @@ const ProfilePage = () => {
       })
     }
   }, [currentUser])
-  // if (user && currentUser) {
-  //   user.following.map(followers => {
-  //     if (followers.id === currentUser.id) {
-  //       setIsFollowing(true)
-  //     }
-  //   })
-  // }
+
 
   return (
     <>
@@ -83,7 +76,7 @@ const ProfilePage = () => {
             <div>{currentUser.level}</div>
             {currentUser && user && (<div>
               {currentUser.id === user.user.id && <button>Edit</button>}
-              {/* { currentUser.id !== user.user.id && isFollowing ? <button>Unfollow</button> : <button>Follow</button>} */}
+              {currentUser.id !== user.user.id && isFollowing ? <button>Unfollow</button> : <button>Follow</button>}
             </div>)}
           </div>
           <div className="main-feed">

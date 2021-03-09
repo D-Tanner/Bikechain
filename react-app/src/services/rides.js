@@ -38,5 +38,18 @@ export const createNewRide = async (userId, title, content, date, latitude, long
 
 
 export const unFollowRider = async (follower_id, followed_id) => {
+  const response = await fetch(`/api/rides/unfollow/${follower_id}/${followed_id}`, {
+    method: "DELETE",
+  })
+  return await response.json()
+}
 
+export const followRider = async (follower_id, followed_id) => {
+  const response = await fetch(`/api/rides/follow/${follower_id}/${followed_id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  return await response.json()
 }

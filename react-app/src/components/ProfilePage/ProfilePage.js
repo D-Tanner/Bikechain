@@ -3,7 +3,7 @@ import Moment from "react-moment"
 import { Modal, useModalContext } from "../../context/Modal"
 import { useParams, Link } from "react-router-dom"
 import "./ProfilePage.css"
-import { unFollowRider } from "../../services/rides"
+import { unFollowRider, followRider } from "../../services/rides"
 
 const ProfilePage = () => {
 
@@ -83,7 +83,9 @@ const ProfilePage = () => {
                 <button
                   onClick={() => unFollowRider(user.user.id, currentUser.id)}
                 >Unfollow</button> :
-                <button>Follow</button>
+                <button
+                  onClick={() => followRider(user.user.id, currentUser.id)}
+                >Follow</button>
               }</div>}
               {/* {isFollowing ?
                 <button

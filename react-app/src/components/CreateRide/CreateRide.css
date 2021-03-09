@@ -80,11 +80,29 @@
   padding: 20px 0 20px 0px;
 }
 
-.private-check {
+/* .private-check {
   height: 20px;
   width: 20px;
   margin: 0 10px 0 0;
+  background-color: black;
+} */
+
+.private-check {
+  height: 30px;
+  width: 30px;
+  margin: 0 10px 0 0;
 }
+
+.main-label {
+  display: block;
+  position: relative;
+  padding-left: 5px;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+
+
 
 .submit-button:hover,
 .cancel-button:hover,

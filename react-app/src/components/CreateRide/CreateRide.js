@@ -6,6 +6,8 @@ import { DatePicker } from 'react-nice-dates'
 import ReactMapGL, { Marker, NavigationControl } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder'
 import RoomIcon from '@material-ui/icons/Room';
+import deepOrange from '@material-ui/core/colors/deepOrange'
+import lightBlue from '@material-ui/core/colors/lightBlue'
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'react-nice-dates/build/style.css'
 import "./CreateRide.css"
@@ -150,7 +152,8 @@ const CreateRide = ({ user }) => {
                 checked={isLocal}
                 onClick={updateisLocal}
               ></input>
-              <label for="local">
+
+              <label className="main-label" for="local">
                 Are you a local? Feel comfortable taking others on this ride?
                 </label>
             </div>
@@ -195,7 +198,8 @@ const CreateRide = ({ user }) => {
                     setLat(e.lngLat[1])
                     // console.log(lat, long)
                   }}>
-                  <RoomIcon style={{ fontSize: 50 }} />
+                  {/* <RoomIcon style={{ fontSize: 50, color: lightBlue[600] }} /> */}
+                  <RoomIcon style={{ fontSize: 50, color: (isLocal) ? lightBlue[600] : deepOrange[600] }} />
                 </Marker>
               )}
             </ReactMapGL>

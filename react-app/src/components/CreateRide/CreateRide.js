@@ -108,11 +108,12 @@ const CreateRide = ({ user }) => {
                 type="text"
                 className="input-text"
                 name="content"
-                placeholder="Additional Information"
+                placeholder="Additional Information. When? What should you bring? What socks should you wear?"
                 onChange={updateContent}
+                rows="10"
               ></textarea>
             </div>
-            <div> When
+            <div className="input-number"> When
             <DatePicker date={date} onDateChange={setDate}
                 locale={enGB}
                 format={'MM-dd-yyyy'}>
@@ -132,7 +133,7 @@ const CreateRide = ({ user }) => {
 
             </div>
             <div>
-              <select name="level" onChange={updateLevel} value={level}>
+              <select className="input-select" name="level" onChange={updateLevel} value={level}>
                 <option value="" disabled selected>Level</option>
                 <option value="Easiest">Novice</option>
                 <option value="Easy">Intermediate</option>

@@ -1,6 +1,7 @@
 .form-grid-container {
   grid-area: form;
   background-color: aquamarine;
+  padding: 20px;
 }
 
 .map-grid-container {
@@ -14,10 +15,35 @@
   grid-template-areas:
   'form map';
   grid-template-columns: 1fr 1fr;
+  /* height: 800px; */
 }
 
 .map-location {
   height: 100%;
   width: 100%;
   background-color: aqua;
+}
+
+.create-form {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.input-text {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+#input-date-value {
+    width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
 }

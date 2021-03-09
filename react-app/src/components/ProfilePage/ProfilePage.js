@@ -15,7 +15,7 @@ const ProfilePage = () => {
   const [commitPage, setCommitPage] = useState(false)
   const [followingPage, setFollowingPage] = useState(false)
   const [isFollowing, setIsFollowing] = useState(false)
-  const { user } = useModalContext();
+  const { user, setUser } = useModalContext();
 
 
   const { userId } = useParams();
@@ -36,16 +36,18 @@ const ProfilePage = () => {
   }, [userId]);
 
 
+
+
   useEffect(() => {
     if (currentUser) {
-      console.log(user.following)
       user.following.map((followers) => {
         if (followers.id === currentUser.id) {
           setIsFollowing(true)
         }
       })
     }
-  }, [currentUser])
+  }, [currentUser, user])
+
 
 
   return (
@@ -81,18 +83,20 @@ const ProfilePage = () => {
               {currentUser.id === user.user.id && <button>Edit</button>}
               {currentUser.id !== user.user.id && <div>{isFollowing ?
                 <button
-                  onClick={() => unFollowRider(user.user.id, currentUser.id)}
+                  onClick={async () => {
+                    const result = await unFollowRider(user.user.id, currentUser.id)
+                    setIsFollowing(false)
+                    setUser(result)
+                  }}
                 >Unfollow</button> :
                 <button
-                  onClick={() => followRider(user.user.id, currentUser.id)}
+                  onClick={async () => {
+                    const result = await followRider(user.user.id, currentUser.id)
+                    setIsFollowing(true)
+                    setUser(result)
+                  }}
                 >Follow</button>
               }</div>}
-              {/* {isFollowing ?
-                <button
-                  onClick={() => unFollowRider(user.user.id, currentUser.id)}
-                >Unfollow</button> :
-                <button>Follow</button>
-              } */}
             </div>)}
           </div>
           <div className="main-feed">

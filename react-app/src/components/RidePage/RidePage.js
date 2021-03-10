@@ -16,6 +16,7 @@ const RidePage = () => {
     (async () => {
       const ride = await getRideById(rideId)
       setRide(ride)
+      console.log(ride)
     })();
   }, [])
 
@@ -24,25 +25,26 @@ const RidePage = () => {
       { ride &&
 
         <div className="ride-page-container">
-          <div class="ride-page-grid-container">
-            <div class="ride-info">Ride Info</div>
-            <div class="ride-posts" id={postFeed ? "feed-selected" : ""}
+          <div className="ride-page-grid-container">
+            <div className="ride-info">Ride Info</div>
+            <div className="ride-posts" id={postFeed ? "feed-selected" : ""}
               onClick={() => {
                 setCommittedFeed(false)
                 setPostFeed(true)
               }}
             >Posts</div>
-            <div class="ride-committed" id={committedFeed ? "feed-selected" : ""}
+            <div className="ride-committed" id={committedFeed ? "feed-selected" : ""}
               onClick={() => {
                 setCommittedFeed(true)
                 setPostFeed(false)
               }}
             >Committed Riders</div>
-            <div class="ride-main-feed">
+            <div className="ride-main-feed">
               {postFeed && <div>Posts</div>}
               {committedFeed && <div>Committed</div>}
             </div>
-            <div class="ride-location">location</div>
+            <div className="ride-location">location</div>
+            <div className="ride-commit-button">Commit</div>
           </div>
         </div>
       }

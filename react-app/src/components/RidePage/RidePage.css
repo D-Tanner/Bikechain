@@ -1,11 +1,12 @@
 .ride-page-container {
     position: fixed;
     width: 100%;
-    height: 100%;
+    height: 90%;
     left: 0;
     top: 90px;
-    background: rgba(51,51,51,0.7);
+    /* background: rgba(51,51,51,0.7); */
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 * {
@@ -17,13 +18,13 @@
 .ride-committed {grid-area: committed;}
 .ride-main-feed { grid-area: main; }
 .ride-location { grid-area: location; }
-
+.ride-commit-button {grid-area: button}
 
 .ride-page-grid-container {
   display: grid;
   grid-template-areas:
     'info info info info location location'
-    'posts posts committed committed location location'
+    'posts posts committed committed button button'
     'main main main main main main';
   grid-template-rows: 3fr 1fr 4fr;
   grid-gap: 10px;

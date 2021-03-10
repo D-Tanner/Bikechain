@@ -132,6 +132,7 @@ const ProfilePage = () => {
               }
               </div>
             )}
+
             {followingPage && following && (
               <div className='ride-feed-container'>{
                 following.map((user, idx) => (

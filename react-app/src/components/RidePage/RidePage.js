@@ -9,8 +9,9 @@ const RidePage = () => {
   const { rideId } = useParams();
 
   const [ride, setRide] = useState();
+  const [postFeed, setPostFeed] = useState(true);
+  const [committedFeed, setCommittedFeed] = useState(false);
 
-  // console.log(ride)
   useEffect(() => {
     (async () => {
       const ride = await getRideById(rideId)
@@ -25,9 +26,22 @@ const RidePage = () => {
         <div className="ride-page-container">
           <div class="ride-page-grid-container">
             <div class="ride-info">Ride Info</div>
-            <div class="ride-posts">Posts</div>
-            <div class="ride-committed">Committed Riders</div>
-            <div class="ride-main-feed">Main</div>
+            <div class="ride-posts" id={postFeed ? "feed-selected" : ""}
+              onClick={() => {
+                setCommittedFeed(false)
+                setPostFeed(true)
+              }}
+            >Posts</div>
+            <div class="ride-committed" id={committedFeed ? "feed-selected" : ""}
+              onClick={() => {
+                setCommittedFeed(true)
+                setPostFeed(false)
+              }}
+            >Committed Riders</div>
+            <div class="ride-main-feed">
+              {postFeed && <div>Posts</div>}
+              {committedFeed && <div>Committed</div>}
+            </div>
             <div class="ride-location">location</div>
           </div>
         </div>

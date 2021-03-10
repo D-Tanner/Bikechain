@@ -27,7 +27,7 @@ const ProfilePage = () => {
     (async () => {
       const response = await fetch(`/api/users/${userId}`);
       const users = await response.json();
-      console.log(users)
+      // console.log(users)
       setCurrentUser(users.user);
       setRides(users.rides);
       setCommittedRides(users.committedRides);

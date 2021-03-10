@@ -5,7 +5,7 @@ COPY react-app/. .
 
 # You have to set this because it should be set during build time.
 ENV REACT_APP_BASE_URL=https://bikechain.herokuapp.com
-ENV REACT_MAP_TOKEN=pk.eyJ1IjoiZGZ0NjA5IiwiYSI6ImNrbHM5dGo4bDF1dHAybmtka2wzaWZldGQifQ.hWTNFLViYV5QK_3G_ecDzw
+
 # Build our React App
 RUN npm install
 RUN npm run build

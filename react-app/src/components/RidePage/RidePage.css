@@ -1,33 +1,37 @@
 .ride-page-container {
-  margin-top: 90px;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 90px;
+    background: rgba(51,51,51,0.7);
 }
 
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.item1 { grid-area: rides; }
-.item2 {grid-area: commit;}
-.item3 {grid-area: following;}
-.item4 { grid-area: profile; }
-.item5 { grid-area: main; }
-.item6 { grid-area: right; }
-.item7 { grid-area: left; }
-.item8 { grid-area: footer; }
+.ride-info { grid-area: info; }
+.ride-posts {grid-area: posts;}
+.ride-committed {grid-area: committed;}
+.ride-main-feed { grid-area: main; }
+.ride-location { grid-area: location; }
 
 
-.grid-container {
+.ride-page-grid-container {
   display: grid;
   grid-template-areas:
-    'profile profile rides commit following'
-    'profile profile main main main'
-    'footer footer footer footer footer';
+    'info info posts committed location location'
+    'info info main main location location';
+
   grid-gap: 10px;
   background-color: #2196F3;
   padding: 10px;
+  width: 90%;
+  margin: 0 auto;
 }
 
-.grid-container > div {
+.ride-page-grid-container > div {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   padding: 20px 0;

@@ -60,6 +60,8 @@ const HomePage = () => {
     })();
   }, [])
 
+  debugger;
+
   return (
     <>
       <div className="home-container">

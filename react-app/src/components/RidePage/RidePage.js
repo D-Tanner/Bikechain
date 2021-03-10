@@ -10,7 +10,7 @@ const RidePage = () => {
 
   const [ride, setRide] = useState();
 
-  console.log(ride)
+  // console.log(ride)
   useEffect(() => {
     (async () => {
       const ride = await getRideById(rideId)

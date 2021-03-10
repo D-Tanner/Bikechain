@@ -25,7 +25,7 @@ const Navigation = () => {
     setShowSearchBarModal,
   } = useModalContext();
 
-  console.log(user)
+  // console.log(user)
   return (
     <>
       {showLoginModal && <LoginForm />}

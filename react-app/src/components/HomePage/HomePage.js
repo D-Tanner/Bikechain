@@ -60,7 +60,6 @@ const HomePage = () => {
     })();
   }, [])
 
-  debugger;
 
   return (
     <>

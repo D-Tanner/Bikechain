@@ -27,7 +27,8 @@
     "react-nice-dates": "^3.0.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "react-time-picker": "^4.1.2"
+    "react-time-picker": "^4.1.2",
+    "worker-loader": "^3.0.8"
   },
   "scripts": {
     "start": "react-scripts start",

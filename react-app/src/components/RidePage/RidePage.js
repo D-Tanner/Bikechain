@@ -26,7 +26,10 @@ const RidePage = () => {
 
         <div className="ride-page-container">
           <div className="ride-page-grid-container">
-            <div className="ride-info">Ride Info</div>
+            <div className="ride-info">
+              <div>{ride.title}</div>
+              <div>{ride.content}</div>
+            </div>
             <div className="ride-posts" id={postFeed ? "feed-selected" : ""}
               onClick={() => {
                 setCommittedFeed(false)

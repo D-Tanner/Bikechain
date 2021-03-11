@@ -27,7 +27,7 @@ const RidePage = () => {
   useEffect(() => {
     if (ride) {
       ride.committedRiders.map((committed) => {
-        if (committed.id === user.id) {
+        if (committed.id === user.user.id) {
           setIsCommitted(true)
         }
       })

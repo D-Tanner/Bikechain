@@ -44,6 +44,12 @@ export const unFollowRider = async (follower_id, followed_id) => {
   return await response.json()
 }
 
+export const unCommitToRide = async (user_id, ride_id) => {
+  const response = await fetch(`/api/rides/uncommit/${user_id}/${ride_id}`, {
+    method: "GET",
+  })
+  return await response.json()
+}
 export const followRider = async (follower_id, followed_id) => {
   const response = await fetch(`/api/rides/follow/${follower_id}/${followed_id}`, {
     method: "GET",
@@ -59,13 +65,6 @@ export const commitToRide = async (user_id, ride_id) => {
     headers: {
       "Content-Type": "application/json",
     },
-  })
-  return await response.json()
-}
-
-export const unCommitToRide = async (user_id, ride_id) => {
-  const response = await fetch(`/api/rides/uncommit/${user_id}/${ride_id}`, {
-    method: "DELETE",
   })
   return await response.json()
 }

@@ -2,25 +2,28 @@ import React, { useState } from "react";
 import { Redirect, useParams, useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
 import { Modal, useModalContext } from "../../context/Modal"
-import { createPost, getRideById } from "../../services/rides"
+import { updatePost } from "../../services/rides"
 import DeleteIcon from "@material-ui/icons/Delete"
-import "./RidePosts.css"
+import "./EditPost.css"
 
-const PostForm = ({ rideId }) => {
+const EditPostForm = ({ post }) => {
+
   const history = useHistory();
   const [content, setContent] = useState()
-  const [description, setDescription] = useState("")
 
   const [images, setAdditionalImages] = useState([])
   const [errors, setErrors] = useState([]);
   const {
     user,
     showPostModal,
-    setShowPostModal, } = useModalContext();
+    setShowPostModal,
+    showEditPostModal,
+    setShowEditPostModal,
+  } = useModalContext();
 
   const postNewPost = async (e) => {
     e.preventDefault()
-    const newPost = await createPost(user.user.id, rideId, content, images)
+    const newPost = await updatePost(post.id, user.user.id, post.rideId, content, images)
 
     if (newPost.errors) {
       setErrors(newPost.errors)
@@ -62,8 +65,8 @@ const PostForm = ({ rideId }) => {
 
   return (
     <>
-      {showPostModal && (
-        <Modal onClose={() => setShowPostModal(false)}>
+      {showEditPostModal && (
+        <Modal onClose={() => setShowEditPostModal(false)}>
           <form onSubmit={postNewPost} className="create-post-form">
             <div>
               {errors.map((error, idx) => (
@@ -104,8 +107,9 @@ const PostForm = ({ rideId }) => {
             </div>
 
             <div className="submit-cancel-container">
-              <button className="submit-button" type="submit">Post</button>
-              <button className="cancel-button" onClick={() => setShowPostModal(false)}>Cancel</button>
+              <button className="submit-button" type="submit">Update</button>
+              <button className="delete-button" type="submit">Delete</button>
+              <button className="cancel-button" onClick={() => setShowEditPostModal(false)}>Cancel</button>
             </div>
           </form>
         </Modal>
@@ -114,4 +118,4 @@ const PostForm = ({ rideId }) => {
   )
 }
 
-export default PostForm;
+export default EditPostForm;

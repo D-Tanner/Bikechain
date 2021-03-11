@@ -109,3 +109,36 @@ def create_new_post():
         return post.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@ride_routes.route('/update-post/<int:post_id>', methods=["PUT"])
+def update_post(post_id):
+    post = db.session.query(Post).get(post_id)
+
+    if request.method == "PUT":
+        form = CreateProject()
+        form['csrf_token'].data = request.cookies['csrf_token']
+
+        if form.validate_on_submit():
+            form.populate_obj(project)
+            db.session.commit()
+
+            if 'images' in request.files:
+                images = request.files.getlist('images')
+                for image in images:
+                    if allowed_file(image.filename):
+                        image.filename = secure_filename(image.filename)
+                        image_url = upload_file_to_s3(image, Config.S3_BUCKET)
+                        image = Image(postId=post.id, imageUrl=image_url)
+                        db.session.add(image)
+            db.session.commit()
+            return post.to_dict()
+
+        return {'errors': validation_errors_to_error_messages(form.errors)}
+
+    # elif request.method == "DELETE":
+    #     db.session.delete(project)
+    #     db.session.commit()
+    #     return {'message': 'Delete Successful'}
+
+    return {'message': 'Invalid Route'}

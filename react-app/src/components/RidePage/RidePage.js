@@ -6,15 +6,22 @@ import { unCommitToRide, commitToRide } from "../../services/rides"
 import "./RidePage.css"
 import "../ProfilePage/ProfilePage.css"
 import RidePost from "../RidePosts/RidePosts"
+import EditPost from "../EditPost/EditPost"
 
 const RidePage = () => {
 
   const { rideId } = useParams();
-  const { user, showPostModal, setShowPostModal } = useModalContext();
+  const { user,
+    showPostModal,
+    setShowPostModal,
+    showEditPostModal,
+    setShowEditPostModal,
+  } = useModalContext();
   const [ride, setRide] = useState();
   const [postFeed, setPostFeed] = useState(true);
   const [committedFeed, setCommittedFeed] = useState(false);
   const [isCommitted, setIsCommitted] = useState(false)
+  const [selectedPost, setSelectedPost] = useState()
 
   useEffect(() => {
     (async () => {
@@ -23,7 +30,7 @@ const RidePage = () => {
       console.log(ride)
       console.log(user)
     })();
-  }, [showPostModal])
+  }, [showPostModal, showEditPostModal])
 
   useEffect(() => {
     if (ride) {
@@ -39,6 +46,7 @@ const RidePage = () => {
   return (
     <>
       {showPostModal && <RidePost rideId={rideId} />}
+      {showEditPostModal && <EditPost post={selectedPost} />}
       { ride && user &&
 
         <div className="ride-page-container">
@@ -66,6 +74,10 @@ const RidePage = () => {
                     <div>
                       <div>{post.content}</div>
                       <div>From {post.user.username}</div>
+                      <span>{post.user.id === user.user.id && <button onClick={() => {
+                        setSelectedPost(post)
+                        setShowEditPostModal((prev) => !prev)
+                      }}>Edit</button>}</span>
                     </div>
                   ))}
                 </div>}

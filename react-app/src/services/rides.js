@@ -94,3 +94,28 @@ export const createPost = async (userId, rideId, content, images) => {
 
   return await response.json();
 };
+
+export const updatePost = async (postId, userId, rideId, content, images) => {
+  const formData = new FormData();
+  formData.append('userId', userId);
+  formData.append('rideId', rideId);
+  formData.append('content', content);
+
+  if (images) {
+    const num = images.length;
+    for (let i = 0; i < num; i++) {
+      const fileList = images[i];
+      const innerNum = fileList.length;
+      for (let j = 0; j < innerNum; j++) {
+        formData.append('images', fileList[j]);
+      }
+    }
+  }
+
+  const response = await fetch(`/api/rides/update-post/${postId}`, {
+    method: "PUT",
+    body: formData,
+  });
+
+  return await response.json();
+};

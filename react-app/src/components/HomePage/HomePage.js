@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Modal, useModalContext } from "../../context/Modal"
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl';
 import { getRides } from '../../services/rides'
+import { getMapToken } from '../../services/auth'
 import { Link } from 'react-router-dom'
 import RoomIcon from '@material-ui/icons/Room';
 import deepOrange from '@material-ui/core/colors/deepOrange'
@@ -21,7 +22,6 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 
 const HomePage = () => {
-  console.log("in HomePage.js", process.env.REACT_APP_MAP_TOKEN)
 
   const {
     user,
@@ -33,6 +33,7 @@ const HomePage = () => {
 
   const [rides, setRides] = useState([])
   const [popup, setPopup] = useState(false)
+  const [mapToken, setMapToken] = useState()
 
   const [selectedRide, setSelectedRide] = useState(null)
   const [viewport, setViewport] = useState({
@@ -67,9 +68,15 @@ const HomePage = () => {
   useEffect(() => {
     (async () => {
       const rides = await getRides()
+      const token = await getMapToken()
       setRides(rides.Rides)
+      setMapToken(token.token)
     })();
   }, [])
+
+  if (!mapToken) {
+    return null
+  }
 
 
   return (
@@ -80,13 +87,13 @@ const HomePage = () => {
           ref={mapRef}
           onClick={() => setPopup(false)}
           mapStyle="mapbox://styles/dft609/cklyko9gp16fx17qkfkqteipz"
-          mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
+          mapboxApiAccessToken={mapToken}
           onViewportChange={handleViewportChange}
         >
           <Geocoder
             mapRef={mapRef}
             onViewportChange={handleGeocoderViewportChange}
-            mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
+            mapboxApiAccessToken={mapToken}
             position="top-right"
             marker={false}
           />

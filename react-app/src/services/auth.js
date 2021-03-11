@@ -1,3 +1,16 @@
+export const getMapToken = async () => {
+  const response = await fetch('/api/auth/map-token', {
+    headers: {
+      'Content-Type': '*/*',
+      'Accept': '*/*'
+    }
+  });
+  const data = await response.json()
+  return data;
+
+}
+
+
 export const authenticate = async () => {
   const response = await fetch('/api/auth/', {
     headers: {

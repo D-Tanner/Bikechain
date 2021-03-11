@@ -14,7 +14,6 @@ import { authenticate } from "./services/auth";
 import { useModalContext } from "./context/Modal";
 
 function App() {
-  console.log("in App.js", process.env.REACT_APP_MAP_TOKEN)
   const { authenticated, setAuthenticated, user, setUser } = useModalContext();
   const [loaded, setLoaded] = useState(false);
   // const [user, setUser] = useState({})

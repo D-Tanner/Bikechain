@@ -21,15 +21,11 @@ const PostForm = ({ rideId }) => {
   const postNewPost = async (e) => {
     e.preventDefault()
     const newPost = await createPost(user.user.id, rideId, content, images)
-    console.log(newPost)
+
     if (newPost.errors) {
       setErrors(newPost.errors)
     } else {
-      (async () => {
-        const ride = await getRideById(rideId)
-        console.log(ride)
-        console.log(user)
-      })();
+      const ride = await getRideById(rideId)
       setShowPostModal(false)
     }
   };

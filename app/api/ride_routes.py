@@ -92,7 +92,6 @@ def create_new_post():
     if form.validate_on_submit():
         post = Post()
         form.populate_obj(post)
-        post.thumbnailImgUrl = thumbnailImgUrl
         db.session.add(post)
         db.session.commit()
 

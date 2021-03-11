@@ -70,7 +70,7 @@ export const commitToRide = async (user_id, ride_id) => {
 }
 
 
-export const createPost = (userId, rideId, content, images) => async (dispatch) => {
+export const createPost = async (userId, rideId, content, images) => {
   const formData = new FormData();
   formData.append('userId', userId);
   formData.append('rideId', rideId);

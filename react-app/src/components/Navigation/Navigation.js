@@ -5,6 +5,7 @@ import "./Navigation.css"
 import LoginForm from "../auth/LoginForm"
 import SignUpForm from "../auth/SignUpForm"
 import LogoutButton from '../auth/LogoutButton';
+import RidePost from "../RidePosts/RidePosts"
 import { useModalContext } from "../../context/Modal"
 import { authenticate } from '../../services/auth';
 
@@ -19,6 +20,8 @@ const Navigation = () => {
     setAuthenticated,
     showLoginModal,
     setShowLoginModal,
+    showPostModal,
+    setShowPostModal,
     showSignUpModal,
     setShowSignUpModal,
     showSearchBarModal,
@@ -30,6 +33,7 @@ const Navigation = () => {
     <>
       {showLoginModal && <LoginForm />}
       {showSignUpModal && <SignUpForm />}
+      {showPostModal && <RidePost />}
       <nav>
         <div className="navigation">
           <div className="navigation-first">

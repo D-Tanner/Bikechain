@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect, useParams, useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
 import { Modal, useModalContext } from "../../context/Modal"
-import { updatePost, deleteImage } from "../../services/rides"
+import { updatePost, deleteImage, deletePost } from "../../services/rides"
 import DeleteIcon from "@material-ui/icons/Delete"
 import "./EditPost.css"
 
@@ -46,6 +46,17 @@ const EditPostForm = ({ post }) => {
     }
   };
 
+  const deletePostById = async (e) => {
+    e.preventDefault()
+    const deleted = await deletePost(post.id)
+
+    if (deleted.errors) {
+      setErrors(deleted.errors)
+    } else {
+      setShowEditPostModal(false)
+    }
+  }
+
   const deleteImageById = (id) => {
     setDeleteImageList((prev) => [...prev, id]);
     setImageList((prev) => prev.filter((image) => image.id !== id));
@@ -84,7 +95,7 @@ const EditPostForm = ({ post }) => {
 
   return (
     <>
-      {showEditPostModal && (
+      {showEditPostModal && post && (
         <Modal onClose={() => setShowEditPostModal(false)}>
           <form onSubmit={postNewPost} className="create-post-form">
             <div>
@@ -142,7 +153,7 @@ const EditPostForm = ({ post }) => {
 
             <div className="submit-cancel-container">
               <button className="submit-button" type="submit">Update</button>
-              <button className="delete-button" type="submit">Delete</button>
+              <button className="delete-button" onClick={deletePostById} type="submit">Delete</button>
               <button className="cancel-button" onClick={() => setShowEditPostModal(false)}>Cancel</button>
             </div>
           </form>

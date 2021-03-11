@@ -150,3 +150,10 @@ def delete_image(image_id):
     db.session.delete(image)
     db.session.commit()
     return post.to_dict()
+
+@ride_routes.route('/post/<int:post_id>', methods=["DELETE"])
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    return {"message": 'Delete Successful'}

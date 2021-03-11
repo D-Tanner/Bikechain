@@ -127,3 +127,10 @@ export const deleteImage = async (imageId) => {
   return await response.json();
 
 };
+
+export const deletePost = async (postId) => {
+  const response = await fetch(`/api/rides/post/${postId}`, {
+    method: "DELETE",
+  });
+  return await response.json();
+};

@@ -68,3 +68,29 @@ export const commitToRide = async (user_id, ride_id) => {
   })
   return await response.json()
 }
+
+
+export const createPost = (userId, rideId, content, images) => async (dispatch) => {
+  const formData = new FormData();
+  formData.append('userId', userId);
+  formData.append('rideId', rideId);
+  formData.append('content', content);
+
+  if (images) {
+    const num = images.length;
+    for (let i = 0; i < num; i++) {
+      const fileList = images[i];
+      const innerNum = fileList.length;
+      for (let j = 0; j < innerNum; j++) {
+        formData.append('images', fileList[j]);
+      }
+    }
+  }
+
+  const response = await fetch('/api/rides/post', {
+    method: "POST",
+    body: formData,
+  });
+
+  return await response.json();
+};

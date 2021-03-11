@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect, useParams, useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
 import { Modal, useModalContext } from "../../context/Modal"
-import { updatePost } from "../../services/rides"
+import { updatePost, deleteImage } from "../../services/rides"
 import DeleteIcon from "@material-ui/icons/Delete"
 import "./EditPost.css"
 
 const EditPostForm = ({ post }) => {
 
   const history = useHistory();
-  const [content, setContent] = useState()
+  const [content, setContent] = useState(post.content)
 
   const [images, setAdditionalImages] = useState([])
   const [errors, setErrors] = useState([]);
+  const [imageList, setImageList] = useState([]);
+  const [deleteImageList, setDeleteImageList] = useState([]);
+
   const {
     user,
     showPostModal,
@@ -21,6 +24,14 @@ const EditPostForm = ({ post }) => {
     setShowEditPostModal,
   } = useModalContext();
 
+  useEffect(() => {
+    if (post) {
+      setImageList(post.images);
+    }
+  }, [post]);
+
+
+
   const postNewPost = async (e) => {
     e.preventDefault()
     const newPost = await updatePost(post.id, user.user.id, post.rideId, content, images)
@@ -28,8 +39,16 @@ const EditPostForm = ({ post }) => {
     if (newPost.errors) {
       setErrors(newPost.errors)
     } else {
-      setShowPostModal(false)
+      setShowEditPostModal(false)
+      deleteImageList.forEach((id) => {
+        deleteImage(id);
+      });
     }
+  };
+
+  const deleteImageById = (id) => {
+    setDeleteImageList((prev) => [...prev, id]);
+    setImageList((prev) => prev.filter((image) => image.id !== id));
   };
 
   const deleteImageByName = (name) => {
@@ -81,10 +100,25 @@ const EditPostForm = ({ post }) => {
                 name='description'
                 placeholder="Get ready to ride!"
                 onChange={updateContent}
+                value={content}
                 required
               ></textarea>
             </div>
             <div>
+              {post &&
+                imageList.map((img, idx) => (
+                  <div>
+                    <span>
+                      <span
+                        onClick={() => deleteImageById(img.id)}
+                        className="delete-image-div"
+                      >
+                        <DeleteIcon />
+                      </span>
+                    </span>
+                    {img.imageUrl.split(".s3.amazonaws.com/")[1]}
+                  </div>
+                ))}
               {images &&
                 images.map((fileList) =>
                   Array.from(fileList).map((image) => (

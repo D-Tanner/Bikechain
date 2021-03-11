@@ -116,11 +116,11 @@ def update_post(post_id):
     post = db.session.query(Post).get(post_id)
 
     if request.method == "PUT":
-        form = CreateProject()
+        form = CreatePost()
         form['csrf_token'].data = request.cookies['csrf_token']
 
         if form.validate_on_submit():
-            form.populate_obj(project)
+            form.populate_obj(post)
             db.session.commit()
 
             if 'images' in request.files:
@@ -142,3 +142,11 @@ def update_post(post_id):
     #     return {'message': 'Delete Successful'}
 
     return {'message': 'Invalid Route'}
+
+@ride_routes.route('/images/<int:image_id>', methods=["DELETE"])
+def delete_image(image_id):
+    image = Image.query.get(image_id)
+    post = Post.query.get(image.postId)
+    db.session.delete(image)
+    db.session.commit()
+    return post.to_dict()

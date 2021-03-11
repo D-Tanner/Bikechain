@@ -119,3 +119,11 @@ export const updatePost = async (postId, userId, rideId, content, images) => {
 
   return await response.json();
 };
+
+export const deleteImage = async (imageId) => {
+  const response = await fetch(`/api/rides/images/${imageId}`, {
+    method: "DELETE",
+  });
+  return await response.json();
+
+};

@@ -1,6 +1,7 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import { createNewRide } from '../../services/rides';
+import { getMapToken } from "../../services/auth"
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
 import ReactMapGL, { Marker, NavigationControl } from 'react-map-gl';
@@ -22,7 +23,6 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 
 const CreateRide = ({ user }) => {
-  console.log("in CreateRide.js", process.env.REACT_APP_MAP_TOKEN)
 
   const history = useHistory();
   const [title, setTitle] = useState("");
@@ -33,6 +33,15 @@ const CreateRide = ({ user }) => {
   const [level, setLevel] = useState();
   const [isLocal, setIsLocal] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [mapToken, setMapToken] = useState()
+
+
+  useEffect(() => {
+    (async () => {
+      const token = await getMapToken()
+      setMapToken(token.token)
+    })();
+  }, [])
 
 
   const postRide = async (e) => {
@@ -93,6 +102,10 @@ const CreateRide = ({ user }) => {
     },
     [handleViewportChange]
   );
+
+  if (!mapToken) {
+    return null
+  }
 
   return (
     <>
@@ -184,13 +197,13 @@ const CreateRide = ({ user }) => {
               {...viewport} width="100%" height="100%"
               ref={mapRef}
               mapStyle="mapbox://styles/dft609/cklyko9gp16fx17qkfkqteipz"
-              mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
+              mapboxApiAccessToken={mapToken}
               onViewportChange={handleViewportChange}
             >
               <Geocoder
                 mapRef={mapRef}
                 onViewportChange={handleGeocoderViewportChange}
-                mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
+                mapboxApiAccessToken={mapToken}
                 position="top-right"
                 marker={false}
               />

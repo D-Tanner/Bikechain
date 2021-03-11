@@ -1,35 +1,74 @@
 .ride-page-container {
-  margin-top: 90px;
+    position: fixed;
+    width: 100%;
+    height: 90%;
+    left: 0;
+    top: 90px;
+    /* background: rgba(51,51,51,0.7); */
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.item1 { grid-area: rides; }
-.item2 {grid-area: commit;}
-.item3 {grid-area: following;}
-.item4 { grid-area: profile; }
-.item5 { grid-area: main; }
-.item6 { grid-area: right; }
-.item7 { grid-area: left; }
-.item8 { grid-area: footer; }
+.ride-info { grid-area: info; }
+.ride-posts {grid-area: posts;}
+.ride-committed {grid-area: committed;}
+.ride-main-feed { grid-area: main; }
+.ride-location { grid-area: location; }
+.ride-commit-button {grid-area: button}
 
-
-.grid-container {
+.ride-page-grid-container {
   display: grid;
   grid-template-areas:
-    'profile profile rides commit following'
-    'profile profile main main main'
-    'footer footer footer footer footer';
+    'info info info info location location'
+    'posts posts committed committed button button'
+    'main main main main main main';
+  grid-template-rows: 3fr 1fr 4fr;
   grid-gap: 10px;
   background-color: #2196F3;
   padding: 10px;
+  width: 90%;
+  margin: 0 auto;
+  height: 100%;
 }
 
-.grid-container > div {
+/* .ride-main-feed {
+  height: 100%;
+}
+
+.ride-posts, .ride-committed {
+  height: 10%;
+} */
+
+.ride-page-container::-webkit-scrollbar {
+  width: 9px;               /* width of the entire scrollbar */
+}
+
+.ride-page-container::-webkit-scrollbar-track {
+  background: rgb(38,38,38);        /* color of the tracking area */
+}
+
+.ride-page-container::-webkit-scrollbar-thumb {
+  background-color: #b4b4b498;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid rgb(38,38,38);  /* creates padding around scroll thumb */
+}
+
+.ride-page-grid-container > div {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   padding: 20px 0;
   font-size: 30px;
+}
+
+.ride-committed:hover, .ride-posts:hover {
+  cursor: pointer;
+  background-color: beige;
+}
+
+#feed-selected {
+  background-color: cadetblue;
 }

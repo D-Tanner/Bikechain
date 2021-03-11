@@ -17,7 +17,9 @@ const RidePage = () => {
     showEditPostModal,
     setShowEditPostModal,
   } = useModalContext();
+
   const [ride, setRide] = useState();
+  const [posts, setPosts] = useState();
   const [postFeed, setPostFeed] = useState(true);
   const [committedFeed, setCommittedFeed] = useState(false);
   const [isCommitted, setIsCommitted] = useState(false)
@@ -39,6 +41,12 @@ const RidePage = () => {
           setIsCommitted(true)
         }
       })
+      const sortedPosts = ride.posts.slice();
+      setPosts(
+        sortedPosts.sort((postOne, postTwo) => {
+          return postTwo.id - postOne.id;
+        })
+      );
     }
   }, [ride])
 
@@ -68,9 +76,9 @@ const RidePage = () => {
               }}
             >Committed Riders</div>
             <div className="ride-main-feed">
-              {postFeed &&
+              {postFeed && posts &&
                 <div>
-                  {ride.posts.map((post) => (
+                  {posts.map((post) => (
                     <div>
                       <div>{post.content}</div>
                       <div>From {post.user.username}</div>

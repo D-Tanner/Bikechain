@@ -84,7 +84,7 @@ def uncommit_to_ride(user_id, ride_id):
     return ride.to_dict()
 
 
-@ride_routes.route('/post', methods=["POST"])
+@ride_routes.route('/new-post', methods=["POST"])
 def create_new_post():
     form = CreatePost()
     form['csrf_token'].data = request.cookies['csrf_token']

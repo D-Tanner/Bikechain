@@ -87,7 +87,7 @@ export const createPost = (userId, rideId, content, images) => async (dispatch) 
     }
   }
 
-  const response = await fetch('/api/rides/post', {
+  const response = await fetch('/api/rides/new-post', {
     method: "POST",
     body: formData,
   });

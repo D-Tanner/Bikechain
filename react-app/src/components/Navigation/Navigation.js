@@ -33,7 +33,7 @@ const Navigation = () => {
     <>
       {showLoginModal && <LoginForm />}
       {showSignUpModal && <SignUpForm />}
-      {showPostModal && <RidePost />}
+      {/* {showPostModal && <RidePost />} */}
       <nav>
         <div className="navigation">
           <div className="navigation-first">

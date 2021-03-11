@@ -5,10 +5,12 @@ import { getRideById } from "../../services/rides"
 import { unCommitToRide, commitToRide } from "../../services/rides"
 import "./RidePage.css"
 import "../ProfilePage/ProfilePage.css"
+import RidePost from "../RidePosts/RidePosts"
+
 const RidePage = () => {
 
   const { rideId } = useParams();
-  const { user, setShowPostModal } = useModalContext();
+  const { user, showPostModal, setShowPostModal } = useModalContext();
   const [ride, setRide] = useState();
   const [postFeed, setPostFeed] = useState(true);
   const [committedFeed, setCommittedFeed] = useState(false);
@@ -36,6 +38,7 @@ const RidePage = () => {
 
   return (
     <>
+      {showPostModal && <RidePost rideId={rideId} />}
       { ride && user &&
 
         <div className="ride-page-container">

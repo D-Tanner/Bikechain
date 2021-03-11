@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 
 from app.models.user_and_ride import Ride, User
 from app.models import db, Post, Image
+from ..config import Config
 
 from app.forms import CreateRide, CreatePost
 from app.helpers import validation_errors_to_error_messages, allowed_file, upload_file_to_s3

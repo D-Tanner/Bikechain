@@ -14,6 +14,5 @@ class Image(db.Model):
         return {
             "postId": self.postId,
             "imageUrl": self.imageUrl,
-            "post": self.post,
             "id": self.id
         }

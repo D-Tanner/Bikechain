@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams, useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
 import { Modal, useModalContext } from "../../context/Modal"
 import { createPost, getRideById } from "../../services/rides"
 import DeleteIcon from "@material-ui/icons/Delete"
+import "./RidePosts.css"
 
 const PostForm = ({ rideId }) => {
-
+  const history = useHistory();
   const [content, setContent] = useState()
   const [description, setDescription] = useState("")
 
   const [images, setAdditionalImages] = useState([])
   const [errors, setErrors] = useState([]);
-
   const {
     user,
     showPostModal,
@@ -25,7 +25,6 @@ const PostForm = ({ rideId }) => {
     if (newPost.errors) {
       setErrors(newPost.errors)
     } else {
-      const ride = await getRideById(rideId)
       setShowPostModal(false)
     }
   };
@@ -43,7 +42,7 @@ const PostForm = ({ rideId }) => {
           }
         }
       }
-      result.push(newFile);
+      if (newFile.length > 0) result.push(newFile);
     });
     setAdditionalImages(result);
   };

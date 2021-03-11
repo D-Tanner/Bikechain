@@ -23,7 +23,7 @@ const RidePage = () => {
       console.log(ride)
       console.log(user)
     })();
-  }, [])
+  }, [showPostModal])
 
   useEffect(() => {
     if (ride) {

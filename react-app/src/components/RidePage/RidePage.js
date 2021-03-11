@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Modal, useModalContext } from "../../context/Modal"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { getRideById } from "../../services/rides"
 import { unCommitToRide, commitToRide } from "../../services/rides"
-
+import RidePost from "../RidePosts/RidePosts"
 import "./RidePage.css"
-
+import "../ProfilePage/ProfilePage.css"
 const RidePage = () => {
 
   const { rideId } = useParams();
-  const { user } = useModalContext();
+  const { user, showPostModal, setShowPostModal } = useModalContext();
   const [ride, setRide] = useState();
   const [postFeed, setPostFeed] = useState(true);
   const [committedFeed, setCommittedFeed] = useState(false);
@@ -68,22 +68,39 @@ const RidePage = () => {
                   ))}
                 </div>}
               {committedFeed && <div>
-                {ride.posts.map((post) => (
-                  <div>
-                    <div>{post.content}</div>
-                    <div>From {post.user.username}</div>
-                  </div>
+                {ride.committedRiders.map((rider, idx) => (
+                  <Link key={idx}
+                    to={`/profile/${rider.id}`}
+                    className="link"
+                  >
+                    <div className="following-grid-container">
+                      <div className="profile-image"></div>
+                      <div className="user-level">{rider.level}</div>
+                      <div className="user-username">{rider.username}</div>
+                      <div className="user-location">{rider.city}, {rider.state}</div>
+                    </div>
+                  </Link>
                 ))}
               </div>}
             </div>
             <div className="ride-location">
-              {isCommitted && <button
-                onClick={async () => {
-                  const result = await unCommitToRide(user.user.id, ride.id)
-                  setIsCommitted(false)
-                  setRide(result)
-                }}
-              >Leave Ride</button>}
+              {isCommitted &&
+                <div>
+                  <div>
+
+                    <button
+                      onClick={async () => {
+                        const result = await unCommitToRide(user.user.id, ride.id)
+                        setIsCommitted(false)
+                        setRide(result)
+                      }}
+                    >Leave Ride</button>
+                  </div>
+                  <div>
+                    <button onClick={() => setShowPostModal(prev => !prev)}>Post</button>
+                  </div>
+                </div>
+              }
               {!isCommitted &&
                 <div>
                   <div>
@@ -99,7 +116,6 @@ const RidePage = () => {
                   </div>
                 </div>}
             </div>
-            {/* <div className="ride-commit-button">Commit</div> */}
           </div>
         </div>
       }

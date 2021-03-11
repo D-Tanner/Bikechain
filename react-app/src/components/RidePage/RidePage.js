@@ -58,8 +58,23 @@ const RidePage = () => {
               }}
             >Committed Riders</div>
             <div className="ride-main-feed">
-              {postFeed && <div>Posts</div>}
-              {committedFeed && <div>Committed</div>}
+              {postFeed &&
+                <div>
+                  {ride.posts.map((post) => (
+                    <div>
+                      <div>{post.content}</div>
+                      <div>From {post.user.username}</div>
+                    </div>
+                  ))}
+                </div>}
+              {committedFeed && <div>
+                {ride.posts.map((post) => (
+                  <div>
+                    <div>{post.content}</div>
+                    <div>From {post.user.username}</div>
+                  </div>
+                ))}
+              </div>}
             </div>
             <div className="ride-location">
               {isCommitted && <button
@@ -69,13 +84,20 @@ const RidePage = () => {
                   setRide(result)
                 }}
               >Leave Ride</button>}
-              {!isCommitted && <button
-                onClick={async () => {
-                  const result = await commitToRide(user.user.id, ride.id)
-                  setIsCommitted(true)
-                  setRide(result)
-                }}
-              >Commit</button>}
+              {!isCommitted &&
+                <div>
+                  <div>
+                    <button
+                      onClick={async () => {
+                        const result = await commitToRide(user.user.id, ride.id)
+                        setIsCommitted(true)
+                        setRide(result)
+                      }}
+                    >Commit</button>
+                  </div>
+                  <div>
+                  </div>
+                </div>}
             </div>
             {/* <div className="ride-commit-button">Commit</div> */}
           </div>

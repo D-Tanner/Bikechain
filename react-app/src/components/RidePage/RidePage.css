@@ -24,7 +24,7 @@
   display: grid;
   grid-template-areas:
     'info info info info location location'
-    'posts posts committed committed button button'
+    'posts posts posts committed committed committed'
     'main main main main main main';
   grid-template-rows: 3fr 1fr 4fr;
   grid-gap: 10px;

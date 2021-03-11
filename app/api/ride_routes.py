@@ -16,7 +16,6 @@ def get_rides():
 @ride_routes.route('/<int:id>')
 def get_ride_by_id(id):
     ride = Ride.query.get(id)
-    print(ride.to_dict())
     return ride.to_dict()
 
 
@@ -58,3 +57,22 @@ def follow_rider(follower_id, followed_id):
 
     return {"user": user.to_dict(),
             "following": following_dict}
+
+@ride_routes.route('/commit/<int:user_id>/<int:ride_id>')
+def commit_to_ride(user_id, ride_id):
+
+    ride = db.session.query(Ride).get(ride_id)
+    user = db.session.query(User).get(user_id)
+    ride.committed_riders.append(user)
+    db.session.commit()
+
+    return ride.to_dict()
+
+@ride_routes.route('/uncommit/<int:user_id>/<int:ride_id>')
+def uncommit_to_ride(user_id, ride_id):
+
+    ride = db.session.query(Ride).get(ride_id)
+    ride.committed_riders = [user for user in ride.committed_riders if user.id != user_id]
+    db.session.commit()
+
+    return ride.to_dict()

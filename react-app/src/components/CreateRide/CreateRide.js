@@ -22,6 +22,7 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 
 const CreateRide = ({ user }) => {
+  console.log("in CreateRide.js", process.env.REACT_APP_MAP_TOKEN)
 
   const history = useHistory();
   const [title, setTitle] = useState("");

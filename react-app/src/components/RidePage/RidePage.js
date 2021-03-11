@@ -3,13 +3,12 @@ import { Modal, useModalContext } from "../../context/Modal"
 import { useParams, Link } from "react-router-dom"
 import { getRideById } from "../../services/rides"
 import { unCommitToRide, commitToRide } from "../../services/rides"
-import RidePost from "../RidePosts/RidePosts"
 import "./RidePage.css"
 import "../ProfilePage/ProfilePage.css"
 const RidePage = () => {
 
   const { rideId } = useParams();
-  const { user, showPostModal, setShowPostModal } = useModalContext();
+  const { user, setShowPostModal } = useModalContext();
   const [ride, setRide] = useState();
   const [postFeed, setPostFeed] = useState(true);
   const [committedFeed, setCommittedFeed] = useState(false);

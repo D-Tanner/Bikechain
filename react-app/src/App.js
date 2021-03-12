@@ -60,7 +60,7 @@ function App() {
         <ProtectedRoute path="/new-ride" exact={true} authenticated={authenticated}>
           <CreateRide user={user} />
         </ProtectedRoute>
-        <ProtectedRoute path="/ride/:rideId/edit" exact={true} authenticated={authenticated}>
+        <ProtectedRoute path="/rides/:rideId/edit" exact={true} authenticated={authenticated}>
           <EditRide user={user} />
         </ProtectedRoute>
       </Switch>

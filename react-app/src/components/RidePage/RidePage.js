@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Modal, useModalContext } from "../../context/Modal"
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useHistory } from "react-router-dom"
 import { unCommitToRide, commitToRide, getRideById } from "../../services/rides"
 import "./RidePage.css"
 import "../ProfilePage/ProfilePage.css"
@@ -11,6 +11,7 @@ import LoginForm from "../auth/LoginForm"
 const RidePage = () => {
 
   const { rideId } = useParams();
+  const history = useHistory();
   const { user,
     showPostModal,
     setShowPostModal,
@@ -66,7 +67,9 @@ const RidePage = () => {
               <div>{ride.title}</div>
               <div>{ride.content}</div>
               {ride && user && ride.id === user.user.id && (
-                <button>Edit</button>
+                <button
+                  onClick={() => history.push(`/rides/${ride.id}/edit`)}
+                >Edit</button>
               )}
             </div>
             <div className="ride-posts" id={postFeed ? "feed-selected" : ""}

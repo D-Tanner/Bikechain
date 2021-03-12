@@ -44,6 +44,9 @@ const EditRide = ({ user }) => {
       setMapToken(token.token)
       const ride = await getRideById(rideId)
       setRide(ride)
+      setLong(ride.longitude)
+      setLat(ride.latitude)
+      setIsLocal(ride.isLocal)
     })();
   }, [])
 
@@ -54,7 +57,7 @@ const EditRide = ({ user }) => {
     if (newRide.errors) {
       setErrors(newRide.errors)
     } else {
-      history.push("/")
+      history.push(`/rides/${rideId}`)
     }
   }
 
@@ -129,6 +132,7 @@ const EditRide = ({ user }) => {
                 name="name"
                 placeholder="Title of Ride"
                 onChange={updateTitle}
+                value={ride.title}
               ></input>
             </div>
             <div className="input-number">
@@ -154,6 +158,7 @@ const EditRide = ({ user }) => {
                 name="content"
                 placeholder="Additional Information. When? What should you bring? What socks should you wear?"
                 onChange={updateContent}
+                value={ride.content}
                 rows="10"
               ></textarea>
             </div>
@@ -181,8 +186,8 @@ const EditRide = ({ user }) => {
                 </label>
             </div>
             <div className="submit-cancel-container">
-              <button className="submit-button" type="submit">Create</button>
-              <button className="cancel-button" onClick={() => history.push('/')}>Cancel</button>
+              <button className="submit-button" type="submit">Update</button>
+              <button className="cancel-button" onClick={() => history.push(`/rides/${rideId}`)}>Cancel</button>
             </div>
           </form>
         </div>

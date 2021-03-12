@@ -12,7 +12,7 @@ import lightBlue from '@material-ui/core/colors/lightBlue'
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'react-nice-dates/build/style.css'
 import "../CreateRide/CreateRide.css"
-
+import "./EditRide.css"
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'
@@ -116,7 +116,7 @@ const EditRide = ({ user }) => {
 
   return (
     <>
-      { ride && <div className="create-grid-container">
+      { ride && user.user.id === ride.userId && <div className="create-grid-container">
         <div className="form-grid-container">
           <h1>Create a Ride!</h1>
           <form onSubmit={updateRide} className="create-form">
@@ -232,6 +232,7 @@ const EditRide = ({ user }) => {
           </div>
         </div>
       </div>}
+      {ride && user.user.id !== ride.userId && <h1 className="error-message">Oops! This is not your ride!</h1>}
     </>
   )
 }

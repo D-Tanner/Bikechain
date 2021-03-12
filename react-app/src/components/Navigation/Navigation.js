@@ -43,8 +43,7 @@ const Navigation = () => {
                 setShowSignUpModal(false)
                 setShowLoginModal(false)
               }}>
-              Bikechain
-              <img src="Bikechain Logo 2 Color.png" alt=""></img>
+              <img height="60%" width="60%" src="BikechainLogo2Color.png" alt=""></img>
             </NavLink>
           </div>
           <div className="navigation-second-fraction">

@@ -66,6 +66,9 @@ const RidePage = () => {
             <div className="ride-info">
               <div>{ride.title}</div>
               <div>{ride.content}</div>
+              {ride && user && ride.id === user.user.id && (
+                <button>Edit</button>
+              )}
             </div>
             <div className="ride-posts" id={postFeed ? "feed-selected" : ""}
               onClick={() => {

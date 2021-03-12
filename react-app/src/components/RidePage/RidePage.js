@@ -7,6 +7,7 @@ import "./RidePage.css"
 import "../ProfilePage/ProfilePage.css"
 import RidePost from "../RidePosts/RidePosts"
 import EditPost from "../EditPost/EditPost"
+import LoginForm from "../auth/LoginForm"
 
 const RidePage = () => {
 
@@ -14,6 +15,8 @@ const RidePage = () => {
   const { user,
     showPostModal,
     setShowPostModal,
+    showLoginModal,
+    setShowLoginModal,
     showEditPostModal,
     setShowEditPostModal,
   } = useModalContext();
@@ -55,6 +58,7 @@ const RidePage = () => {
     <>
       {showPostModal && <RidePost rideId={rideId} />}
       {showEditPostModal && <EditPost post={selectedPost} />}
+      {showLoginModal && <LoginForm />}
       { ride &&
 
         <div className="ride-page-container">
@@ -92,7 +96,12 @@ const RidePage = () => {
               {committedFeed && <div>
                 {ride.committedRiders.map((rider, idx) => (
                   <Link key={idx}
-                    to={`/profile/${rider.id}`}
+                    to={user !== null && `/profile/${rider.id}`}
+                    onClick={() => {
+                      if (user === null) {
+                        setShowLoginModal(true)
+                      }
+                    }}
                     className="link"
                   >
                     <div className="following-grid-container">

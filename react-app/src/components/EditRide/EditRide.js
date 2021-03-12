@@ -44,16 +44,18 @@ const EditRide = ({ user }) => {
       setMapToken(token.token)
       const ride = await getRideById(rideId)
       setRide(ride)
+      setTitle(ride.title)
       setLong(ride.longitude)
       setLat(ride.latitude)
       setIsLocal(ride.isLocal)
+      setContent(ride.content)
     })();
   }, [])
 
 
   const updateRide = async (e) => {
     e.preventDefault()
-    const newRide = await updateRideById(user.id, rideId, title, content, date.toISOString(), lat, long, isLocal, level)
+    const newRide = await updateRideById(user.user.id, rideId, title, content, date.toISOString(), lat, long, isLocal, level)
     if (newRide.errors) {
       setErrors(newRide.errors)
     } else {
@@ -132,7 +134,7 @@ const EditRide = ({ user }) => {
                 name="name"
                 placeholder="Title of Ride"
                 onChange={updateTitle}
-                value={ride.title}
+                value={title}
               ></input>
             </div>
             <div className="input-number">
@@ -158,7 +160,7 @@ const EditRide = ({ user }) => {
                 name="content"
                 placeholder="Additional Information. When? What should you bring? What socks should you wear?"
                 onChange={updateContent}
-                value={ride.content}
+                value={content}
                 rows="10"
               ></textarea>
             </div>

@@ -202,13 +202,13 @@ const EditRide = ({ user }) => {
               mapboxApiAccessToken={mapToken}
               onViewportChange={handleViewportChange}
             >
-              <Geocoder
+              {/* <Geocoder
                 mapRef={mapRef}
                 onViewportChange={handleGeocoderViewportChange}
                 mapboxApiAccessToken={mapToken}
                 position="top-right"
                 marker={false}
-              />
+              /> */}
               <NavigationControl style={navControlStyle} />
               {lat && long && (
                 <Marker key={1}

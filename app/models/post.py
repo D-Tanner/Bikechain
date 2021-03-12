@@ -19,6 +19,5 @@ class Post(db.Model):
       "rideId": self.rideId,
       "content": self.content,
       "user": self.user.to_dict(),
-      # "ride": self.ride.to_dict(),
       "images": [image.to_dict() for image in self.images],
     }

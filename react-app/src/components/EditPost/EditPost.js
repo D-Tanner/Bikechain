@@ -1,32 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect, useParams, useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
 import { Modal, useModalContext } from "../../context/Modal"
-import { createPost, getRideById } from "../../services/rides"
+import { updatePost, deleteImage, deletePost } from "../../services/rides"
 import DeleteIcon from "@material-ui/icons/Delete"
-import "./RidePosts.css"
+import "./EditPost.css"
 
-const PostForm = ({ rideId }) => {
+const EditPostForm = ({ post }) => {
+
   const history = useHistory();
-  const [content, setContent] = useState()
-  const [description, setDescription] = useState("")
+  const [content, setContent] = useState(post.content)
 
   const [images, setAdditionalImages] = useState([])
   const [errors, setErrors] = useState([]);
+  const [imageList, setImageList] = useState([]);
+  const [deleteImageList, setDeleteImageList] = useState([]);
+
   const {
     user,
     showPostModal,
-    setShowPostModal, } = useModalContext();
+    setShowPostModal,
+    showEditPostModal,
+    setShowEditPostModal,
+  } = useModalContext();
+
+  useEffect(() => {
+    if (post) {
+      setImageList(post.images);
+    }
+  }, [post]);
+
+
 
   const postNewPost = async (e) => {
     e.preventDefault()
-    const newPost = await createPost(user.user.id, rideId, content, images)
+    const newPost = await updatePost(post.id, user.user.id, post.rideId, content, images)
 
     if (newPost.errors) {
       setErrors(newPost.errors)
     } else {
-      setShowPostModal(false)
+      setShowEditPostModal(false)
+      deleteImageList.forEach((id) => {
+        deleteImage(id);
+      });
     }
+  };
+
+  const deletePostById = async (e) => {
+    e.preventDefault()
+    const deleted = await deletePost(post.id)
+
+    if (deleted.errors) {
+      setErrors(deleted.errors)
+    } else {
+      setShowEditPostModal(false)
+    }
+  }
+
+  const deleteImageById = (id) => {
+    setDeleteImageList((prev) => [...prev, id]);
+    setImageList((prev) => prev.filter((image) => image.id !== id));
   };
 
   const deleteImageByName = (name) => {
@@ -62,8 +95,8 @@ const PostForm = ({ rideId }) => {
 
   return (
     <>
-      {showPostModal && (
-        <Modal onClose={() => setShowPostModal(false)}>
+      {showEditPostModal && post && (
+        <Modal onClose={() => setShowEditPostModal(false)}>
           <form onSubmit={postNewPost} className="create-post-form">
             <div>
               {errors.map((error, idx) => (
@@ -78,10 +111,25 @@ const PostForm = ({ rideId }) => {
                 name='description'
                 placeholder="Get ready to ride!"
                 onChange={updateContent}
+                value={content}
                 required
               ></textarea>
             </div>
             <div>
+              {post &&
+                imageList.map((img, idx) => (
+                  <div>
+                    <span>
+                      <span
+                        onClick={() => deleteImageById(img.id)}
+                        className="delete-image-div"
+                      >
+                        <DeleteIcon />
+                      </span>
+                    </span>
+                    {img.imageUrl.split(".s3.amazonaws.com/")[1]}
+                  </div>
+                ))}
               {images &&
                 images.map((fileList) =>
                   Array.from(fileList).map((image) => (
@@ -104,8 +152,9 @@ const PostForm = ({ rideId }) => {
             </div>
 
             <div className="submit-cancel-container">
-              <button className="submit-button" type="submit">Post</button>
-              <button className="cancel-button" onClick={() => setShowPostModal(false)}>Cancel</button>
+              <button className="submit-button" type="submit">Update</button>
+              <button className="delete-button" onClick={deletePostById} type="submit">Delete</button>
+              <button className="cancel-button" onClick={() => setShowEditPostModal(false)}>Cancel</button>
             </div>
           </form>
         </Modal>
@@ -114,4 +163,4 @@ const PostForm = ({ rideId }) => {
   )
 }
 
-export default PostForm;
+export default EditPostForm;

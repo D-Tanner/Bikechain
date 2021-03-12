@@ -23,6 +23,7 @@ export const ModalProvider = ({ children }) => {
   const [showSearchBarModal, setShowSearchBarModal] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
   const [showPostModal, setShowPostModal] = useState(false);
+  const [showEditPostModal, setShowEditPostModal] = useState(false);
 
   useEffect(() => {
     setValue(modalRef.current);
@@ -41,6 +42,8 @@ export const ModalProvider = ({ children }) => {
           setShowLoginModal,
           showPostModal,
           setShowPostModal,
+          showEditPostModal,
+          setShowEditPostModal,
           showSignUpModal,
           setShowSignUpModal,
           showSearchBarModal,

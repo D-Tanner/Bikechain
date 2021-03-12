@@ -68,3 +68,69 @@ export const commitToRide = async (user_id, ride_id) => {
   })
   return await response.json()
 }
+
+
+export const createPost = async (userId, rideId, content, images) => {
+  const formData = new FormData();
+  formData.append('userId', userId);
+  formData.append('rideId', rideId);
+  formData.append('content', content);
+
+  if (images) {
+    const num = images.length;
+    for (let i = 0; i < num; i++) {
+      const fileList = images[i];
+      const innerNum = fileList.length;
+      for (let j = 0; j < innerNum; j++) {
+        formData.append('images', fileList[j]);
+      }
+    }
+  }
+
+  const response = await fetch('/api/rides/new-post', {
+    method: "POST",
+    body: formData,
+  });
+
+  return await response.json();
+};
+
+export const updatePost = async (postId, userId, rideId, content, images) => {
+  const formData = new FormData();
+  formData.append('userId', userId);
+  formData.append('rideId', rideId);
+  formData.append('content', content);
+
+  if (images) {
+    const num = images.length;
+    for (let i = 0; i < num; i++) {
+      const fileList = images[i];
+      const innerNum = fileList.length;
+      for (let j = 0; j < innerNum; j++) {
+        formData.append('images', fileList[j]);
+      }
+    }
+  }
+
+  const response = await fetch(`/api/rides/update-post/${postId}`, {
+    method: "PUT",
+    body: formData,
+  });
+
+  return await response.json();
+};
+
+export const deleteImage = async (imageId) => {
+  const response = await fetch(`/api/rides/images/${imageId}`, {
+    method: "DELETE",
+  });
+  return await response.json();
+
+};
+
+export const deletePost = async (postId) => {
+  const response = await fetch(`/api/rides/post/${postId}`, {
+    method: "DELETE",
+  });
+  return await response.json();
+};

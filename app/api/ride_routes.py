@@ -1,10 +1,17 @@
 from flask import Blueprint, jsonify, request, json
 from flask_login import login_required
+from sqlalchemy import desc, func
+from werkzeug.utils import secure_filename
+
 from app.models.user_and_ride import Ride, User
-from app.models import db
-from app.forms import CreateRide
-from app.helpers import validation_errors_to_error_messages
+from app.models import db, Post, Image
+from ..config import Config
+
+from app.forms import CreateRide, CreatePost
+from app.helpers import validation_errors_to_error_messages, allowed_file, upload_file_to_s3
 import datetime
+
+
 ride_routes = Blueprint('rides', __name__)
 
 
@@ -76,3 +83,77 @@ def uncommit_to_ride(user_id, ride_id):
     db.session.commit()
 
     return ride.to_dict()
+
+
+@ride_routes.route('/new-post', methods=["POST"])
+def create_new_post():
+    form = CreatePost()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        post = Post()
+        form.populate_obj(post)
+        db.session.add(post)
+        db.session.commit()
+
+        if 'images' in request.files:
+            images = request.files.getlist('images')
+
+            for image in images:
+                if allowed_file(image.filename):
+                    image.filename = secure_filename(image.filename)
+                    image_url = upload_file_to_s3(image, Config.S3_BUCKET)
+                    image = Image(postId=post.id, imageUrl=image_url)
+                    db.session.add(image)
+        db.session.commit()
+        return post.to_dict()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@ride_routes.route('/update-post/<int:post_id>', methods=["PUT"])
+def update_post(post_id):
+    post = db.session.query(Post).get(post_id)
+
+    if request.method == "PUT":
+        form = CreatePost()
+        form['csrf_token'].data = request.cookies['csrf_token']
+
+        if form.validate_on_submit():
+            form.populate_obj(post)
+            db.session.commit()
+
+            if 'images' in request.files:
+                images = request.files.getlist('images')
+                for image in images:
+                    if allowed_file(image.filename):
+                        image.filename = secure_filename(image.filename)
+                        image_url = upload_file_to_s3(image, Config.S3_BUCKET)
+                        image = Image(postId=post.id, imageUrl=image_url)
+                        db.session.add(image)
+            db.session.commit()
+            return post.to_dict()
+
+        return {'errors': validation_errors_to_error_messages(form.errors)}
+
+    # elif request.method == "DELETE":
+    #     db.session.delete(project)
+    #     db.session.commit()
+    #     return {'message': 'Delete Successful'}
+
+    return {'message': 'Invalid Route'}
+
+@ride_routes.route('/images/<int:image_id>', methods=["DELETE"])
+def delete_image(image_id):
+    image = Image.query.get(image_id)
+    post = Post.query.get(image.postId)
+    db.session.delete(image)
+    db.session.commit()
+    return post.to_dict()
+
+@ride_routes.route('/post/<int:post_id>', methods=["DELETE"])
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    return {"message": 'Delete Successful'}

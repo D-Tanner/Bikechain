@@ -33,7 +33,7 @@ const Navigation = () => {
     <>
       {showLoginModal && <LoginForm />}
       {showSignUpModal && <SignUpForm />}
-      {showPostModal && <RidePost />}
+      {/* {showPostModal && <RidePost />} */}
       <nav>
         <div className="navigation">
           <div className="navigation-first">
@@ -43,8 +43,8 @@ const Navigation = () => {
                 setShowSignUpModal(false)
                 setShowLoginModal(false)
               }}>
-              Bikechain
-          </NavLink>
+              <img height="60%" width="60%" src="BikechainLogo2Color.png" alt=""></img>
+            </NavLink>
           </div>
           <div className="navigation-second-fraction">
 

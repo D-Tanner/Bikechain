@@ -37,7 +37,7 @@ const RidePage = () => {
   useEffect(() => {
     if (ride) {
       ride.committedRiders.map((committed) => {
-        if (committed.id === user.user.id) {
+        if (user && committed.id === user.user.id) {
           setIsCommitted(true)
         }
       })
@@ -55,7 +55,7 @@ const RidePage = () => {
     <>
       {showPostModal && <RidePost rideId={rideId} />}
       {showEditPostModal && <EditPost post={selectedPost} />}
-      { ride && user &&
+      { ride &&
 
         <div className="ride-page-container">
           <div className="ride-page-grid-container">
@@ -82,10 +82,10 @@ const RidePage = () => {
                     <div>
                       <div>{post.content}</div>
                       <div>From {post.user.username}</div>
-                      <span>{post.user.id === user.user.id && <button onClick={() => {
+                      {user && <span>{post.user.id === user.user.id && <button onClick={() => {
                         setSelectedPost(post)
                         setShowEditPostModal((prev) => !prev)
-                      }}>Edit</button>}</span>
+                      }}>Edit</button>}</span>}
                     </div>
                   ))}
                 </div>}
@@ -106,7 +106,7 @@ const RidePage = () => {
               </div>}
             </div>
             <div className="ride-location">
-              {isCommitted &&
+              {isCommitted && user &&
                 <div>
                   <div>
 
@@ -123,7 +123,7 @@ const RidePage = () => {
                   </div>
                 </div>
               }
-              {!isCommitted &&
+              {!isCommitted && user &&
                 <div>
                   <div>
                     <button

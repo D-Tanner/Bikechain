@@ -40,6 +40,8 @@ const HomePage = () => {
     top: 10,
   }
 
+
+
   const mapRef = useRef();
   const handleViewportChange = useCallback(
     (newViewport) => setViewport(newViewport),
@@ -83,13 +85,14 @@ const HomePage = () => {
           mapboxApiAccessToken={mapToken}
           onViewportChange={handleViewportChange}
         >
-          <Geocoder
+          {/* <Geocoder
             mapRef={mapRef}
             onViewportChange={handleGeocoderViewportChange}
             mapboxApiAccessToken={mapToken}
             position="top-right"
             marker={false}
-          />
+          /> */}
+
           <NavigationControl style={navControlStyle} />
           {rides.map((ride, idx) => (
             <Marker key={idx}

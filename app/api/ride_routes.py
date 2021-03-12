@@ -30,12 +30,26 @@ def get_ride_by_id(id):
 def create_ride():
     form = CreateRide()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(request.data)
+
     if form.validate_on_submit():
         ride = Ride()
-        print("hello")
+
         form.populate_obj(ride)
         db.session.add(ride)
+        db.session.commit()
+        return ride.to_dict()
+
+    return {'errors':  validation_errors_to_error_messages(form.errors)}
+
+@ride_routes.route('/<int:ride_id>/edit', methods=["PUT"])
+def update_ride(ride_id):
+    ride = Ride.query.get(ride_id)
+
+    form = CreateRide()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        form.populate_obj(ride)
         db.session.commit()
         return ride.to_dict()
 

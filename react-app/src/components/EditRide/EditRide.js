@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { useHistory } from 'react-router-dom'
-import { createNewRide } from '../../services/rides';
+import { useHistory, useParams } from 'react-router-dom'
+import { updateRideById, getRideById } from '../../services/rides';
 import { getMapToken } from "../../services/auth"
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
@@ -11,14 +11,16 @@ import deepOrange from '@material-ui/core/colors/deepOrange'
 import lightBlue from '@material-ui/core/colors/lightBlue'
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'react-nice-dates/build/style.css'
-import "./CreateRide.css"
+import "../CreateRide/CreateRide.css"
+import "./EditRide.css"
 
 
 
-
-const CreateRide = ({ user }) => {
+const EditRide = ({ user }) => {
 
   const history = useHistory();
+  const { rideId } = useParams();
+  const [ride, setRide] = useState();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [date, setDate] = useState();
@@ -34,17 +36,24 @@ const CreateRide = ({ user }) => {
     (async () => {
       const token = await getMapToken()
       setMapToken(token.token)
+      const ride = await getRideById(rideId)
+      setRide(ride)
+      setTitle(ride.title)
+      setLong(ride.longitude)
+      setLat(ride.latitude)
+      setIsLocal(ride.isLocal)
+      setContent(ride.content)
     })();
   }, [])
 
 
-  const postRide = async (e) => {
+  const updateRide = async (e) => {
     e.preventDefault()
-    const newRide = await createNewRide(user.id, title, content, date.toISOString(), lat, long, isLocal, level)
+    const newRide = await updateRideById(user.user.id, rideId, title, content, date.toISOString(), lat, long, isLocal, level)
     if (newRide.errors) {
       setErrors(newRide.errors)
     } else {
-      history.push("/")
+      history.push(`/rides/${rideId}`)
     }
   }
 
@@ -103,10 +112,10 @@ const CreateRide = ({ user }) => {
 
   return (
     <>
-      <div className="create-grid-container">
+      { ride && user.user.id === ride.userId && <div className="create-grid-container">
         <div className="form-grid-container">
           <h1>Create a Ride!</h1>
-          <form onSubmit={postRide} className="create-form">
+          <form onSubmit={updateRide} className="create-form">
             <div>
               {errors.map((error, idx) => (
                 <ul classname="errors" key={idx}>{error}</ul>
@@ -119,15 +128,13 @@ const CreateRide = ({ user }) => {
                 name="name"
                 placeholder="Title of Ride"
                 onChange={updateTitle}
+                value={title}
               ></input>
             </div>
             <div className="input-number">
               <DatePicker date={date} onDateChange={setDate}
                 locale={enGB}
                 format={'MM-dd-yyyy'}>
-                {/* <DatePicker date={date} onDateChange={(event) => {
-
-            }} locale={enGB} format={'MM-dd-yyyy'}> */}
                 {({ inputProps, focused }) => (
 
                   <input
@@ -147,6 +154,7 @@ const CreateRide = ({ user }) => {
                 name="content"
                 placeholder="Additional Information. When? What should you bring? What socks should you wear?"
                 onChange={updateContent}
+                value={content}
                 rows="10"
               ></textarea>
             </div>
@@ -174,8 +182,8 @@ const CreateRide = ({ user }) => {
                 </label>
             </div>
             <div className="submit-cancel-container">
-              <button className="submit-button" type="submit">Create</button>
-              <button className="cancel-button" onClick={() => history.push('/')}>Cancel</button>
+              <button className="submit-button" type="submit">Update</button>
+              <button className="cancel-button" onClick={() => history.push(`/rides/${rideId}`)}>Cancel</button>
             </div>
           </form>
         </div>
@@ -212,18 +220,17 @@ const CreateRide = ({ user }) => {
                   onDragEnd={(e) => {
                     setLong(e.lngLat[0])
                     setLat(e.lngLat[1])
-                    // console.log(lat, long)
                   }}>
-                  {/* <RoomIcon style={{ fontSize: 50, color: lightBlue[600] }} /> */}
                   <RoomIcon style={{ fontSize: 50, color: (isLocal) ? lightBlue[600] : deepOrange[600] }} />
                 </Marker>
               )}
             </ReactMapGL>
           </div>
         </div>
-      </div>
+      </div>}
+      {ride && user.user.id !== ride.userId && <h1 className="error-message">Oops! This is not your ride!</h1>}
     </>
   )
 }
 
-export default CreateRide;
+export default EditRide;

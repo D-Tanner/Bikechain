@@ -31,6 +31,16 @@
   justify-content: flex-start;
 }
 
+.logo-image-container {
+  height: 75px;
+  width: 280px;
+}
+
+#logo-image {
+  max-height: 100%;
+  max-width: 100%;
+}
+
 .navigation-home {
   display: inline-flex;
   text-decoration: none;

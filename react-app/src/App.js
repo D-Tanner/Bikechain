@@ -6,12 +6,21 @@ import Navigation from "./components/Navigation/Navigation";
 import CreateRide from "./components/CreateRide/CreateRide"
 import RidePage from "./components/RidePage/RidePage"
 import HomePage from "./components/HomePage/HomePage"
+import EditRide from "./components/EditRide/EditRide"
 import ProfilePage from "./components/ProfilePage/ProfilePage"
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./services/auth";
 import { useModalContext } from "./context/Modal";
+
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl'
+
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+
 
 function App() {
   const { authenticated, setAuthenticated, user, setUser } = useModalContext();
@@ -53,14 +62,14 @@ function App() {
         <Route path="/" exact={true}>
           <HomePage />
         </Route>
-        <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
-          <UsersList />
-        </ProtectedRoute>
         <ProtectedRoute path="/profile/:userId" exact={true} authenticated={authenticated}>
           <ProfilePage />
         </ProtectedRoute>
         <ProtectedRoute path="/new-ride" exact={true} authenticated={authenticated}>
           <CreateRide user={user} />
+        </ProtectedRoute>
+        <ProtectedRoute path="/rides/:rideId/edit" exact={true} authenticated={authenticated}>
+          <EditRide user={user} />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

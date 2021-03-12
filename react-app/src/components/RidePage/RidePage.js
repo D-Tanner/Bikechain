@@ -1,19 +1,22 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Modal, useModalContext } from "../../context/Modal"
-import { useParams, Link } from "react-router-dom"
-import { getRideById } from "../../services/rides"
-import { unCommitToRide, commitToRide } from "../../services/rides"
+import { useParams, Link, useHistory } from "react-router-dom"
+import { unCommitToRide, commitToRide, getRideById } from "../../services/rides"
 import "./RidePage.css"
 import "../ProfilePage/ProfilePage.css"
 import RidePost from "../RidePosts/RidePosts"
 import EditPost from "../EditPost/EditPost"
+import LoginForm from "../auth/LoginForm"
 
 const RidePage = () => {
 
   const { rideId } = useParams();
+  const history = useHistory();
   const { user,
     showPostModal,
     setShowPostModal,
+    showLoginModal,
+    setShowLoginModal,
     showEditPostModal,
     setShowEditPostModal,
   } = useModalContext();
@@ -37,7 +40,7 @@ const RidePage = () => {
   useEffect(() => {
     if (ride) {
       ride.committedRiders.map((committed) => {
-        if (committed.id === user.user.id) {
+        if (user && committed.id === user.user.id) {
           setIsCommitted(true)
         }
       })
@@ -55,13 +58,19 @@ const RidePage = () => {
     <>
       {showPostModal && <RidePost rideId={rideId} />}
       {showEditPostModal && <EditPost post={selectedPost} />}
-      { ride && user &&
+      {showLoginModal && <LoginForm />}
+      { ride &&
 
         <div className="ride-page-container">
           <div className="ride-page-grid-container">
             <div className="ride-info">
               <div>{ride.title}</div>
               <div>{ride.content}</div>
+              {ride && user && ride.id === user.user.id && (
+                <button
+                  onClick={() => history.push(`/rides/${ride.id}/edit`)}
+                >Edit</button>
+              )}
             </div>
             <div className="ride-posts" id={postFeed ? "feed-selected" : ""}
               onClick={() => {
@@ -82,17 +91,22 @@ const RidePage = () => {
                     <div>
                       <div>{post.content}</div>
                       <div>From {post.user.username}</div>
-                      <span>{post.user.id === user.user.id && <button onClick={() => {
+                      {user && <span>{post.user.id === user.user.id && <button onClick={() => {
                         setSelectedPost(post)
                         setShowEditPostModal((prev) => !prev)
-                      }}>Edit</button>}</span>
+                      }}>Edit</button>}</span>}
                     </div>
                   ))}
                 </div>}
               {committedFeed && <div>
                 {ride.committedRiders.map((rider, idx) => (
                   <Link key={idx}
-                    to={`/profile/${rider.id}`}
+                    to={user !== null && `/profile/${rider.id}`}
+                    onClick={() => {
+                      if (user === null) {
+                        setShowLoginModal(true)
+                      }
+                    }}
                     className="link"
                   >
                     <div className="following-grid-container">
@@ -106,7 +120,7 @@ const RidePage = () => {
               </div>}
             </div>
             <div className="ride-location">
-              {isCommitted &&
+              {isCommitted && user &&
                 <div>
                   <div>
 
@@ -123,7 +137,7 @@ const RidePage = () => {
                   </div>
                 </div>
               }
-              {!isCommitted &&
+              {!isCommitted && user &&
                 <div>
                   <div>
                     <button

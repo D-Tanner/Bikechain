@@ -39,7 +39,7 @@ const ProfilePage = () => {
 
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && user) {
       user.following.map((followers) => {
         if (followers.id === currentUser.id) {
           setIsFollowing(true)
@@ -60,7 +60,9 @@ const ProfilePage = () => {
               setCommitPage(false)
               setFollowingPage(false)
             }}
-          >{currentUser.id === user.user.id ? "Your rides" : "Their rides"}</div>
+          >
+            {currentUser.id === user.user.id ? "Your rides" : "Their rides"}
+          </div>
           <div className="item2" id={commitPage ? "is-selected" : ""}
             onClick={() => {
               setRidePage(false)

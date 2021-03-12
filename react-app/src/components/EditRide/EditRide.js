@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { useHistory } from 'react-router-dom'
-import { createNewRide } from '../../services/rides';
+import { useHistory, useParams } from 'react-router-dom'
+import { updateRideById, getRideById } from '../../services/rides';
 import { getMapToken } from "../../services/auth"
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
@@ -11,7 +11,7 @@ import deepOrange from '@material-ui/core/colors/deepOrange'
 import lightBlue from '@material-ui/core/colors/lightBlue'
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'react-nice-dates/build/style.css'
-import "./CreateRide.css"
+import "../CreateRide/CreateRide.css"
 
 
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -25,6 +25,8 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 const EditRide = ({ user }) => {
 
   const history = useHistory();
+  const { rideId } = useParams();
+  const [ride, setRide] = useState();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [date, setDate] = useState();
@@ -40,13 +42,15 @@ const EditRide = ({ user }) => {
     (async () => {
       const token = await getMapToken()
       setMapToken(token.token)
+      const ride = await getRideById(rideId)
+      setRide(ride)
     })();
   }, [])
 
 
-  const postRide = async (e) => {
+  const updateRide = async (e) => {
     e.preventDefault()
-    const newRide = await createNewRide(user.id, title, content, date.toISOString(), lat, long, isLocal, level)
+    const newRide = await updateRideById(user.id, rideId, title, content, date.toISOString(), lat, long, isLocal, level)
     if (newRide.errors) {
       setErrors(newRide.errors)
     } else {
@@ -109,10 +113,10 @@ const EditRide = ({ user }) => {
 
   return (
     <>
-      <div className="create-grid-container">
+      { ride && <div className="create-grid-container">
         <div className="form-grid-container">
           <h1>Create a Ride!</h1>
-          <form onSubmit={postRide} className="create-form">
+          <form onSubmit={updateRide} className="create-form">
             <div>
               {errors.map((error, idx) => (
                 <ul classname="errors" key={idx}>{error}</ul>
@@ -131,9 +135,6 @@ const EditRide = ({ user }) => {
               <DatePicker date={date} onDateChange={setDate}
                 locale={enGB}
                 format={'MM-dd-yyyy'}>
-                {/* <DatePicker date={date} onDateChange={(event) => {
-
-            }} locale={enGB} format={'MM-dd-yyyy'}> */}
                 {({ inputProps, focused }) => (
 
                   <input
@@ -225,7 +226,7 @@ const EditRide = ({ user }) => {
             </ReactMapGL>
           </div>
         </div>
-      </div>
+      </div>}
     </>
   )
 }

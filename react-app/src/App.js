@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation/Navigation";
 import CreateRide from "./components/CreateRide/CreateRide"
 import RidePage from "./components/RidePage/RidePage"
 import HomePage from "./components/HomePage/HomePage"
+import EditRide from "./components/EditRide/EditRide"
 import ProfilePage from "./components/ProfilePage/ProfilePage"
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
@@ -53,14 +54,14 @@ function App() {
         <Route path="/" exact={true}>
           <HomePage />
         </Route>
-        {/* <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
-          <UsersList />
-        </ProtectedRoute> */}
         <ProtectedRoute path="/profile/:userId" exact={true} authenticated={authenticated}>
           <ProfilePage />
         </ProtectedRoute>
         <ProtectedRoute path="/new-ride" exact={true} authenticated={authenticated}>
           <CreateRide user={user} />
+        </ProtectedRoute>
+        <ProtectedRoute path="/ride/:rideId/edit" exact={true} authenticated={authenticated}>
+          <EditRide user={user} />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

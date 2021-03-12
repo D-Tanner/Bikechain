@@ -35,6 +35,23 @@ export const createNewRide = async (userId, title, content, date, latitude, long
   })
   return await response.json();
 }
+export const updateRideById = async (userId, rideId, title, content, date, latitude, longitude, isLocal, level) => {
+  const formData = new FormData();
+  formData.append('userId', userId);
+  formData.append('title', title);
+  formData.append('content', content);
+  formData.append('date', date);
+  formData.append('latitude', latitude);
+  formData.append('longitude', longitude);
+  formData.append('isLocal', isLocal);
+  formData.append('level', level);
+
+  const response = await fetch(`/api/rides/${rideId}/edit`, {
+    method: "PUT",
+    body: formData,
+  })
+  return await response.json();
+}
 
 
 export const unFollowRider = async (follower_id, followed_id) => {

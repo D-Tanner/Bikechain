@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Modal, useModalContext } from "../../context/Modal"
 import { useParams, Link } from "react-router-dom"
-import { getRideById } from "../../services/rides"
-import { unCommitToRide, commitToRide } from "../../services/rides"
+import { unCommitToRide, commitToRide, getRideById } from "../../services/rides"
 import "./RidePage.css"
 import "../ProfilePage/ProfilePage.css"
 import RidePost from "../RidePosts/RidePosts"

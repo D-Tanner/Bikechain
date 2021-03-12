@@ -44,7 +44,7 @@ const Navigation = () => {
                 setShowLoginModal(false)
               }}>
               <div className="logo-image-container">
-                <img id="logo-image" src="/BikechainLogo2Color.png" alt=""></img>
+                <img id="logo-image" src="/logo.png" alt=""></img>
               </div>
             </NavLink>
           </div>

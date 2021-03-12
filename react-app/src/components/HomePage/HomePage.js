@@ -24,6 +24,7 @@ const HomePage = () => {
 
 
 
+
   const [rides, setRides] = useState([])
   const [popup, setPopup] = useState(false)
   const [mapToken, setMapToken] = useState()
@@ -85,13 +86,13 @@ const HomePage = () => {
           mapboxApiAccessToken={mapToken}
           onViewportChange={handleViewportChange}
         >
-          {/* <Geocoder
+          <Geocoder
             mapRef={mapRef}
             onViewportChange={handleGeocoderViewportChange}
             mapboxApiAccessToken={mapToken}
             position="top-right"
             marker={false}
-          /> */}
+          />
 
           <NavigationControl style={navControlStyle} />
           {rides.map((ride, idx) => (

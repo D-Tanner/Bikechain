@@ -66,7 +66,7 @@ const RidePage = () => {
             <div className="ride-info">
               <div>{ride.title}</div>
               <div>{ride.content}</div>
-              {ride && user && ride.id === user.user.id && (
+              {ride && user && ride.user.id === user.user.id && (
                 <button
                   onClick={() => history.push(`/rides/${ride.id}/edit`)}
                 >Edit</button>

@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom';
 import { signUp } from '../../services/auth';
 import { Modal, useModalContext } from "../../context/Modal"
 import csc from "country-state-city";
+import DeleteIcon from "@material-ui/icons/Delete"
+
 
 const SignUpForm = () => {
   const [username, setUsername] = useState("");
@@ -14,7 +16,7 @@ const SignUpForm = () => {
   const [stateCode, setStateCode] = useState("");
   const [level, setLevel] = useState("");
   const [errors, setErrors] = useState([]);
-  // const [profileImage, setProfileImage] = useState(null)
+  const [profileImage, setProfileImage] = useState(null)
 
   const {
     user,
@@ -31,7 +33,7 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await signUp(username, email, password, city, state, level);
+      const user = await signUp(username, email, password, city, state, level, profileImage);
       if (!user.errors) {
         setUser(user)
         setAuthenticated(true);
@@ -84,14 +86,18 @@ const SignUpForm = () => {
     setLevel(e.target.value)
   }
 
-  // const chooseImage = () => {
-  //   document.getElementById('file').click();
-  // };
+  const chooseImage = () => {
+    document.getElementById('file').click();
+  };
 
-  // const updateProfileImage = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) setProfileImage(file);
-  // };
+  const updateProfileImage = (e) => {
+    const file = e.target.files[0];
+    if (file) setProfileImage(file);
+  };
+
+  const deleteImage = (e) => {
+    setProfileImage(null)
+  }
 
   if (authenticated) {
     return <Redirect to="/" />;
@@ -131,6 +137,26 @@ const SignUpForm = () => {
                 onChange={updateEmail}
                 value={email}
               ></input>
+            </div>
+            <div>
+              {profileImage &&
+
+
+                <div>
+                  <span>
+                    <span
+                      onClick={() => deleteImage()}
+                      className="delete-image-div"
+                    >
+                      <DeleteIcon />
+                    </span>
+                  </span>
+                  {profileImage.name}
+                </div>
+
+              }
+              <input type="button" id="loadFile" value="Choose a Profile Image" onClick={chooseImage} />
+              <input placeholder="Choose a Profile Image" className="hide-this-button" id="file" type="file" name="image" onChange={updateProfileImage} />
             </div>
             <div>
               <select name="state" onChange={updateState} value={state}>

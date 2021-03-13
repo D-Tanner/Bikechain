@@ -72,7 +72,6 @@ class User(db.Model, UserMixin):
         "state": self.state,
         "level": self.level,
         "profileImage": self.profileImageUrl,
-        # "following": self.followers,
       }
 
 

@@ -180,6 +180,7 @@ def delete_post(post_id):
 def delete_ride(ride_id):
     ride = Ride.query.get(ride_id)
     db.session.delete(ride)
+
     db.session.commit()
 
     return {"message": 'Delete Successful'}

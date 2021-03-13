@@ -49,7 +49,6 @@ const EditRide = ({ user }) => {
 
   const updateRide = async (e) => {
     e.preventDefault()
-    // console.log(user.user.id, rideId, title, content, date.toISOString(), lat, long, isLocal, level)
     const newRide = await updateRideById(user.user.id, Number(rideId), title, content, date.toISOString(), lat, long, isLocal, level)
     if (newRide.errors) {
       setErrors(newRide.errors)
@@ -60,7 +59,7 @@ const EditRide = ({ user }) => {
 
   const deleteProject = async (e) => {
     e.preventDefault()
-    const result = await deleteProjectById(rideId)
+    const result = await deleteProjectById(Number(rideId))
     if (result.errors) {
       setErrors(result.erros)
     } else {

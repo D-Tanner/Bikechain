@@ -49,7 +49,8 @@ const EditRide = ({ user }) => {
 
   const updateRide = async (e) => {
     e.preventDefault()
-    const newRide = await updateRideById(user.user.id, rideId, title, content, date.toISOString(), lat, long, isLocal, level)
+    // console.log(user.user.id, rideId, title, content, date.toISOString(), lat, long, isLocal, level)
+    const newRide = await updateRideById(user.user.id, Number(rideId), title, content, date.toISOString(), lat, long, isLocal, level)
     if (newRide.errors) {
       setErrors(newRide.errors)
     } else {
@@ -171,11 +172,11 @@ const EditRide = ({ user }) => {
             <div>
               <select className="input-select" name="level" onChange={updateLevel} value={level} required>
                 <option value="" disabled selected>Level of the Ride</option>
-                <option value="Easiest">Novice</option>
-                <option value="Easy">Intermediate</option>
-                <option value="More Difficult">Intermediate+</option>
-                <option value="Very Difficult">Advanced</option>
-                <option value="Extremely Difficult">Advanced+</option>
+                <option value="Easiest">Easiest</option>
+                <option value="Easy">Easy</option>
+                <option value="More Difficult">More Difficult</option>
+                <option value="Very Difficult">Very Difficult</option>
+                <option value="Extremely Difficult">Extremely Difficult</option>
               </select>
             </div>
             <div className="is-local-container">

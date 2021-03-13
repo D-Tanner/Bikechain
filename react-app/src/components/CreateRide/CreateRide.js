@@ -153,11 +153,11 @@ const CreateRide = ({ user }) => {
             <div>
               <select className="input-select" name="level" onChange={updateLevel} value={level} required>
                 <option value="" disabled selected>Level of the Ride</option>
-                <option value="Easiest">Novice</option>
-                <option value="Easy">Intermediate</option>
-                <option value="More Difficult">Intermediate+</option>
-                <option value="Very Difficult">Advanced</option>
-                <option value="Extremely Difficult">Advanced+</option>
+                <option value="Easiest">Easiest</option>
+                <option value="Easy">Easy</option>
+                <option value="More Difficult">More Difficult</option>
+                <option value="Very Difficult">Very Difficult</option>
+                <option value="Extremely Difficult">Extremely Difficult</option>
               </select>
             </div>
             <div className="is-local-container">

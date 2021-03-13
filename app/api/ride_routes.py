@@ -46,8 +46,8 @@ def create_ride():
 @ride_routes.route('/<int:ride_id>/edit', methods=["PUT"])
 def update_ride(ride_id):
     ride = Ride.query.get(ride_id)
-
     form = CreateRide()
+
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
@@ -182,4 +182,4 @@ def delete_ride(ride_id):
     db.session.delete(ride)
     db.session.commit()
 
-    return {'errors':  validation_errors_to_error_messages(form.errors)}
+    return {"message": 'Delete Successful'}

@@ -18,6 +18,7 @@ ride_routes = Blueprint('rides', __name__)
 @ride_routes.route('/')
 def get_rides():
     rides = Ride.query.all()
+    print([ride.to_dict() for ride in rides])
     return {"Rides": [ride.to_dict() for ride in rides]}
 
 @ride_routes.route('/<int:id>')

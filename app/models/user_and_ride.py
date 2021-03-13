@@ -91,7 +91,7 @@ class Ride(db.Model):
 
   user = db.relationship("User", back_populates="rides")
   posts = db.relationship("Post", cascade="all,delete", back_populates="ride")
-  committed_riders = db.relationship("User", secondary="users_committed_rides", back_populates="committed_rides")
+  committed_riders = db.relationship("User", cascade="all,delete", secondary="users_committed_rides", back_populates="committed_rides")
 
 
   def to_dict(self):

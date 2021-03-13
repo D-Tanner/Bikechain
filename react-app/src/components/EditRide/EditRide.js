@@ -30,7 +30,7 @@ const EditRide = ({ user }) => {
   const [isLocal, setIsLocal] = useState(false);
   const [errors, setErrors] = useState([]);
   const [mapToken, setMapToken] = useState()
-
+  const [deleteConfirm, setDeleteConfirm] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -114,7 +114,7 @@ const EditRide = ({ user }) => {
     <>
       { ride && user.user.id === ride.userId && <div className="create-grid-container">
         <div className="form-grid-container">
-          <h1>Create a Ride!</h1>
+          <h1>Update Your Ride!</h1>
           <form onSubmit={updateRide} className="create-form">
             <div>
               {errors.map((error, idx) => (
@@ -183,6 +183,16 @@ const EditRide = ({ user }) => {
             </div>
             <div className="submit-cancel-container">
               <button className="submit-button" type="submit">Update</button>
+              <div>
+
+                {!deleteConfirm && <button onClick={() => setDeleteConfirm((prev) => !prev)} className="delete-button">Delete</button>}
+                {deleteConfirm && (
+                  <div>
+                    <button className="yes-button">Yes</button>
+                    <button onClick={() => setDeleteConfirm((prev) => !prev)} className="no-button">No</button>
+                  </div>
+                )}
+              </div>
               <button className="cancel-button" onClick={() => history.push(`/rides/${rideId}`)}>Cancel</button>
             </div>
           </form>

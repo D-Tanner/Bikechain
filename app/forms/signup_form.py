@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, FileField
 from wtforms.validators import DataRequired, Email, ValidationError
 from app.models import User
 
@@ -19,4 +19,4 @@ class SignUpForm(FlaskForm):
     city = StringField('city', validators=[DataRequired()])
     state = StringField('state', validators=[DataRequired()])
     level = StringField('level', validators=[DataRequired()])
-    # profileImage = FileField('profileImage')
+    profileImage = FileField('profileImage')

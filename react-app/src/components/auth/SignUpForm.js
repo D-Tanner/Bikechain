@@ -17,7 +17,6 @@ const SignUpForm = () => {
   const [level, setLevel] = useState("");
   const [errors, setErrors] = useState([]);
   const [profileImage, setProfileImage] = useState(null)
-
   const {
     user,
     setUser,
@@ -140,8 +139,6 @@ const SignUpForm = () => {
             </div>
             <div>
               {profileImage &&
-
-
                 <div>
                   <span>
                     <span
@@ -153,7 +150,6 @@ const SignUpForm = () => {
                   </span>
                   {profileImage.name}
                 </div>
-
               }
               <input type="button" id="loadFile" value="Choose a Profile Image" onClick={chooseImage} />
               <input placeholder="Choose a Profile Image" className="hide-this-button" id="file" type="file" name="image" onChange={updateProfileImage} />

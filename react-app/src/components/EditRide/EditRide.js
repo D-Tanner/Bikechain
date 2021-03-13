@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom'
-import { updateRideById, getRideById } from '../../services/rides';
+import { updateRideById, getRideById, deleteProjectById } from '../../services/rides';
 import { getMapToken } from "../../services/auth"
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
@@ -54,6 +54,16 @@ const EditRide = ({ user }) => {
       setErrors(newRide.errors)
     } else {
       history.push(`/rides/${rideId}`)
+    }
+  }
+
+  const deleteProject = async (e) => {
+    e.preventDefault()
+    const result = await deleteProjectById(rideId)
+    if (result.errors) {
+      setErrors(result.erros)
+    } else {
+      history.push(`/`)
     }
   }
 
@@ -185,10 +195,10 @@ const EditRide = ({ user }) => {
               <button className="submit-button" type="submit">Update</button>
               <div>
 
-                {!deleteConfirm && <button onClick={() => setDeleteConfirm((prev) => !prev)} className="delete-button">Delete</button>}
+                {!deleteConfirm && <button onClick={() => setDeleteConfirm((prev) => !prev)} className="delete-button">Delete?</button>}
                 {deleteConfirm && (
                   <div>
-                    <button className="yes-button">Yes</button>
+                    <button onClick={deleteProject} className="yes-button">Yes</button>
                     <button onClick={() => setDeleteConfirm((prev) => !prev)} className="no-button">No</button>
                   </div>
                 )}

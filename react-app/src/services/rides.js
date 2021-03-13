@@ -151,3 +151,10 @@ export const deletePost = async (postId) => {
   });
   return await response.json();
 };
+
+export const deleteProjectById = async (rideId) => {
+  const response = await fetch(`/api/rides/delete/${rideId}`, {
+    method: "DELETE",
+  });
+  return await response.json();
+};

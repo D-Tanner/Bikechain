@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../services/auth';
 import { Modal, useModalContext } from "../../context/Modal"
 import csc from "country-state-city";
 import DeleteIcon from "@material-ui/icons/Delete"
 import CloseIcon from '@material-ui/icons/Close';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 import "./SignUpForm.css"
 
@@ -19,6 +20,7 @@ const SignUpForm = () => {
   const [level, setLevel] = useState("");
   const [errors, setErrors] = useState([]);
   const [profileImage, setProfileImage] = useState(null)
+  const [riderImage, setRiderImage] = useState("")
   const {
     user,
     setUser,
@@ -30,6 +32,16 @@ const SignUpForm = () => {
   const listOfStates = csc.getStatesOfCountry("US");
   const listOfCities = csc.getCitiesOfState("US", stateCode);
 
+
+  useEffect(() => {
+    if (level) {
+      if (level === "Novice") setRiderImage("/novice.png")
+      if (level === "Intermediate") setRiderImage("/intermediate.png")
+      if (level === "Intermediate+") setRiderImage("/intermediate-plus.png")
+      if (level === "Advanced") setRiderImage("/advanced.png")
+      if (level === "Advanced+") setRiderImage("/advanced-plus.png")
+    }
+  }, [level])
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -109,9 +121,14 @@ const SignUpForm = () => {
       {showSignUpModal && (
         <Modal onClose={() => setShowSignUpModal(false)}>
           <div className="signup-modal-container-width">
+            <div className="level-rider-image-container">
+              {level && <img id="rider-image" src={riderImage}></img>}
+            </div>
             <form onSubmit={onSignUp}>
               <div className="close-button-container">
-                <CloseIcon onClick={() => setShowSignUpModal((prev) => !prev)}></CloseIcon>
+                <div>
+                  <CloseIcon className="close-button-icon" onClick={() => setShowSignUpModal((prev) => !prev)}></CloseIcon>
+                </div>
               </div>
               <div >
                 <ul >
@@ -178,7 +195,7 @@ const SignUpForm = () => {
                     ))}
                 </select>
               </div>
-              <div>
+              <div className="level-of-rider-container">
                 <select className="level-of-rider" name="level" onChange={updateLevel} value={level}>
                   <option value="" disabled selected>Level</option>
                   <option value="Novice">Novice</option>
@@ -187,6 +204,9 @@ const SignUpForm = () => {
                   <option value="Advanced">Advanced</option>
                   <option value="Advanced+">Advanced+</option>
                 </select>
+                {/* <div className="level-rider-image-container">
+                  <img id="rider-image" src="/advanced.png"></img>
+                </div> */}
               </div>
               <div>
 

@@ -18,6 +18,7 @@
   grid-column-start: 3;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 #navigation-button-container {
@@ -48,27 +49,8 @@
   font-size: 35px;
 }
 
-.nav-login {
-  height: 30px;
-  width: 55px;
-  font-size: 25px;
-  background-color: transparent;
-  color: black;
-  border: transparent;
-  margin-right: 55px;
-}
 
-.nav-signup {
-  height: 30px;
-  width: 85px;
-  font-size: 25px;
-  background-color: transparent;
-  color: black;
-  border: transparent;
-  margin-right: 40px;
-}
-
-.nav-logout {
+.nav-logout, .nav-login, .nav-signup {
     background-color: Transparent;
     background-repeat:no-repeat;
     border: none;
@@ -109,7 +91,9 @@
 }
 
 .nav-your-profile:hover,
-.nav-logout:hover {
+.nav-logout:hover,
+.nav-login:hover,
+.nav-signup:hover {
   opacity: 0.2;
   transition-duration: 0.2s;
 }

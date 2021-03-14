@@ -77,12 +77,12 @@ const Navigation = () => {
                 </button>
               )}
             </div>
-            <div>
-              {authenticated && <LogoutButton
+            {authenticated && <div>
+              <LogoutButton
                 className="nav-logout"
-                setAuthenticated={setAuthenticated} />}
-            </div>
-            <div>
+                setAuthenticated={setAuthenticated} />
+            </div>}
+            {authenticated && <div>
               <button
                 className="nav-your-profile"
                 onClick={() => {
@@ -93,8 +93,8 @@ const Navigation = () => {
                     setShowLoginModal((prev) => !prev)
                   }
                 }}>Your Profile</button>
-            </div>
-            <div className="nav-create-a-ride-container">
+            </div>}
+            {authenticated && <div className="nav-create-a-ride-container">
               <button
                 className="nav-create-a-ride"
                 onClick={() => {
@@ -105,7 +105,7 @@ const Navigation = () => {
                     setShowLoginModal((prev) => !prev)
                   }
                 }}>Create a Ride</button>
-            </div>
+            </div>}
           </div>
         </div>
 

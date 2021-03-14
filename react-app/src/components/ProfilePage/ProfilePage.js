@@ -46,6 +46,7 @@ const ProfilePage = () => {
         }
       })
     }
+    console.log(user)
   }, [currentUser, user])
 
 

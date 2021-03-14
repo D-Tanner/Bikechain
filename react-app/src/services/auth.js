@@ -62,17 +62,15 @@ export const signUp = async (username, email, password, city, state, level, prof
   return await response.json();
 }
 
-export const editUser = async (username, email, password, city, state, level, profileImage) => {
+export const editUser = async (userId, city, state, level, profileImage) => {
   const formData = new FormData();
-  formData.append("username", username);
-  formData.append("email", email);
-  formData.append("password", password);
+
   formData.append("city", city);
   formData.append("state", state);
   formData.append("level", level);
   formData.append("profileImage", profileImage);
 
-  const response = await fetch("/api/auth/signup", {
+  const response = await fetch(`/api/auth/edit-user/${userId}`, {
     method: "PUT",
     body: formData,
   });

@@ -96,7 +96,40 @@ def sign_up():
                 "following": following_dict}
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
+@auth_routes.route('/edit-user/<int:user_id>', methods=['PUT'])
+def edit_user(user_id):
+    user = User.query.get(user_id)
 
+    if 'city' in request.form:
+        user.city = request.form['city']
+    if 'state' in request.form:
+        user.state = request.form['state']
+    if 'level' in request.form:
+        user.level = request.form['level']
+
+    profileImageUrl = None
+    if 'profileImage' in request.files:
+        image = request.files['profileImage']
+        image.filename = secure_filename(image.filename)
+        profileImageUrl = upload_file_to_s3(image, Config.S3_BUCKET)
+
+    user.profileImageUrl = profileImageUrl
+    db.session.commit()
+
+    following_dict = [following.to_dict() for following in user.followers]
+
+    return {"user": user.to_dict(),
+            "following": following_dict}
+
+
+
+
+@auth_routes.route('/unauthorized')
+def unauthorized():
+    """
+    Returns unauthorized JSON when flask-login authentication fails
+    """
+    return {'errors': ['Unauthorized']}, 401
 # @auth_routes.route('/signup', methods=['POST'])
 # def sign_up():
 #     """
@@ -129,11 +162,3 @@ def sign_up():
 #         return {"user": user.to_dict(),
 #                 "following": following_dict}
 #     return {'errors': validation_errors_to_error_messages(form.errors)}
-
-
-@auth_routes.route('/unauthorized')
-def unauthorized():
-    """
-    Returns unauthorized JSON when flask-login authentication fails
-    """
-    return {'errors': ['Unauthorized']}, 401

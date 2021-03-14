@@ -10,10 +10,8 @@ import "./EditUser.css"
 
 const EditUser = () => {
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
+
+
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [stateCode, setStateCode] = useState("");
@@ -32,54 +30,30 @@ const EditUser = () => {
   const listOfCities = csc.getCitiesOfState("US", stateCode);
 
   useEffect(() => {
-    console.log(user)
     if (user) {
-      setUsername(user.user.username)
-      setEmail(user.user.email)
-      setProfileImage(user.user.profileImage);
+      if (user.user.profileImage) {
+        const name = user.user.profileImage.split(".s3.amazonaws.com/")[1]
+        setProfileImage(name);
+      }
       setLevel(user.user.level)
-      setState(user.user.state)
-      setCity(user.user.city)
     }
   }, []);
 
 
 
+
   const editUserById = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword) {
-      const user = await editUser(username, email, password, city, state, level, profileImage);
-      if (!user.errors) {
-        setUser(user)
-        setShowEditUserModal(false);
-      } else {
-        const errors = user.errors.map(error => error.split(' : ')[1]);
-        setErrors(errors);
-      }
+
+    const updated = await editUser(user.user.id, city, state, level, profileImage);
+    if (!updated.errors) {
+      setUser(updated)
+      setShowEditUserModal(false);
     } else {
-      setErrors([
-        "Confirm Password field must be the same as the Password field",
-      ]);
+      setErrors(errors);
     }
+
   };
-
-
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const updateRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
-  };
-
 
   const updateState = (e) => {
     setState(e.target.value);
@@ -107,12 +81,13 @@ const EditUser = () => {
 
   const updateProfileImage = (e) => {
     const file = e.target.files[0];
-    if (file) setProfileImage(file);
+    if (file) setProfileImage(file.name);
   };
 
   const deleteImage = (e) => {
     setProfileImage(null)
   }
+
 
   return (
     <>
@@ -125,24 +100,6 @@ const EditUser = () => {
               ))}
             </div>
             <div>
-              <label>User Name</label>
-              <input
-                type="text"
-                name="username"
-                onChange={updateUsername}
-                value={username}
-              ></input>
-            </div>
-            <div>
-              <label>Email</label>
-              <input
-                type="text"
-                name="email"
-                onChange={updateEmail}
-                value={email}
-              ></input>
-            </div>
-            <div>
               {profileImage &&
                 <div>
                   <span>
@@ -153,14 +110,14 @@ const EditUser = () => {
                       <DeleteIcon />
                     </span>
                   </span>
-                  {profileImage.name}
+                  {profileImage}
                 </div>
               }
               <input type="button" id="loadFile" value="Choose a Profile Image" onClick={chooseImage} />
               <input placeholder="Choose a Profile Image" className="hide-this-button" id="file" type="file" name="image" onChange={updateProfileImage} />
             </div>
             <div>
-              <select name="state" onChange={updateState} value={state}>
+              <select name="state" onChange={updateState} value={state} required>
                 <option value="" disabled selected>
                   State
                 </option>
@@ -168,7 +125,7 @@ const EditUser = () => {
                   <option key={state.name}>{state.name}</option>
                 ))}
               </select>
-              <select name="city" onChange={updateCity} value={city}>
+              <select name="city" onChange={updateCity} value={city} required>
                 <option value="" disabled selected>
                   City
                 </option>
@@ -187,25 +144,6 @@ const EditUser = () => {
                 <option value="Advanced">Advanced</option>
                 <option value="Advanced+">Advanced+</option>
               </select>
-            </div>
-            <div>
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                onChange={updatePassword}
-                value={password}
-              ></input>
-            </div>
-            <div>
-              <label>Repeat Password</label>
-              <input
-                type="password"
-                name="repeat_password"
-                onChange={updateRepeatPassword}
-                value={repeatPassword}
-                required={true}
-              ></input>
             </div>
             <div className="submit-cancel-container">
               <button className="submit-button" type="submit">Update</button>

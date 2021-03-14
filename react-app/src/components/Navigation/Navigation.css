@@ -3,7 +3,8 @@
   width: 100%;
   display: grid;
   position: fixed;
-  grid-template-columns: 17.5% 32.5% 32.5% 17.5%;
+  /* grid-template-columns: 17.5% 32.5% 32.5% 17.5%; */
+  grid-template-columns: 1fr 4fr 4fr 1fr;
   grid-template-rows: 1fr;
   margin: 0;
   padding: 0;

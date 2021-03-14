@@ -58,9 +58,8 @@ const RidePage = () => {
     <>
       {showPostModal && <RidePost rideId={rideId} />}
       {showEditPostModal && <EditPost post={selectedPost} />}
-      {showLoginModal && <LoginForm />}
-      { ride &&
 
+      { ride &&
         <div className="ride-page-container">
           <div className="ride-page-grid-container">
             <div className="ride-info">

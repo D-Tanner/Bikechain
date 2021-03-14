@@ -1,0 +1,55 @@
+.close-button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.25rem;
+}
+
+.close-button-container:hover {
+  cursor: pointer;
+}
+
+
+.login-input-password,
+.login-input-email {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+
+
+.login-demo-submit-button,
+.login-submit-button {
+  background-color: #ff7110;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 3px;
+}
+
+.login-demo-submit-button:hover,
+.login-submit-button:hover {
+  opacity: 0.8;
+}
+
+.login-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-modal-container-width {
+  width: 400px;
+  padding: 20px;
+}
+
+.login-errors {
+  color: red;
+}

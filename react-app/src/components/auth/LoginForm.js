@@ -61,7 +61,7 @@ const LoginForm = () => {
           <div className="login-modal-container-width">
             <form onSubmit={onLogin}>
               <div className="close-button-container">
-                <CloseIcon onClick={() => setShowLoginModal((prev) => !prev)}></CloseIcon>
+                <CloseIcon className="close-button-icon" onClick={() => setShowLoginModal((prev) => !prev)}></CloseIcon>
               </div>
               <div>
                 {errors.map((error) => (

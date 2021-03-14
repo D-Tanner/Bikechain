@@ -168,7 +168,7 @@ const CreateRide = ({ user }) => {
                 name="content"
                 placeholder="Additional Information. When? What should you bring? What socks should you wear?"
                 onChange={updateContent}
-                rows="10"
+                rows="6"
               ></textarea>
             </div>
             <div>

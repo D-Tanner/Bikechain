@@ -1,12 +1,13 @@
 .form-grid-container {
   grid-area: form;
-  background-color: aquamarine;
+  background-color: rgba(117, 195, 231, 0.3);
   padding: 20px;
 }
 
 .map-grid-container {
   grid-area: map;
-  background-color: cadetblue;
+  /* background-color: cadetblue; */
+  background-color: rgba(117, 195, 231, 0.3);
   padding: 20px;
 }
 
@@ -56,7 +57,7 @@
 .map-location {
   height: 700px;
   width: 700px;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 
 .create-form {

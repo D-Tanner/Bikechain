@@ -83,24 +83,28 @@ const Navigation = () => {
                 setAuthenticated={setAuthenticated} />}
             </div>
             <div>
-              <button onClick={() => {
-                if (authenticated) {
-                  history.push(`/profile/${user.user.id}`)
-                } else {
-                  setShowSignUpModal(false)
-                  setShowLoginModal((prev) => !prev)
-                }
-              }}>Your Profile</button>
+              <button
+                className="nav-your-profile"
+                onClick={() => {
+                  if (authenticated) {
+                    history.push(`/profile/${user.user.id}`)
+                  } else {
+                    setShowSignUpModal(false)
+                    setShowLoginModal((prev) => !prev)
+                  }
+                }}>Your Profile</button>
             </div>
-            <div>
-              <button onClick={() => {
-                if (authenticated) {
-                  history.push("/new-ride")
-                } else {
-                  setShowSignUpModal(false)
-                  setShowLoginModal((prev) => !prev)
-                }
-              }}>Create a Ride</button>
+            <div className="nav-create-a-ride-container">
+              <button
+                className="nav-create-a-ride"
+                onClick={() => {
+                  if (authenticated) {
+                    history.push("/new-ride")
+                  } else {
+                    setShowSignUpModal(false)
+                    setShowLoginModal((prev) => !prev)
+                  }
+                }}>Create a Ride</button>
             </div>
           </div>
         </div>

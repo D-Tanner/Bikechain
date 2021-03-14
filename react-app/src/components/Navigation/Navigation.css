@@ -69,11 +69,47 @@
 }
 
 .nav-logout {
-  height: 30px;
-  width: 55px;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size: 20px;
+}
+
+.nav-create-a-ride {
+  display: flex;
+  border: none;
+  height: 40px;
+  width: 195px;
   font-size: 25px;
   background-color: transparent;
-  color: black;
-  border: transparent;
-  margin-right: 55px;
+  color: white;
+  border-width: 2px;
+  background-color: #ff7110;
+  border-color: #ff7110;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.nav-create-a-ride:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.nav-your-profile {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size: 20px;
+}
+
+.nav-your-profile:hover,
+.nav-logout:hover {
+  opacity: 0.2;
+  transition-duration: 0.2s;
 }

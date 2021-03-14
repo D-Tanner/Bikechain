@@ -28,6 +28,8 @@ const CreateRide = ({ user }) => {
   const [isLocal, setIsLocal] = useState(false);
   const [errors, setErrors] = useState([]);
   const [mapToken, setMapToken] = useState()
+  const [rideImage, setRideImage] = useState("")
+
 
   useEffect(() => {
     (async () => {
@@ -37,6 +39,16 @@ const CreateRide = ({ user }) => {
     })();
   }, [])
 
+
+  useEffect(() => {
+    if (level) {
+      if (level === "Easiest") setRideImage("/easiest.png")
+      if (level === "Easy") setRideImage("/easy.png")
+      if (level === "More Difficult") setRideImage("/more-difficult.png")
+      if (level === "Very Difficult") setRideImage("/very-difficult.png")
+      if (level === "Extremely Difficult") setRideImage("/extremely-difficult.png")
+    }
+  }, [level])
 
   const postRide = async (e) => {
     e.preventDefault()
@@ -105,7 +117,16 @@ const CreateRide = ({ user }) => {
     <>
       {user && <div className="create-grid-container">
         <div className="form-grid-container">
-          <h1>Create a Ride!</h1>
+          <div className="create-ride-title-container">
+            <div>
+
+              <h1>Create a Ride!</h1>
+            </div>
+            <div className="level-ride-image-container">
+              {level && <img id="ride-image" src={rideImage}></img>}
+            </div>
+            <div></div>
+          </div>
           <form onSubmit={postRide} className="create-form">
             <div>
               {errors.map((error, idx) => (
@@ -147,7 +168,7 @@ const CreateRide = ({ user }) => {
                 name="content"
                 placeholder="Additional Information. When? What should you bring? What socks should you wear?"
                 onChange={updateContent}
-                rows="10"
+                rows="6"
               ></textarea>
             </div>
             <div>
@@ -181,7 +202,7 @@ const CreateRide = ({ user }) => {
         </div>
 
         <div className="map-grid-container">
-          <h1>Click and Drag to select location</h1>
+          <h1>Click and drag to select location</h1>
           <div className="map-location">
             <ReactMapGL
               onClick={(e) => {

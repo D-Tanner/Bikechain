@@ -1,13 +1,17 @@
 .form-grid-container {
   grid-area: form;
-  background-color: aquamarine;
   padding: 20px;
 }
 
 .map-grid-container {
   grid-area: map;
-  background-color: cadetblue;
   padding: 20px;
+}
+
+.form-grid-container,
+.map-grid-container {
+
+  background-color: rgba(117, 195, 231, 0.3);
 }
 
 .create-grid-container {
@@ -23,6 +27,25 @@
 
 }
 
+.create-ride-title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.level-ride-image-container {
+  height: 60px;
+  width: 60px;
+  /* background-color: blue; */
+}
+
+#ride-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
 .input-select-level {
   width: 80%;
   padding: 12px 20px;
@@ -37,7 +60,7 @@
 .map-location {
   height: 700px;
   width: 700px;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 
 .create-form {
@@ -113,7 +136,7 @@
 
 .submit-button,
 .cancel-button{
-  background-color:#fc4c02;
+  background-color:#ff7110;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;

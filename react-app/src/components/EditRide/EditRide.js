@@ -31,6 +31,8 @@ const EditRide = ({ user }) => {
   const [errors, setErrors] = useState([]);
   const [mapToken, setMapToken] = useState()
   const [deleteConfirm, setDeleteConfirm] = useState(false)
+  const [rideImage, setRideImage] = useState("")
+
 
   useEffect(() => {
     (async () => {
@@ -41,6 +43,7 @@ const EditRide = ({ user }) => {
       setTitle(ride.title)
       setLong(ride.longitude)
       setLat(ride.latitude)
+      setLevel(ride.level)
       setIsLocal(ride.isLocal)
       setContent(ride.content)
     })();
@@ -56,6 +59,16 @@ const EditRide = ({ user }) => {
       history.push(`/rides/${rideId}`)
     }
   }
+
+  useEffect(() => {
+    if (level) {
+      if (level === "Easiest") setRideImage("/easiest.png")
+      if (level === "Easy") setRideImage("/easy.png")
+      if (level === "More Difficult") setRideImage("/more-difficult.png")
+      if (level === "Very Difficult") setRideImage("/very-difficult.png")
+      if (level === "Extremely Difficult") setRideImage("/extremely-difficult.png")
+    }
+  }, [level])
 
   const deleteProject = async (e) => {
     e.preventDefault()
@@ -124,7 +137,15 @@ const EditRide = ({ user }) => {
     <>
       { ride && user.user.id === ride.userId && <div className="create-grid-container">
         <div className="form-grid-container">
-          <h1>Update Your Ride!</h1>
+          <div className="create-ride-title-container">
+            <div>
+              <h1>Update Your Ride!</h1>
+            </div>
+            <div className="level-ride-image-container">
+              {level && <img id="ride-image" src={rideImage}></img>}
+            </div>
+            <div></div>
+          </div>
           <form onSubmit={updateRide} className="create-form">
             <div>
               {errors.map((error, idx) => (
@@ -165,11 +186,11 @@ const EditRide = ({ user }) => {
                 placeholder="Additional Information. When? What should you bring? What socks should you wear?"
                 onChange={updateContent}
                 value={content}
-                rows="10"
+                rows="6"
               ></textarea>
             </div>
             <div>
-              <select className="input-select" name="level" onChange={updateLevel} value={level} required>
+              <select className="input-select-level" name="level" onChange={updateLevel} value={level} required>
                 <option value="" disabled selected>Level of the Ride</option>
                 <option value="Easiest">Easiest</option>
                 <option value="Easy">Easy</option>
@@ -191,19 +212,17 @@ const EditRide = ({ user }) => {
                 Are you a local? Feel comfortable taking others on this ride?
                 </label>
             </div>
-            <div className="submit-cancel-container">
-              <button className="submit-button" type="submit">Update</button>
-              <div>
+            <div className="submit-cancel-container-edit-ride">
+              <button className="submit-button-edit-ride" type="submit">Update</button>
 
-                {!deleteConfirm && <button onClick={() => setDeleteConfirm((prev) => !prev)} className="delete-button">Delete?</button>}
-                {deleteConfirm && (
-                  <div>
-                    <button onClick={deleteProject} className="yes-button">Yes</button>
-                    <button onClick={() => setDeleteConfirm((prev) => !prev)} className="no-button">No</button>
-                  </div>
-                )}
-              </div>
-              <button className="cancel-button" onClick={() => history.push(`/rides/${rideId}`)}>Cancel</button>
+              {!deleteConfirm && <button className="delete-button-edit-ride" onClick={() => setDeleteConfirm((prev) => !prev)}>Delete?</button>}
+              {deleteConfirm && (
+                <div className="confirmation-delete-edit-ride">
+                  <button className="yes-confirm-delete" onClick={deleteProject}>Yes</button>
+                  <button className="no-confirm-delete" onClick={() => setDeleteConfirm((prev) => !prev)}>No</button>
+                </div>
+              )}
+              <button className="cancel-button-edit-ride" onClick={() => history.push(`/rides/${rideId}`)}>Cancel</button>
             </div>
           </form>
         </div>

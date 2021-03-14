@@ -1,3 +1,77 @@
 .hide-this-button {
   display: none;
 }
+
+.post-modal-container-width {
+  width: 400px;
+  padding: 20px;
+}
+
+.post-close-button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.25rem;
+
+}
+
+.input-text-create-post {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.choose-additional-images {
+  background-color:#ff7110;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 45%;
+  border-radius: 5px;
+}
+
+.post-choose-additional-image-button {
+  background-color:#ff7110;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  border-radius: 5px;
+}
+
+.post-submit-button,
+.post-cancel-button {
+  background-color: #ff7110;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 70%;
+  border-radius: 3px;
+  border: 1px solid #ff7110;
+}
+
+
+
+
+
+
+.post-cancel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-submit-button:hover,
+
+.post-cancel-button:hover {
+  opacity: 0.8;
+}

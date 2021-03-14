@@ -131,11 +131,11 @@ const SignUpForm = () => {
                 </div>
               </div>
               <div >
-                <ul >
+                <div >
                   {errors.map((error, idx) => (
                     <div className="signup-errors">{error}</div>
                   ))}
-                </ul>
+                </div>
               </div>
               <div>
                 <input

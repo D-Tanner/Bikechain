@@ -1,3 +1,60 @@
 .error-message {
   margin-top: 200px;
 }
+
+
+.submit-button-edit-ride,
+.cancel-button-edit-ride,
+.delete-button-edit-ride {
+  background-color:#ff7110;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 70%;
+  border-radius: 5px;
+}
+
+.confirmation-delete-edit-ride{
+  display: grid;
+  width: 70%;
+  grid-template-areas:
+  'Yes No';
+  grid-template-columns: 1fr 1fr;
+
+}
+
+.yes-confirm-delete {
+  grid-area: Yes;
+  background-color: #f44336;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.no-confirm-delete {
+  grid-area: No;
+  background-color: rgb(140, 199, 223);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.submit-button-edit-ride:hover,
+.cancel-button-edit-ride:hover,
+.delete-button-edit-ride:hover,
+.no-confirm-delete:hover,
+.yes-confirm-delete:hover {
+  opacity: 0.8;
+}
+
+.submit-cancel-container-edit-ride {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

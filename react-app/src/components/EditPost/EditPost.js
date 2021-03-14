@@ -4,6 +4,8 @@ import { login } from "../../services/auth";
 import { Modal, useModalContext } from "../../context/Modal"
 import { updatePost, deleteImage, deletePost } from "../../services/rides"
 import DeleteIcon from "@material-ui/icons/Delete"
+import CloseIcon from '@material-ui/icons/Close';
+
 import "./EditPost.css"
 
 const EditPostForm = ({ post }) => {
@@ -97,66 +99,77 @@ const EditPostForm = ({ post }) => {
     <>
       {showEditPostModal && post && (
         <Modal onClose={() => setShowEditPostModal(false)}>
-          <form onSubmit={postNewPost} className="create-post-form">
-            <div>
-              {errors.map((error, idx) => (
-                <ul className="errors" key={idx}>{error}</ul>
-              ))}
-            </div>
-            <div>
-              <textarea
-                type='text'
-                className="input-text-create-post"
-                rows="10"
-                name='description'
-                placeholder="Get ready to ride!"
-                onChange={updateContent}
-                value={content}
-                required
-              ></textarea>
-            </div>
-            <div>
-              {post &&
-                imageList.map((img, idx) => (
-                  <div>
-                    <span>
-                      <span
+          <div className="edit-post-modal-container-width">
+            <form onSubmit={postNewPost} className="create-post-form">
+              <div className="edit-post-close-button-container">
+                <div>
+                  <CloseIcon className="close-button-icon" onClick={() => setShowEditPostModal((prev) => !prev)}></CloseIcon>
+                </div>
+              </div>
+              <div>
+                {errors.map((error, idx) => (
+                  <ul className="errors" key={idx}>{error}</ul>
+                ))}
+              </div>
+              <div>
+                <textarea
+                  type='text'
+                  className="input-text-create-post"
+                  rows="6"
+                  name='description'
+                  placeholder="Get ready to ride!"
+                  onChange={updateContent}
+                  value={content}
+                  required
+                ></textarea>
+              </div>
+              <div>
+                {post &&
+                  imageList.map((img, idx) => (
+
+                    <div className="selecting-images-container">
+                      <div
                         onClick={() => deleteImageById(img.id)}
                         className="delete-image-div"
                       >
                         <DeleteIcon />
-                      </span>
-                    </span>
-                    {img.imageUrl.split(".s3.amazonaws.com/")[1]}
-                  </div>
-                ))}
-              {images &&
-                images.map((fileList) =>
-                  Array.from(fileList).map((image) => (
-                    <div>
-                      <span>
-                        <span
+                      </div>
+                      <div className="selected-image-label">
+                        {img.imageUrl.split(".s3.amazonaws.com/")[1]}
+                      </div>
+                    </div>
+
+                  ))}
+                {images &&
+                  images.map((fileList) =>
+                    Array.from(fileList).map((image) => (
+
+                      <div className="selecting-images-container">
+                        <div
                           onClick={() => deleteImageByName(image.name)}
                           className="delete-image-div"
                         >
                           <DeleteIcon />
-                        </span>
-                      </span>
-                      {image.name}
-                    </div>
-                  ))
-                )}
-              <input className="choose-image" type="button" id="loadFile" value="Choose a Additional Images" onClick={chooseAdditionalImage} />
-              {/* <label for="image">   {additionalImages}</label> */}
-              <input className="hide-this-button" placeholder="Choose a Thumbnail Image" multiple="true" id="additionalFile" type="file" name="image" onChange={updateAdditionalImages} />
-            </div>
+                        </div>
+                        <div className="selected-image-label">
+                          {image.name}
+                        </div>
+                      </div>
 
-            <div className="submit-cancel-container">
-              <button className="submit-button" type="submit">Update</button>
-              <button className="delete-button" onClick={deletePostById} type="submit">Delete</button>
-              <button className="cancel-button" onClick={() => setShowEditPostModal(false)}>Cancel</button>
-            </div>
-          </form>
+                    ))
+                  )}
+                <input className="choose-additional-image-button" type="button" id="loadFile" value="Choose a Additional Images" onClick={chooseAdditionalImage} />
+                {/* <label for="image">   {additionalImages}</label> */}
+                <input className="hide-this-button" placeholder="Choose a Thumbnail Image" multiple="true" id="additionalFile" type="file" name="image" onChange={updateAdditionalImages} />
+              </div>
+
+              <div className="edit-post-update-delete-cancel-container">
+                <button className="edit-post-submit-button" type="submit">Update</button>
+                <button className="edit-post-delete-button" onClick={deletePostById} type="submit">Delete</button>
+                <button className="edit-post-cancel-button" onClick={() => setShowEditPostModal(false)}>Cancel</button>
+              </div>
+            </form>
+          </div>
         </Modal>
       )}
     </>

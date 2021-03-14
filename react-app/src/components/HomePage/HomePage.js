@@ -56,7 +56,7 @@ const HomePage = () => {
 
   useEffect(() => {
     let filtered = [];
-    if (rides && startDate) {
+    if (rides && startDate && !endDate) {
       rides.forEach((ride) => {
         const newDate = new Date(ride.date.slice(5, 16)).toISOString()
         if (startDate.toISOString() <= newDate) {
@@ -65,7 +65,7 @@ const HomePage = () => {
       })
       setFilteredRides(filtered)
     }
-    if (rides && endDate) {
+    if (rides && endDate && !startDate) {
       filtered = []
       rides.forEach((ride) => {
         const newDate = new Date(ride.date.slice(5, 16)).toISOString()
@@ -75,8 +75,18 @@ const HomePage = () => {
       })
       setFilteredRides(filtered)
     }
+    if (rides && endDate && startDate) {
+      filtered = []
+      rides.forEach((ride) => {
+        const newDate = new Date(ride.date.slice(5, 16)).toISOString()
+        if (startDate.toISOString() <= newDate && endDate.toISOString() >= newDate) {
+          filtered.push(ride)
+        }
+      })
+      setFilteredRides(filtered)
+    }
     console.log(startDate, endDate)
-    if (startDate === undefined && endDate === undefined) {
+    if (!startDate && !endDate) {
       setFilteredRides(rides)
     }
   }, [startDate, endDate])

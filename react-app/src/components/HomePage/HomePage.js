@@ -10,6 +10,9 @@ import lightBlue from '@material-ui/core/colors/lightBlue'
 import "./HomePage.css"
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import Geocoder from 'react-map-gl-geocoder'
+import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates'
+import 'react-nice-dates/build/style.css'
+import { enGB } from 'date-fns/locale'
 
 
 
@@ -25,6 +28,9 @@ const HomePage = () => {
 
 
 
+  const [startDate, setStartDate] = useState()
+  const [endDate, setEndDate] = useState()
+  const [filteredRides, setFilteredRides] = useState();
   const [rides, setRides] = useState([])
   const [popup, setPopup] = useState(false)
   const [mapToken, setMapToken] = useState()
@@ -36,11 +42,59 @@ const HomePage = () => {
     zoom: 8
   });
 
+
+
+  useEffect(() => {
+    (async () => {
+      const rides = await getRides()
+      const token = await getMapToken()
+      setRides(rides.Rides)
+      setFilteredRides(rides.Rides)
+      setMapToken(token.token)
+    })();
+  }, [])
+
+  useEffect(() => {
+    let filtered = [];
+    if (rides && startDate && !endDate) {
+      rides.forEach((ride) => {
+        const newDate = new Date(ride.date.slice(5, 16)).toISOString()
+        if (startDate.toISOString() <= newDate) {
+          filtered.push(ride)
+        }
+      })
+      setFilteredRides(filtered)
+    }
+    if (rides && endDate && !startDate) {
+      filtered = []
+      rides.forEach((ride) => {
+        const newDate = new Date(ride.date.slice(5, 16)).toISOString()
+        if (endDate.toISOString() >= newDate) {
+          filtered.push(ride)
+        }
+      })
+      setFilteredRides(filtered)
+    }
+    if (rides && endDate && startDate) {
+      filtered = []
+      rides.forEach((ride) => {
+        const newDate = new Date(ride.date.slice(5, 16)).toISOString()
+        if (startDate.toISOString() <= newDate && endDate.toISOString() >= newDate) {
+          filtered.push(ride)
+        }
+      })
+      setFilteredRides(filtered)
+    }
+    console.log(startDate, endDate)
+    if (!startDate && !endDate) {
+      setFilteredRides(rides)
+    }
+  }, [startDate, endDate])
+
   const navControlStyle = {
     left: 10,
     top: 10,
   }
-
 
 
   const mapRef = useRef();
@@ -61,14 +115,8 @@ const HomePage = () => {
     [handleViewportChange]
   );
 
-  useEffect(() => {
-    (async () => {
-      const rides = await getRides()
-      const token = await getMapToken()
-      setRides(rides.Rides)
-      setMapToken(token.token)
-    })();
-  }, [])
+
+
 
   if (!mapToken) {
     return null
@@ -78,6 +126,34 @@ const HomePage = () => {
   return (
     <>
       <div className="home-container">
+        <div className="date-range-container">
+          <DateRangePicker
+            startDate={startDate}
+            endDate={endDate}
+            onStartDateChange={setStartDate}
+            onEndDateChange={setEndDate}
+            // minimumDate={new Date()}
+            minimumLength={1}
+            format='dd MMM yyyy'
+          // locale={enGB}
+          >
+            {({ startDateInputProps, endDateInputProps, focus }) => (
+              <div className='date-range'>
+                <input
+                  className={'input-select' + (focus === START_DATE ? ' -focused' : '')}
+                  {...startDateInputProps}
+                  placeholder='Start date'
+                />
+                <span className='date-range_arrow' />
+                <input
+                  className={'input-select' + (focus === END_DATE ? ' -focused' : '')}
+                  {...endDateInputProps}
+                  placeholder='End date'
+                />
+              </div>
+            )}
+          </DateRangePicker>
+        </div>
         <ReactMapGL
           {...viewport} width="100%" height="100%"
           ref={mapRef}
@@ -95,7 +171,7 @@ const HomePage = () => {
           />
 
           <NavigationControl style={navControlStyle} />
-          {rides.map((ride, idx) => (
+          {filteredRides.map((ride, idx) => (
             <Marker key={idx}
               latitude={ride.latitude}
               longitude={ride.longitude}

@@ -10,6 +10,9 @@ import lightBlue from '@material-ui/core/colors/lightBlue'
 import "./HomePage.css"
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import Geocoder from 'react-map-gl-geocoder'
+import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates'
+import 'react-nice-dates/build/style.css'
+import { enGB } from 'date-fns/locale'
 
 
 
@@ -25,6 +28,9 @@ const HomePage = () => {
 
 
 
+  const [startDate, setStartDate] = useState()
+  const [endDate, setEndDate] = useState()
+  const [filteredRides, setFilteredRides] = useState();
   const [rides, setRides] = useState([])
   const [popup, setPopup] = useState(false)
   const [mapToken, setMapToken] = useState()
@@ -40,7 +46,6 @@ const HomePage = () => {
     left: 10,
     top: 10,
   }
-
 
 
   const mapRef = useRef();
@@ -70,6 +75,10 @@ const HomePage = () => {
     })();
   }, [])
 
+  useEffect(() => {
+    console.log(rides)
+  }, [rides])
+
   if (!mapToken) {
     return null
   }
@@ -78,6 +87,34 @@ const HomePage = () => {
   return (
     <>
       <div className="home-container">
+        <div className="date-range-container">
+          <DateRangePicker
+            startDate={startDate}
+            endDate={endDate}
+            onStartDateChange={setStartDate}
+            onEndDateChange={setEndDate}
+            // minimumDate={new Date()}
+            minimumLength={1}
+            format='dd MMM yyyy'
+          // locale={enGB}
+          >
+            {({ startDateInputProps, endDateInputProps, focus }) => (
+              <div className='date-range'>
+                <input
+                  className={'input-select' + (focus === START_DATE ? ' -focused' : '')}
+                  {...startDateInputProps}
+                  placeholder='Start date'
+                />
+                <span className='date-range_arrow' />
+                <input
+                  className={'input-select' + (focus === END_DATE ? ' -focused' : '')}
+                  {...endDateInputProps}
+                  placeholder='End date'
+                />
+              </div>
+            )}
+          </DateRangePicker>
+        </div>
         <ReactMapGL
           {...viewport} width="100%" height="100%"
           ref={mapRef}

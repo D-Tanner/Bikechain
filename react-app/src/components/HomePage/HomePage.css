@@ -11,3 +11,25 @@
     height: 200px;
     width: 200px;
 }
+
+.date-range-container {
+    z-index: 100;
+    position: absolute;
+    /* width: 550px; */
+    top: 3px;
+    left: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.input-select {
+  width: 240px;
+  /* padding: 12px 20px; */
+  height: 36px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-size: 15px;
+  /* font: inherit; */
+}

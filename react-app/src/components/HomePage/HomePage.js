@@ -85,7 +85,6 @@ const HomePage = () => {
       })
       setFilteredRides(filtered)
     }
-    console.log(startDate, endDate)
     if (!startDate && !endDate) {
       setFilteredRides(rides)
     }
@@ -135,7 +134,7 @@ const HomePage = () => {
             // minimumDate={new Date()}
             minimumLength={1}
             format='dd MMM yyyy'
-          // locale={enGB}
+            locale={enGB}
           >
             {({ startDateInputProps, endDateInputProps, focus }) => (
               <div className='date-range'>

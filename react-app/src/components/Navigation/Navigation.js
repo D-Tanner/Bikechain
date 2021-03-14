@@ -33,7 +33,6 @@ const Navigation = () => {
     <>
       {showLoginModal && <LoginForm />}
       {showSignUpModal && <SignUpForm />}
-      {/* {showPostModal && <RidePost />} */}
       <nav>
         <div className="navigation">
           <div className="navigation-first">
@@ -77,31 +76,35 @@ const Navigation = () => {
                 </button>
               )}
             </div>
-            <div>
-              {authenticated && <LogoutButton
+            {authenticated && <div>
+              <LogoutButton
                 className="nav-logout"
-                setAuthenticated={setAuthenticated} />}
-            </div>
-            <div>
-              <button onClick={() => {
-                if (authenticated) {
-                  history.push(`/profile/${user.user.id}`)
-                } else {
-                  setShowSignUpModal(false)
-                  setShowLoginModal((prev) => !prev)
-                }
-              }}>Your Profile</button>
-            </div>
-            <div>
-              <button onClick={() => {
-                if (authenticated) {
-                  history.push("/new-ride")
-                } else {
-                  setShowSignUpModal(false)
-                  setShowLoginModal((prev) => !prev)
-                }
-              }}>Create a Ride</button>
-            </div>
+                setAuthenticated={setAuthenticated} />
+            </div>}
+            {authenticated && <div>
+              <button
+                className="nav-your-profile"
+                onClick={() => {
+                  if (authenticated) {
+                    history.push(`/profile/${user.user.id}`)
+                  } else {
+                    setShowSignUpModal(false)
+                    setShowLoginModal((prev) => !prev)
+                  }
+                }}>Your Profile</button>
+            </div>}
+            {authenticated && <div className="nav-create-a-ride-container">
+              <button
+                className="nav-create-a-ride"
+                onClick={() => {
+                  if (authenticated) {
+                    history.push("/new-ride")
+                  } else {
+                    setShowSignUpModal(false)
+                    setShowLoginModal((prev) => !prev)
+                  }
+                }}>Create a Ride</button>
+            </div>}
           </div>
         </div>
 

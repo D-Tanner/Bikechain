@@ -1,0 +1,140 @@
+.close-button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.25rem;
+}
+
+.close-button-icon:hover {
+  cursor: pointer;
+}
+
+
+.signup-input-username,
+.signup-input-password,
+.signup-input-repeat-password,
+.signup-input-email {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.signup-submit-button {
+  background-color: #ff7110;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 3px;
+}
+
+
+.signup-submit-button:hover {
+  opacity: 0.8;
+}
+
+.submit-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-modal-container-width {
+  width: 400px;
+  padding: 20px;
+}
+
+.submit-errors {
+  color: red;
+}
+
+.choose-profile-image {
+  background-color:#ff7110;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 45%;
+  border-radius: 5px;
+}
+
+.location-field-container {
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+    'state city';
+  grid-template-columns: 1fr 1fr;
+}
+
+.location-state {
+  grid-area: state;
+  width: 100%;
+  max-width: 200px;
+  overflow: hidden;
+  padding: 10px 10px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.location-city {
+  grid-area: city;
+  width: 100%;
+  max-width: 200px;
+  overflow: hidden;
+  padding: 10px 10px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.level-of-rider {
+  width: 100%;
+  max-width: 200px;
+  overflow: hidden;
+  padding: 10px 10px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.selecting-images-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.selected-image-label {
+  padding-top: 5px;
+}
+
+.level-of-rider-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.level-rider-image-container {
+  height: 70px;
+  width: 70px;
+  /* background-color: blue; */
+  /* padding: 10px 10px; */
+  /* margin: 8px 0; */
+  margin-left: 10px;
+  top: 10px;
+  display: inline-block;
+  box-sizing: border-box;
+  position: absolute;
+}
+
+#rider-image {
+  width: 100%;
+  height: 100%;
+}

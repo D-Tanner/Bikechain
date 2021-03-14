@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { login } from "../../services/auth";
 import { Modal, useModalContext } from "../../context/Modal"
-
+import CloseIcon from '@material-ui/icons/Close';
+import "./LoginForm.css"
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -57,42 +58,46 @@ const LoginForm = () => {
     <>
       {showLoginModal && (
         <Modal onClose={() => setShowLoginModal(false)}>
-          <form onSubmit={onLogin}>
-            <button
-              onClick={() => setShowLoginModal((prev) => !prev)}
-            >
-              <i id="close-icon" className="far fa-times fa-2x"></i>
-            </button>
-            <div>
-              {errors.map((error) => (
-                <div>{error}</div>
-              ))}
-            </div>
-            <div>
-              <label htmlFor="email">Email</label>
-              <input
-                name="email"
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={updateEmail}
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Password</label>
-              <input
-                name="password"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={updatePassword}
-              />
-              <button type="submit">Login</button>
-              <button onClick={demoLogin}>
-                Login as Demo
+          <div className="login-modal-container-width">
+            <form onSubmit={onLogin}>
+              <div className="close-button-container">
+                <CloseIcon onClick={() => setShowLoginModal((prev) => !prev)}></CloseIcon>
+              </div>
+              <div>
+                {errors.map((error) => (
+                  <div className="login-errors">{error}</div>
+                ))}
+              </div>
+              <div>
+
+                <input
+                  className="login-input-email"
+                  name="email"
+                  type="text"
+                  placeholder="Email"
+                  value={email}
+                  onChange={updateEmail}
+                />
+              </div>
+              <div>
+
+                <input
+                  className="login-input-password"
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={updatePassword}
+                />
+              </div>
+              <div className="login-button-container">
+                <button className="login-submit-button" type="submit">Login</button>
+                <button className="login-demo-submit-button" onClick={demoLogin}>
+                  Login as Demo
               </button>
-            </div>
-          </form>
+              </div>
+            </form>
+          </div>
         </Modal>
       )}
     </>

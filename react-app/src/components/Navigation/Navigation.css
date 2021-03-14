@@ -3,7 +3,8 @@
   width: 100%;
   display: grid;
   position: fixed;
-  grid-template-columns: 17.5% 32.5% 32.5% 17.5%;
+  /* grid-template-columns: 17.5% 32.5% 32.5% 17.5%; */
+  grid-template-columns: 1fr 4fr 4fr 1fr;
   grid-template-rows: 1fr;
   margin: 0;
   padding: 0;
@@ -18,6 +19,7 @@
   grid-column-start: 3;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 #navigation-button-container {
@@ -48,32 +50,51 @@
   font-size: 35px;
 }
 
-.nav-login {
-  height: 30px;
-  width: 55px;
-  font-size: 25px;
-  background-color: transparent;
-  color: black;
-  border: transparent;
-  margin-right: 55px;
+
+.nav-logout, .nav-login, .nav-signup {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size: 20px;
 }
 
-.nav-signup {
-  height: 30px;
-  width: 85px;
+.nav-create-a-ride {
+  display: flex;
+  border: none;
+  height: 40px;
+  width: 195px;
   font-size: 25px;
   background-color: transparent;
-  color: black;
-  border: transparent;
-  margin-right: 40px;
+  color: white;
+  border-width: 2px;
+  background-color: #ff7110;
+  border-color: #ff7110;
+  border-radius: 3px;
+  display: inline-block;
 }
 
-.nav-logout {
-  height: 30px;
-  width: 55px;
-  font-size: 25px;
-  background-color: transparent;
-  color: black;
-  border: transparent;
-  margin-right: 55px;
+.nav-create-a-ride:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.nav-your-profile {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size: 20px;
+}
+
+.nav-your-profile:hover,
+.nav-logout:hover,
+.nav-login:hover,
+.nav-signup:hover {
+  opacity: 0.2;
+  transition-duration: 0.2s;
 }

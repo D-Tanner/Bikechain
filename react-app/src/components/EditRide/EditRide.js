@@ -212,19 +212,17 @@ const EditRide = ({ user }) => {
                 Are you a local? Feel comfortable taking others on this ride?
                 </label>
             </div>
-            <div className="submit-cancel-container">
-              <button className="submit-button" type="submit">Update</button>
-              <div>
+            <div className="submit-cancel-container-edit-ride">
+              <button className="submit-button-edit-ride" type="submit">Update</button>
 
-                {!deleteConfirm && <button onClick={() => setDeleteConfirm((prev) => !prev)} className="delete-button">Delete?</button>}
-                {deleteConfirm && (
-                  <div>
-                    <button onClick={deleteProject} className="yes-button">Yes</button>
-                    <button onClick={() => setDeleteConfirm((prev) => !prev)} className="no-button">No</button>
-                  </div>
-                )}
-              </div>
-              <button className="cancel-button" onClick={() => history.push(`/rides/${rideId}`)}>Cancel</button>
+              {!deleteConfirm && <button className="delete-button-edit-ride" onClick={() => setDeleteConfirm((prev) => !prev)}>Delete?</button>}
+              {deleteConfirm && (
+                <div className="confirmation-delete-edit-ride">
+                  <button className="yes-confirm-delete" onClick={deleteProject}>Yes</button>
+                  <button className="no-confirm-delete" onClick={() => setDeleteConfirm((prev) => !prev)}>No</button>
+                </div>
+              )}
+              <button className="cancel-button-edit-ride" onClick={() => history.push(`/rides/${rideId}`)}>Cancel</button>
             </div>
           </form>
         </div>

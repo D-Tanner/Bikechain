@@ -1,13 +1,10 @@
 .form-grid-container {
   grid-area: form;
-  /* background-color: rgba(117, 195, 231, 0.3); */
   padding: 20px;
 }
 
 .map-grid-container {
   grid-area: map;
-  /* background-color: cadetblue; */
-  /* background-color: rgba(117, 195, 231, 0.3); */
   padding: 20px;
 }
 

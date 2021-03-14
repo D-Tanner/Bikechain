@@ -8,7 +8,6 @@ class CreateRide(FlaskForm):
     title = StringField("title", validators=[DataRequired()])
     content = StringField("content", validators=[DataRequired()])
     date = StringField("date")
-    # date = DateField("date", validators=[DataRequired()])
     latitude = FloatField("latitude", validators=[DataRequired()])
     longitude = FloatField("longitude", validators=[DataRequired()])
     isLocal = BooleanField("isLocal")

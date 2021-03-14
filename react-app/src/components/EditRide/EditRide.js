@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom'
-import { updateRideById, getRideById } from '../../services/rides';
+import { updateRideById, getRideById, deleteProjectById } from '../../services/rides';
 import { getMapToken } from "../../services/auth"
 import { enGB } from 'date-fns/locale'
 import { DatePicker } from 'react-nice-dates'
@@ -30,7 +30,7 @@ const EditRide = ({ user }) => {
   const [isLocal, setIsLocal] = useState(false);
   const [errors, setErrors] = useState([]);
   const [mapToken, setMapToken] = useState()
-
+  const [deleteConfirm, setDeleteConfirm] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -49,11 +49,21 @@ const EditRide = ({ user }) => {
 
   const updateRide = async (e) => {
     e.preventDefault()
-    const newRide = await updateRideById(user.user.id, rideId, title, content, date.toISOString(), lat, long, isLocal, level)
+    const newRide = await updateRideById(user.user.id, Number(rideId), title, content, date.toISOString(), lat, long, isLocal, level)
     if (newRide.errors) {
       setErrors(newRide.errors)
     } else {
       history.push(`/rides/${rideId}`)
+    }
+  }
+
+  const deleteProject = async (e) => {
+    e.preventDefault()
+    const result = await deleteProjectById(Number(rideId))
+    if (result.errors) {
+      setErrors(result.erros)
+    } else {
+      history.push(`/`)
     }
   }
 
@@ -114,7 +124,7 @@ const EditRide = ({ user }) => {
     <>
       { ride && user.user.id === ride.userId && <div className="create-grid-container">
         <div className="form-grid-container">
-          <h1>Create a Ride!</h1>
+          <h1>Update Your Ride!</h1>
           <form onSubmit={updateRide} className="create-form">
             <div>
               {errors.map((error, idx) => (
@@ -161,11 +171,11 @@ const EditRide = ({ user }) => {
             <div>
               <select className="input-select" name="level" onChange={updateLevel} value={level} required>
                 <option value="" disabled selected>Level of the Ride</option>
-                <option value="Easiest">Novice</option>
-                <option value="Easy">Intermediate</option>
-                <option value="More Difficult">Intermediate+</option>
-                <option value="Very Difficult">Advanced</option>
-                <option value="Extremely Difficult">Advanced+</option>
+                <option value="Easiest">Easiest</option>
+                <option value="Easy">Easy</option>
+                <option value="More Difficult">More Difficult</option>
+                <option value="Very Difficult">Very Difficult</option>
+                <option value="Extremely Difficult">Extremely Difficult</option>
               </select>
             </div>
             <div className="is-local-container">
@@ -183,6 +193,16 @@ const EditRide = ({ user }) => {
             </div>
             <div className="submit-cancel-container">
               <button className="submit-button" type="submit">Update</button>
+              <div>
+
+                {!deleteConfirm && <button onClick={() => setDeleteConfirm((prev) => !prev)} className="delete-button">Delete?</button>}
+                {deleteConfirm && (
+                  <div>
+                    <button onClick={deleteProject} className="yes-button">Yes</button>
+                    <button onClick={() => setDeleteConfirm((prev) => !prev)} className="no-button">No</button>
+                  </div>
+                )}
+              </div>
               <button className="cancel-button" onClick={() => history.push(`/rides/${rideId}`)}>Cancel</button>
             </div>
           </form>

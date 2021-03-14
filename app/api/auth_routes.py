@@ -4,6 +4,9 @@ from app.forms import LoginForm
 from app.forms import SignUpForm
 from ..config import Config
 from flask_login import current_user, login_user, logout_user, login_required
+from werkzeug.utils import secure_filename
+from app.helpers import allowed_file, upload_file_to_s3, \
+    validation_errors_to_error_messages
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -73,15 +76,17 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
-        user = User(
-            username=form.data['username'],
-            email=form.data['email'],
-            password=form.data['password'],
-            city=form.data['city'],
-            state=form.data['state'],
-            level=form.data['level'],
-        )
+        print(form.data)
+        profileImageUrl = None
+        if 'profileImage' in request.files:
+            image = request.files['profileImage']
+            image.filename = secure_filename(image.filename)
+            profileImageUrl = upload_file_to_s3(image, Config.S3_BUCKET)
+        user = User()
+        form.populate_obj(user)
+        user.profileImageUrl = profileImageUrl
         db.session.add(user)
         db.session.commit()
         login_user(user)
@@ -91,6 +96,33 @@ def sign_up():
                 "following": following_dict}
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
+@auth_routes.route('/edit-user/<int:user_id>', methods=['PUT'])
+def edit_user(user_id):
+    user = User.query.get(user_id)
+
+    if 'city' in request.form:
+        user.city = request.form['city']
+    if 'state' in request.form:
+        user.state = request.form['state']
+    if 'level' in request.form:
+        user.level = request.form['level']
+
+    profileImageUrl = None
+    if 'profileImage' in request.files:
+        image = request.files['profileImage']
+        image.filename = secure_filename(image.filename)
+        profileImageUrl = upload_file_to_s3(image, Config.S3_BUCKET)
+
+    user.profileImageUrl = profileImageUrl
+    db.session.commit()
+
+    following_dict = [following.to_dict() for following in user.followers]
+
+    return {"user": user.to_dict(),
+            "following": following_dict}
+
+
+
 
 @auth_routes.route('/unauthorized')
 def unauthorized():
@@ -98,3 +130,35 @@ def unauthorized():
     Returns unauthorized JSON when flask-login authentication fails
     """
     return {'errors': ['Unauthorized']}, 401
+# @auth_routes.route('/signup', methods=['POST'])
+# def sign_up():
+#     """
+#     Creates a new user and logs them in
+#     """
+#     form = SignUpForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+
+#     if form.validate_on_submit():
+#         print(form.data)
+#         profileImageUrl = None
+#         if 'profileImage' in request.files:
+#             image = request.files['profileImage']
+#             image.filename = secure_filename(image.filename)
+#             profileImageUrl = upload_file_to_s3(image, Config.S3_BUCKET)
+#         user = User(
+#             username=form.data['username'],
+#             email=form.data['email'],
+#             password=form.data['password'],
+#             city=form.data['city'],
+#             state=form.data['state'],
+#             level=form.data['level'],
+#         )
+#         user.profileImage = profileImageUrl
+#         db.session.add(user)
+#         db.session.commit()
+#         login_user(user)
+#         following_dict = [following.to_dict() for following in user.followers]
+
+#         return {"user": user.to_dict(),
+#                 "following": following_dict}
+#     return {'errors': validation_errors_to_error_messages(form.errors)}

@@ -4,6 +4,7 @@ import { Modal, useModalContext } from "../../context/Modal"
 import { useParams, Link } from "react-router-dom"
 import "./ProfilePage.css"
 import { unFollowRider, followRider } from "../../services/rides"
+import EditUser from '../../components/EditUser/EditUser'
 
 const ProfilePage = () => {
 
@@ -15,7 +16,7 @@ const ProfilePage = () => {
   const [commitPage, setCommitPage] = useState(false)
   const [followingPage, setFollowingPage] = useState(false)
   const [isFollowing, setIsFollowing] = useState(false)
-  const { user, setUser } = useModalContext();
+  const { user, setUser, showEditUserModal, setShowEditUserModal, } = useModalContext();
 
 
   const { userId } = useParams();
@@ -27,13 +28,12 @@ const ProfilePage = () => {
     (async () => {
       const response = await fetch(`/api/users/${userId}`);
       const users = await response.json();
-      // console.log(users)
       setCurrentUser(users.user);
       setRides(users.rides);
       setCommittedRides(users.committedRides);
       setFollowing(users.following);
     })();
-  }, [userId]);
+  }, [userId, showEditUserModal]);
 
 
 
@@ -46,12 +46,14 @@ const ProfilePage = () => {
         }
       })
     }
+    console.log(user)
   }, [currentUser, user])
 
 
 
   return (
     <>
+      {showEditUserModal && <EditUser />}
       { currentUser && user.user && <div className="profile-page-container">
         <div className="grid-container">
           <div className="item1" id={ridePage ? "is-selected" : ""}
@@ -82,7 +84,8 @@ const ProfilePage = () => {
             <div>{currentUser.city}, {currentUser.state}</div>
             <div>{currentUser.level}</div>
             {currentUser && user && (<div>
-              {currentUser.id === user.user.id && <button>Edit</button>}
+              {currentUser.id === user.user.id && <button
+                onClick={() => setShowEditUserModal(true)}>Edit</button>}
               {currentUser.id !== user.user.id && <div>{isFollowing ?
                 <button
                   onClick={async () => {

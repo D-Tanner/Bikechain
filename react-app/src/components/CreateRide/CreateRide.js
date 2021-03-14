@@ -29,18 +29,18 @@ const CreateRide = ({ user }) => {
   const [errors, setErrors] = useState([]);
   const [mapToken, setMapToken] = useState()
 
-
   useEffect(() => {
     (async () => {
       const token = await getMapToken()
       setMapToken(token.token)
+
     })();
   }, [])
 
 
   const postRide = async (e) => {
     e.preventDefault()
-    const newRide = await createNewRide(user.id, title, content, date.toISOString(), lat, long, isLocal, level)
+    const newRide = await createNewRide(user.user.id, title, content, date.toISOString(), lat, long, isLocal, level)
     if (newRide.errors) {
       setErrors(newRide.errors)
     } else {
@@ -103,7 +103,7 @@ const CreateRide = ({ user }) => {
 
   return (
     <>
-      <div className="create-grid-container">
+      {user && <div className="create-grid-container">
         <div className="form-grid-container">
           <h1>Create a Ride!</h1>
           <form onSubmit={postRide} className="create-form">
@@ -153,11 +153,11 @@ const CreateRide = ({ user }) => {
             <div>
               <select className="input-select" name="level" onChange={updateLevel} value={level} required>
                 <option value="" disabled selected>Level of the Ride</option>
-                <option value="Easiest">Novice</option>
-                <option value="Easy">Intermediate</option>
-                <option value="More Difficult">Intermediate+</option>
-                <option value="Very Difficult">Advanced</option>
-                <option value="Extremely Difficult">Advanced+</option>
+                <option value="Easiest">Easiest</option>
+                <option value="Easy">Easy</option>
+                <option value="More Difficult">More Difficult</option>
+                <option value="Very Difficult">Very Difficult</option>
+                <option value="Extremely Difficult">Extremely Difficult</option>
               </select>
             </div>
             <div className="is-local-container">
@@ -221,7 +221,7 @@ const CreateRide = ({ user }) => {
             </ReactMapGL>
           </div>
         </div>
-      </div>
+      </div>}
     </>
   )
 }

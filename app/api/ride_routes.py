@@ -18,6 +18,7 @@ ride_routes = Blueprint('rides', __name__)
 @ride_routes.route('/')
 def get_rides():
     rides = Ride.query.all()
+    print([ride.to_dict() for ride in rides])
     return {"Rides": [ride.to_dict() for ride in rides]}
 
 @ride_routes.route('/<int:id>')
@@ -37,6 +38,7 @@ def create_ride():
         form.populate_obj(ride)
         db.session.add(ride)
         db.session.commit()
+        print(ride.to_dict())
         return ride.to_dict()
 
     return {'errors':  validation_errors_to_error_messages(form.errors)}
@@ -44,8 +46,8 @@ def create_ride():
 @ride_routes.route('/<int:ride_id>/edit', methods=["PUT"])
 def update_ride(ride_id):
     ride = Ride.query.get(ride_id)
-
     form = CreateRide()
+
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
@@ -54,6 +56,7 @@ def update_ride(ride_id):
         return ride.to_dict()
 
     return {'errors':  validation_errors_to_error_messages(form.errors)}
+
 
 @ride_routes.route('/unfollow/<int:follower_id>/<int:followed_id>', methods=["DELETE"])
 def unfollow_rider(follower_id, followed_id):
@@ -170,4 +173,14 @@ def delete_post(post_id):
     post = Post.query.get(post_id)
     db.session.delete(post)
     db.session.commit()
+    return {"message": 'Delete Successful'}
+
+
+@ride_routes.route('/delete/<int:ride_id>', methods=["DELETE"])
+def delete_ride(ride_id):
+    ride = Ride.query.get(ride_id)
+    db.session.delete(ride)
+
+    db.session.commit()
+
     return {"message": 'Delete Successful'}

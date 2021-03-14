@@ -5,6 +5,8 @@ import { Modal, useModalContext } from "../../context/Modal"
 import { updatePost, deleteImage, deletePost } from "../../services/rides"
 import { editUser } from "../../services/auth"
 import DeleteIcon from "@material-ui/icons/Delete"
+import CloseIcon from '@material-ui/icons/Close';
+
 import csc from "country-state-city";
 import "./EditUser.css"
 
@@ -18,6 +20,7 @@ const EditUser = () => {
   const [level, setLevel] = useState("");
   const [errors, setErrors] = useState([]);
   const [profileImage, setProfileImage] = useState(null)
+  const [riderImage, setRiderImage] = useState("")
 
   const {
     user,
@@ -39,7 +42,15 @@ const EditUser = () => {
     }
   }, []);
 
-
+  useEffect(() => {
+    if (level) {
+      if (level === "Novice") setRiderImage("/novice.png")
+      if (level === "Intermediate") setRiderImage("/intermediate.png")
+      if (level === "Intermediate+") setRiderImage("/intermediate-plus.png")
+      if (level === "Advanced") setRiderImage("/advanced.png")
+      if (level === "Advanced+") setRiderImage("/advanced-plus.png")
+    }
+  }, [level])
 
 
   const editUserById = async (e) => {
@@ -93,63 +104,74 @@ const EditUser = () => {
     <>
       {showEditUserModal && user && (
         <Modal onClose={() => setShowEditUserModal(false)}>
-          <form onSubmit={editUserById} className="create-post-form">
-            <div>
-              {errors.map((error, idx) => (
-                <ul className="errors" key={idx}>{error}</ul>
-              ))}
+          <div className="edit-user-modal-container-width">
+            <div className="level-rider-image-container">
+              {level && <img id="rider-image" src={riderImage}></img>}
             </div>
-            <div>
-              {profileImage &&
+            <form onSubmit={editUserById} className="create-post-form">
+              <div className="edit-user-close-button-container">
                 <div>
-                  <span>
-                    <span
+                  <CloseIcon className="edit-user-close-button-icon" onClick={() => setShowEditUserModal((prev) => !prev)}></CloseIcon>
+                </div>
+              </div>
+              <div>
+                {errors.map((error) => (
+                  <div className="edit-user-errors">{error}</div>
+                ))}
+              </div>
+              <div>
+                {profileImage &&
+                  <div className="selecting-images-container">
+
+                    <div
                       onClick={() => deleteImage()}
                       className="delete-image-div"
                     >
                       <DeleteIcon />
-                    </span>
-                  </span>
-                  {profileImage}
-                </div>
-              }
-              <input type="button" id="loadFile" value="Choose a Profile Image" onClick={chooseImage} />
-              <input placeholder="Choose a Profile Image" className="hide-this-button" id="file" type="file" name="image" onChange={updateProfileImage} />
-            </div>
-            <div>
-              <select name="state" onChange={updateState} value={state} required>
-                <option value="" disabled selected>
-                  State
+                    </div>
+                    <div className="selected-image-label">
+                      {profileImage}
+                    </div>
+                  </div>
+                }
+                <input className="choose-profile-image" type="button" id="loadFile" value="Choose a Profile Image" onClick={chooseImage} />
+                <input placeholder="Choose a Profile Image" className="hide-this-button" id="file" type="file" name="image" onChange={updateProfileImage} />
+              </div>
+              <div className="location-field-container">
+                <select className="location-state" name="state" onChange={updateState} value={state} required>
+                  <option value="" disabled selected>
+                    State
                 </option>
-                {listOfStates.map((state) => (
-                  <option key={state.name}>{state.name}</option>
-                ))}
-              </select>
-              <select name="city" onChange={updateCity} value={city} required>
-                <option value="" disabled selected>
-                  City
-                </option>
-                {stateCode !== "" &&
-                  listOfCities.map((city) => (
-                    <option key={city.name}>{city.name}</option>
+                  {listOfStates.map((state) => (
+                    <option key={state.name}>{state.name}</option>
                   ))}
-              </select>
-            </div>
-            <div>
-              <select name="level" onChange={updateLevel} value={level}>
-                <option value="" disabled selected>Level</option>
-                <option value="Novice">Novice</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Intermediate+">Intermediate+</option>
-                <option value="Advanced">Advanced</option>
-                <option value="Advanced+">Advanced+</option>
-              </select>
-            </div>
-            <div className="submit-cancel-container">
-              <button className="submit-button" type="submit">Update</button>
-              <button className="cancel-button" onClick={() => setShowEditUserModal(false)}>Cancel</button>
-            </div>
-          </form>
+                </select>
+                <select className="location-city" name="city" onChange={updateCity} value={city}>
+                  <option value="" disabled selected>
+                    City
+                </option>
+                  {stateCode !== "" &&
+                    listOfCities.map((city) => (
+                      <option key={city.name}>{city.name}</option>
+                    ))}
+                </select>
+              </div>
+              <div className="level-of-rider-container-edit">
+                <select className="level-of-rider-edit" name="level" onChange={updateLevel} value={level} required>
+                  <option value="" disabled selected>Level</option>
+                  <option value="Novice">Novice</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Intermediate+">Intermediate+</option>
+                  <option value="Advanced">Advanced</option>
+                  <option value="Advanced+">Advanced+</option>
+                </select>
+              </div>
+              <div className="edit-user-submit-cancel-container">
+                <button className="edit-user-submit-button" type="submit">Update</button>
+                <button className="edit-user-cancel-button" onClick={() => setShowEditUserModal(false)}>Cancel</button>
+              </div>
+            </form>
+          </div>
         </Modal>
       )}
     </>

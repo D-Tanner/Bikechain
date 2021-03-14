@@ -169,7 +169,7 @@ const EditRide = ({ user }) => {
               ></textarea>
             </div>
             <div>
-              <select className="input-select" name="level" onChange={updateLevel} value={level} required>
+              <select className="input-select-level" name="level" onChange={updateLevel} value={level} required>
                 <option value="" disabled selected>Level of the Ride</option>
                 <option value="Easiest">Easiest</option>
                 <option value="Easy">Easy</option>

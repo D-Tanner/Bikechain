@@ -202,7 +202,7 @@ const CreateRide = ({ user }) => {
         </div>
 
         <div className="map-grid-container">
-          <h1>Click and Drag to select location</h1>
+          <h1>Click and drag to select location</h1>
           <div className="map-location">
             <ReactMapGL
               onClick={(e) => {

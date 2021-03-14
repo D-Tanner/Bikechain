@@ -31,6 +31,8 @@ const EditRide = ({ user }) => {
   const [errors, setErrors] = useState([]);
   const [mapToken, setMapToken] = useState()
   const [deleteConfirm, setDeleteConfirm] = useState(false)
+  const [rideImage, setRideImage] = useState("")
+
 
   useEffect(() => {
     (async () => {
@@ -41,6 +43,7 @@ const EditRide = ({ user }) => {
       setTitle(ride.title)
       setLong(ride.longitude)
       setLat(ride.latitude)
+      setLevel(ride.level)
       setIsLocal(ride.isLocal)
       setContent(ride.content)
     })();
@@ -56,6 +59,16 @@ const EditRide = ({ user }) => {
       history.push(`/rides/${rideId}`)
     }
   }
+
+  useEffect(() => {
+    if (level) {
+      if (level === "Easiest") setRideImage("/easiest.png")
+      if (level === "Easy") setRideImage("/easy.png")
+      if (level === "More Difficult") setRideImage("/more-difficult.png")
+      if (level === "Very Difficult") setRideImage("/very-difficult.png")
+      if (level === "Extremely Difficult") setRideImage("/extremely-difficult.png")
+    }
+  }, [level])
 
   const deleteProject = async (e) => {
     e.preventDefault()
@@ -124,7 +137,15 @@ const EditRide = ({ user }) => {
     <>
       { ride && user.user.id === ride.userId && <div className="create-grid-container">
         <div className="form-grid-container">
-          <h1>Update Your Ride!</h1>
+          <div className="create-ride-title-container">
+            <div>
+              <h1>Update Your Ride!</h1>
+            </div>
+            <div className="level-ride-image-container">
+              {level && <img id="ride-image" src={rideImage}></img>}
+            </div>
+            <div></div>
+          </div>
           <form onSubmit={updateRide} className="create-form">
             <div>
               {errors.map((error, idx) => (

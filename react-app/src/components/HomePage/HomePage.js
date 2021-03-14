@@ -42,6 +42,45 @@ const HomePage = () => {
     zoom: 8
   });
 
+
+
+  useEffect(() => {
+    (async () => {
+      const rides = await getRides()
+      const token = await getMapToken()
+      setRides(rides.Rides)
+      setFilteredRides(rides.Rides)
+      setMapToken(token.token)
+    })();
+  }, [])
+
+  useEffect(() => {
+    let filtered = [];
+    if (rides && startDate) {
+      rides.forEach((ride) => {
+        const newDate = new Date(ride.date.slice(5, 16)).toISOString()
+        if (startDate.toISOString() <= newDate) {
+          filtered.push(ride)
+        }
+      })
+      setFilteredRides(filtered)
+    }
+    if (rides && endDate) {
+      filtered = []
+      rides.forEach((ride) => {
+        const newDate = new Date(ride.date.slice(5, 16)).toISOString()
+        if (endDate.toISOString() >= newDate) {
+          filtered.push(ride)
+        }
+      })
+      setFilteredRides(filtered)
+    }
+    console.log(startDate, endDate)
+    if (startDate === undefined && endDate === undefined) {
+      setFilteredRides(rides)
+    }
+  }, [startDate, endDate])
+
   const navControlStyle = {
     left: 10,
     top: 10,
@@ -66,18 +105,8 @@ const HomePage = () => {
     [handleViewportChange]
   );
 
-  useEffect(() => {
-    (async () => {
-      const rides = await getRides()
-      const token = await getMapToken()
-      setRides(rides.Rides)
-      setMapToken(token.token)
-    })();
-  }, [])
 
-  useEffect(() => {
-    console.log(rides)
-  }, [rides])
+
 
   if (!mapToken) {
     return null
@@ -132,7 +161,7 @@ const HomePage = () => {
           />
 
           <NavigationControl style={navControlStyle} />
-          {rides.map((ride, idx) => (
+          {filteredRides.map((ride, idx) => (
             <Marker key={idx}
               latitude={ride.latitude}
               longitude={ride.longitude}

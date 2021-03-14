@@ -4,6 +4,8 @@ import { login } from "../../services/auth";
 import { Modal, useModalContext } from "../../context/Modal"
 import { createPost, getRideById } from "../../services/rides"
 import DeleteIcon from "@material-ui/icons/Delete"
+import CloseIcon from '@material-ui/icons/Close';
+
 import "./RidePosts.css"
 
 const PostForm = ({ rideId }) => {
@@ -64,50 +66,60 @@ const PostForm = ({ rideId }) => {
     <>
       {showPostModal && (
         <Modal onClose={() => setShowPostModal(false)}>
-          <form onSubmit={postNewPost} className="create-post-form">
-            <div>
-              {errors.map((error, idx) => (
-                <ul className="errors" key={idx}>{error}</ul>
-              ))}
-            </div>
-            <div>
-              <textarea
-                type='text'
-                className="input-text-create-post"
-                rows="10"
-                name='description'
-                placeholder="Get ready to ride!"
-                onChange={updateContent}
-                required
-              ></textarea>
-            </div>
-            <div>
-              {images &&
-                images.map((fileList) =>
-                  Array.from(fileList).map((image) => (
-                    <div>
-                      <span>
-                        <span
+          <div className="post-modal-container-width">
+
+            <form onSubmit={postNewPost} className="create-post-form">
+              <div className="post-close-button-container">
+                <div>
+                  <CloseIcon className="close-button-icon" onClick={() => setShowPostModal((prev) => !prev)}></CloseIcon>
+                </div>
+              </div>
+              <div>
+                {errors.map((error, idx) => (
+                  <ul className="errors" key={idx}>{error}</ul>
+                ))}
+              </div>
+              <div>
+                <textarea
+                  type='text'
+                  className="input-text-create-post"
+                  rows="10"
+                  name='description'
+                  placeholder="Get ready to ride!"
+                  onChange={updateContent}
+                  required
+                ></textarea>
+              </div>
+              <div>
+                {images &&
+                  images.map((fileList) =>
+                    Array.from(fileList).map((image) => (
+
+                      <div className="selecting-images-container">
+                        <div
                           onClick={() => deleteImageByName(image.name)}
                           className="delete-image-div"
                         >
                           <DeleteIcon />
-                        </span>
-                      </span>
-                      {image.name}
-                    </div>
-                  ))
-                )}
-              <input className="choose-image" type="button" id="loadFile" value="Choose a Additional Images" onClick={chooseAdditionalImage} />
-              {/* <label for="image">   {additionalImages}</label> */}
-              <input className="hide-this-button" placeholder="Choose a Thumbnail Image" multiple="true" id="additionalFile" type="file" name="image" onChange={updateAdditionalImages} />
-            </div>
+                        </div>
+                        <div classname="selected-image-label">
+                          {image.name}
+                        </div>
+                      </div>
 
-            <div className="submit-cancel-container">
-              <button className="submit-button" type="submit">Post</button>
-              <button className="cancel-button" onClick={() => setShowPostModal(false)}>Cancel</button>
-            </div>
-          </form>
+                    ))
+                  )}
+                <input className="post-choose-additional-image-button" type="button" id="loadFile" value="Choose a Additional Images" onClick={chooseAdditionalImage} />
+                {/* <label for="image">   {additionalImages}</label> */}
+                <input className="hide-this-button" placeholder="Choose a Thumbnail Image" multiple="true" id="additionalFile" type="file" name="image" onChange={updateAdditionalImages} />
+              </div>
+
+              <div className="post-cancel-container">
+                <button className="post-submit-button" type="submit">Post</button>
+                <button className="post-cancel-button" onClick={() => setShowPostModal(false)}>Cancel</button>
+              </div>
+            </form>
+          </div>
         </Modal>
       )}
     </>

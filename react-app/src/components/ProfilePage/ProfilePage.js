@@ -104,6 +104,7 @@ const ProfilePage = () => {
                 onClick={() => setShowEditUserModal(true)}>Edit</button>}
               {currentUser.id !== user.user.id && <div>{isFollowing ?
                 <button
+                  className="edit-a-user"
                   onClick={async () => {
                     const result = await unFollowRider(user.user.id, currentUser.id)
                     setIsFollowing(false)
@@ -111,6 +112,7 @@ const ProfilePage = () => {
                   }}
                 >Unfollow</button> :
                 <button
+                  className="edit-a-user"
                   onClick={async () => {
                     const result = await followRider(user.user.id, currentUser.id)
                     setIsFollowing(true)
@@ -157,7 +159,82 @@ const ProfilePage = () => {
               }
               </div>
             )}
+            {commitPage && committedRides && (
+              <div className='ride-feed-container'>{
+                committedRides.map((ride, idx) => (
 
+                  <Link key={idx} to={`/rides/${ride.id}`} className="link">
+                    <div className="ride-grid-container">
+                      <div className="level-image-feed">
+                        <img id="level-image-feed" src={getImage(ride.level)}></img>
+                      </div>
+                      <div className="ride-level-image"></div>
+                      <div className="ride-title">{ride.title}</div>
+                      <div className="ride-content">From {ride.user.username}</div>
+                      <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>
+                    </div>
+                  </Link>
+                ))
+              }
+              </div>
+            )}
+            {commitPage && committedRides && (
+              <div className='ride-feed-container'>{
+                committedRides.map((ride, idx) => (
+
+                  <Link key={idx} to={`/rides/${ride.id}`} className="link">
+                    <div className="ride-grid-container">
+                      <div className="level-image-feed">
+                        <img id="level-image-feed" src={getImage(ride.level)}></img>
+                      </div>
+                      <div className="ride-level-image"></div>
+                      <div className="ride-title">{ride.title}</div>
+                      <div className="ride-content">From {ride.user.username}</div>
+                      <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>
+                    </div>
+                  </Link>
+                ))
+              }
+              </div>
+            )}
+            {commitPage && committedRides && (
+              <div className='ride-feed-container'>{
+                committedRides.map((ride, idx) => (
+
+                  <Link key={idx} to={`/rides/${ride.id}`} className="link">
+                    <div className="ride-grid-container">
+                      <div className="level-image-feed">
+                        <img id="level-image-feed" src={getImage(ride.level)}></img>
+                      </div>
+                      <div className="ride-level-image"></div>
+                      <div className="ride-title">{ride.title}</div>
+                      <div className="ride-content">From {ride.user.username}</div>
+                      <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>
+                    </div>
+                  </Link>
+                ))
+              }
+              </div>
+            )}
+            {commitPage && committedRides && (
+              <div className='ride-feed-container'>{
+                committedRides.map((ride, idx) => (
+
+                  <Link key={idx} to={`/rides/${ride.id}`} className="link">
+                    <div className="ride-grid-container">
+                      <div className="level-image-feed">
+                        <img id="level-image-feed" src={getImage(ride.level)}></img>
+                      </div>
+                      <div className="ride-level-image"></div>
+                      <div className="ride-title">{ride.title}</div>
+                      <div className="ride-content">From {ride.user.username}</div>
+                      <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>
+                    </div>
+                  </Link>
+                ))
+              }
+              </div>
+            )}
             {followingPage && following && (
               <div className='ride-feed-container'>{
                 following.map((user, idx) => (

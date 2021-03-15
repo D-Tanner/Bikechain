@@ -33,7 +33,7 @@ const ProfilePage = () => {
       setRides(users.rides);
       setCommittedRides(users.committedRides);
       setFollowing(users.following);
-      console.log(users)
+      // console.log(users)
     })();
   }, [userId, showEditUserModal]);
 
@@ -52,7 +52,7 @@ const ProfilePage = () => {
       const result = getLevel(currentUser.level)
       setRiderImage(result)
     }
-    console.log(user)
+    // console.log(user)
   }, [currentUser, user])
 
 

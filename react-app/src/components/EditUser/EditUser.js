@@ -56,7 +56,7 @@ const EditUser = () => {
 
   const editUserById = async (e) => {
     e.preventDefault();
-    console.log(profileImage)
+    // console.log(profileImage)
     const updated = await editUser(user.user.id, city, state, level, profileImage);
     if (!updated.errors) {
       setUser(updated)

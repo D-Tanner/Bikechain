@@ -32,8 +32,8 @@ const RidePage = () => {
     (async () => {
       const ride = await getRideById(rideId)
       setRide(ride)
-      console.log(ride)
-      console.log(user)
+      // console.log(ride)
+      // console.log(user)
     })();
   }, [showPostModal, showEditPostModal])
 

@@ -132,83 +132,8 @@ const ProfilePage = () => {
                         <img id="level-image-feed" src={getImage(ride.level)}></img>
                       </div>
                       <div className="ride-title">{ride.title}</div>
-                      <div className="ride-content">From You</div>
-                      <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>
-                    </div>
-                  </Link>
-                ))
-              }
-              </div>
-            )}
-            {commitPage && committedRides && (
-              <div className='ride-feed-container'>{
-                committedRides.map((ride, idx) => (
-
-                  <Link key={idx} to={`/rides/${ride.id}`} className="link">
-                    <div className="ride-grid-container">
-                      <div className="level-image-feed">
-                        <img id="level-image-feed" src={getImage(ride.level)}></img>
-                      </div>
-                      <div className="ride-level-image"></div>
-                      <div className="ride-title">{ride.title}</div>
-                      <div className="ride-content">From {ride.user.username}</div>
-                      <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>
-                    </div>
-                  </Link>
-                ))
-              }
-              </div>
-            )}
-            {commitPage && committedRides && (
-              <div className='ride-feed-container'>{
-                committedRides.map((ride, idx) => (
-
-                  <Link key={idx} to={`/rides/${ride.id}`} className="link">
-                    <div className="ride-grid-container">
-                      <div className="level-image-feed">
-                        <img id="level-image-feed" src={getImage(ride.level)}></img>
-                      </div>
-                      <div className="ride-level-image"></div>
-                      <div className="ride-title">{ride.title}</div>
-                      <div className="ride-content">From {ride.user.username}</div>
-                      <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>
-                    </div>
-                  </Link>
-                ))
-              }
-              </div>
-            )}
-            {commitPage && committedRides && (
-              <div className='ride-feed-container'>{
-                committedRides.map((ride, idx) => (
-
-                  <Link key={idx} to={`/rides/${ride.id}`} className="link">
-                    <div className="ride-grid-container">
-                      <div className="level-image-feed">
-                        <img id="level-image-feed" src={getImage(ride.level)}></img>
-                      </div>
-                      <div className="ride-level-image"></div>
-                      <div className="ride-title">{ride.title}</div>
-                      <div className="ride-content">From {ride.user.username}</div>
-                      <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>
-                    </div>
-                  </Link>
-                ))
-              }
-              </div>
-            )}
-            {commitPage && committedRides && (
-              <div className='ride-feed-container'>{
-                committedRides.map((ride, idx) => (
-
-                  <Link key={idx} to={`/rides/${ride.id}`} className="link">
-                    <div className="ride-grid-container">
-                      <div className="level-image-feed">
-                        <img id="level-image-feed" src={getImage(ride.level)}></img>
-                      </div>
-                      <div className="ride-level-image"></div>
-                      <div className="ride-title">{ride.title}</div>
-                      <div className="ride-content">From {ride.user.username}</div>
+                      {user.user.id === currentUser.id && <div className="ride-content">From You</div>}
+                      {user.user.id !== currentUser.id && <div className="ride-content">From {currentUser.username}</div>}
                       <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>
                     </div>
                   </Link>

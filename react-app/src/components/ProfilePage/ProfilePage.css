@@ -155,6 +155,9 @@
   height: 300px;
   width: 300px;
   border-radius: 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow:hidden;
   margin: 0 auto;
   margin-bottom: 10px;
 }
@@ -162,6 +165,12 @@
 .default-profile-image-page {
   max-height: 100%;
   max-width: 100%;
+}
+.profile-image-page {
+        object-fit: cover;
+        object-position: center;
+        height: 300px;
+        width: 300px;
 }
 
 /* .profile-info {

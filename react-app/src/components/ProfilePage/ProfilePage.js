@@ -82,7 +82,7 @@ const ProfilePage = () => {
           <div className="profile-info">
             {<div className="image-profile-page-container">
               {!currentUser.profileImage && <img className="default-profile-image-page" src="/default-profile-image.png"></img>}
-              {currentUser.profileImage && <img className="default-profile-image-page" src={currentUser.profileImage}></img>}
+              {currentUser.profileImage && <img className="profile-image-page" src={currentUser.profileImage}></img>}
             </div>}
             <div>{currentUser.username}</div>
             <div>{currentUser.city}, {currentUser.state}</div>

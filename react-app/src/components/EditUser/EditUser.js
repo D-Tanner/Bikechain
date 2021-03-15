@@ -52,7 +52,6 @@ const EditUser = () => {
     }
   }, [level])
 
-
   const editUserById = async (e) => {
     e.preventDefault();
 
@@ -92,7 +91,7 @@ const EditUser = () => {
 
   const updateProfileImage = (e) => {
     const file = e.target.files[0];
-    if (file) setProfileImage(file.name);
+    if (file) setProfileImage(file);
   };
 
   const deleteImage = (e) => {
@@ -130,7 +129,8 @@ const EditUser = () => {
                       <DeleteIcon />
                     </div>
                     <div className="selected-image-label">
-                      {profileImage}
+                      {profileImage.name}
+                      {!profileImage.name && profileImage}
                     </div>
                   </div>
                 }

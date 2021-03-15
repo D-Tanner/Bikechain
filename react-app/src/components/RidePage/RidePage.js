@@ -7,6 +7,11 @@ import "../ProfilePage/ProfilePage.css"
 import RidePost from "../RidePosts/RidePosts"
 import EditPost from "../EditPost/EditPost"
 import LoginForm from "../auth/LoginForm"
+import { getLevel, getImage, getDefaultImage } from '../../services/getImages'
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import Moment from "react-moment"
+import lightBlue from '@material-ui/core/colors/lightBlue'
+
 
 const RidePage = () => {
 
@@ -32,8 +37,6 @@ const RidePage = () => {
     (async () => {
       const ride = await getRideById(rideId)
       setRide(ride)
-      // console.log(ride)
-      // console.log(user)
     })();
   }, [showPostModal, showEditPostModal])
 
@@ -54,6 +57,7 @@ const RidePage = () => {
   }, [ride])
 
 
+
   return (
     <>
       {showPostModal && <RidePost rideId={rideId} />}
@@ -63,13 +67,46 @@ const RidePage = () => {
         <div className="ride-page-container">
           <div className="ride-page-grid-container">
             <div className="ride-info">
-              <div>{ride.title}</div>
-              <div>{ride.content}</div>
-              {ride && user && ride.user.id === user.user.id && (
-                <button
-                  onClick={() => history.push(`/rides/${ride.id}/edit`)}
-                >Edit</button>
-              )}
+              <div className="ride-info-grid">
+                <div className="ridepage-level-image-container">
+                  <img id="ridepage-level-image" src={getImage(ride.level)}></img>
+                </div>
+                <div className="ride-info-title">{ride.title}</div>
+                <div className="ride-info-content">{ride.content}</div>
+                <div className="ride-info-date"><Moment format="MMM D" date={ride.date} /></div>
+                <div className="ride-current-username">
+                  <div className="organized">Organized By: </div>
+                  <Link to={`/profile/${ride.user.id}`} className="rider-link">
+                    <div className="ride-username-image-container">
+                      <img id="ride-username-image" src={getLevel(ride.user.level)}></img>
+                    </div>
+                    <div className="ride-actual-username">
+                      {ride.user.username}
+                    </div>
+                  </Link>
+                </div>
+
+                <div className="ride-info-local">
+                  {ride.isLocal && (
+                    <div className="ride-local-check">
+                      <div>
+                        <CheckCircleIcon style={{ fontsize: 50, color: lightBlue[600] }}></CheckCircleIcon>
+                      </div>
+                      <div className="ride-local-check-label">
+                        Local
+                  </div>
+                    </div>)}
+                </div>
+                <div className="ride-info-edit">
+
+                  {ride && user && ride.user.id === user.user.id && (
+                    <button
+                      className="edit-a-ride-button"
+                      onClick={() => history.push(`/rides/${ride.id}/edit`)}
+                    >Edit</button>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="ride-posts" id={postFeed ? "feed-selected" : ""}
               onClick={() => {
@@ -82,39 +119,62 @@ const RidePage = () => {
                 setCommittedFeed(true)
                 setPostFeed(false)
               }}
-            >Committed Riders</div>
+            >Committed Riders ({ride.committedRiders.length})</div>
             <div className="ride-main-feed">
               {postFeed && posts &&
-                <div>
+                <div className="post-feed-container">
                   {posts.map((post) => (
-                    <div>
-                      <div>{post.content}</div>
-                      <div>From {post.user.username}</div>
-                      {user && <span>{post.user.id === user.user.id && <button onClick={() => {
-                        setSelectedPost(post)
-                        setShowEditPostModal((prev) => !prev)
-                      }}>Edit</button>}</span>}
+                    <div className="each-post-in-feed">
+
+                      <div className="posts-image-profile-page-container">
+                        {!post.user.profileImage && <img className="posts-default-profile-image-page" src={"/default-profile-image.png"}></img>}
+                        {post.user.profileImage && <img className="posts-profile-image-page" src={post.user.profileImage}></img>}
+                      </div>
+                      <div className="posts-username">{post.user.username}</div>
+
+                      <div className="posts-content">{post.content}</div>
+                      {user && post.user.id === user.user.id && <div className="edit-a-post-button-container"><button
+                        className="edit-a-post-button"
+                        onClick={() => {
+                          setSelectedPost(post)
+                          setShowEditPostModal((prev) => !prev)
+                        }}>Edit</button></div>}
+                      <div className="center-post-images">
+                        {post.images.map((image) => (
+                          // <div className="center-post-images">
+                          <div className="images-in-post-container">
+                            <img className="images-in-post" src={image.imageUrl}></img>
+                          </div>
+                          // </div>
+                        ))}
+                      </div>
                     </div>
                   ))}
                 </div>}
               {committedFeed && <div>
                 {ride.committedRiders.map((rider, idx) => (
-                  <Link key={idx}
-                    to={user !== null && `/profile/${rider.id}`}
-                    onClick={() => {
-                      if (user === null) {
-                        setShowLoginModal(true)
-                      }
-                    }}
-                    className="link"
-                  >
-                    <div className="following-grid-container">
-                      <div className="profile-image"></div>
-                      <div className="user-level">{rider.level}</div>
-                      <div className="user-username">{rider.username}</div>
-                      <div className="user-location">{rider.city}, {rider.state}</div>
-                    </div>
-                  </Link>
+                  <div className="give-riders-space">
+
+                    <Link key={idx}
+                      to={user !== null && `/profile/${rider.id}`}
+                      onClick={() => {
+                        if (user === null) {
+                          setShowLoginModal(true)
+                        }
+                      }}
+                      className="link"
+                    >
+                      <div className="committed-riders-grid-container">
+                        <div className="user-level">
+                          <div className="level-image-feed">
+                            <img id="level-image-feed" src={getLevel(rider.level)}></img>
+                          </div>
+                        </div>
+                        <div className="user-username">{rider.username}</div>
+                        <div className="user-location">{rider.city}, {rider.state}</div>
+                      </div>
+                    </Link>
+                  </div>
                 ))}
               </div>}
             </div>
@@ -124,6 +184,7 @@ const RidePage = () => {
                   <div>
 
                     <button
+                      className="leave-a-ride-button"
                       onClick={async () => {
                         const result = await unCommitToRide(user.user.id, ride.id)
                         setIsCommitted(false)
@@ -132,7 +193,9 @@ const RidePage = () => {
                     >Leave Ride</button>
                   </div>
                   <div>
-                    <button onClick={() => setShowPostModal(prev => !prev)}>Post</button>
+                    <button
+                      className="leave-a-ride-button"
+                      onClick={() => setShowPostModal(prev => !prev)}>Post</button>
                   </div>
                 </div>
               }
@@ -140,6 +203,7 @@ const RidePage = () => {
                 <div>
                   <div>
                     <button
+                      className="leave-a-ride-button"
                       onClick={async () => {
                         const result = await commitToRide(user.user.id, ride.id)
                         setIsCommitted(true)

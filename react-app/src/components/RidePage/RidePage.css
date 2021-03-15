@@ -4,7 +4,6 @@
     height: 90%;
     left: 0;
     top: 90px;
-    /* background: rgba(51,51,51,0.7); */
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -17,44 +16,37 @@
 .ride-posts {grid-area: posts;}
 .ride-committed {grid-area: committed;}
 .ride-main-feed { grid-area: main; }
-.ride-location { grid-area: location; }
+.ride-location { grid-area: location; width: 100px;}
 .ride-commit-button {grid-area: button}
 
 .ride-page-grid-container {
   display: grid;
   grid-template-areas:
-    'info info info info location location'
+    'info info info info info location'
     'posts posts posts committed committed committed'
     'main main main main main main';
-  grid-template-rows: 3fr 1fr 4fr;
+  grid-template-rows: 300px 90px 1fr;
   grid-gap: 10px;
-  background-color: #2196F3;
+  /* background-color: #2196F3; */
   padding: 10px;
   width: 90%;
   margin: 0 auto;
   height: 100%;
 }
 
-/* .ride-main-feed {
-  height: 100%;
-}
-
-.ride-posts, .ride-committed {
-  height: 10%;
-} */
 
 .ride-page-container::-webkit-scrollbar {
   width: 9px;               /* width of the entire scrollbar */
 }
 
 .ride-page-container::-webkit-scrollbar-track {
-  background: rgb(38,38,38);        /* color of the tracking area */
+  background:white;        /* color of the tracking area */
 }
 
 .ride-page-container::-webkit-scrollbar-thumb {
-  background-color: #b4b4b498;    /* color of the scroll thumb */
+  background-color: #e0dccd;    /* color of the scroll thumb */
   border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid rgb(38,38,38);  /* creates padding around scroll thumb */
+  border: 1px solid rgb(216, 210, 210);  /* creates padding around scroll thumb */
 }
 
 .ride-page-grid-container > div {
@@ -66,9 +58,273 @@
 
 .ride-committed:hover, .ride-posts:hover {
   cursor: pointer;
-  background-color: beige;
 }
 
 #feed-selected {
-  background-color: cadetblue;
+  border-bottom: 10px solid #ff7110;
+}
+
+.committed-riders-grid-container {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: grid;
+  grid-template-areas:
+    'level username username username'
+    'level location location location'
+  ;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 20px;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.give-riders-space {
+  margin-bottom: 20px;
+}
+
+
+.committed-riders-grid-container:hover {
+  background-color: blanchedalmond;
+}
+
+.edit-a-post-button {
+  border: none;
+  height: 40px;
+  width: 100px;
+  font-size: 20px;
+  background-color: transparent;
+  color: white;
+  border-width: 2px;
+  background-color: #ff7110;
+  border-color: #ff7110;
+  border-radius: 3px;
+}
+
+.edit-a-post-button-container {
+    grid-area: edit;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.edit-a-post-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.post-feed-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.each-post-in-feed {
+  margin-bottom: 30px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: grid;
+  grid-template-areas:
+  'profileImage username username edit'
+  'content content content content'
+  'pic pic pic pic';
+  grid-template-columns: 100px 1fr 1fr 1fr;
+  padding: 20px;
+  padding-bottom: 50px;
+}
+
+.posts-username {
+  grid-area: username;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.posts-content {
+  grid-area: content;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.images-in-post-container {
+  /* background-color: blue; */
+  height: 500px;
+  width: 500px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow:hidden;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.center-post-images {
+  grid-area: pic;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.images-in-post {
+        object-fit: cover;
+        object-position: center;
+        height: 500px;
+        width: 500px;
+}
+
+.posts-image-profile-page-container {
+  /* background-color: blue; */
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow:hidden;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  grid-area: profileImage
+}
+
+
+.posts-profile-image-page {
+        object-fit: cover;
+        object-position: center;
+        height: 100px;
+        width: 100px;
+}
+.posts-default-profile-image-page {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.leave-a-ride-button {
+  border: none;
+  height: 40px;
+  width: 150px;
+  font-size: 20px;
+  background-color: transparent;
+  color: white;
+  margin-bottom: 20px;
+  border-width: 2px;
+  background-color: #ff7110;
+  border-color: #ff7110;
+  border-radius: 3px;
+}
+
+.leave-a-ride-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.ride-info-grid {
+  display: grid;
+  grid-template-areas:
+  'level level title title date'
+  'level level ride-content ride-content ride-user'
+  'level level ride-content ride-content ride-user'
+  'edit-ride edit-ride isLocal isLocal isLocal';
+  grid-template-columns: 100px 100px 1fr 1fr 1fr;
+}
+
+.ride-info-title {
+  grid-area: title;
+  display: flex;
+  margin-left: 20px;
+  align-items: center;
+  font-size: 30px;
+}
+.ride-info-content {
+  grid-area: ride-content;
+  display: flex;
+  margin-left: 20px;
+  font-size: 20px;
+}
+.ride-info-date {
+  grid-area: date;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-left: 20px; */
+
+}
+
+.ride-info-local {
+  grid-area: isLocal;
+}
+
+.ride-info-edit {
+    grid-area: edit-ride;
+    display: flex;
+    justify-content: center;
+}
+
+.ridepage-level-image-container {
+  grid-area: level;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+#ridepage-level-image {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.edit-a-ride-button {
+  border: none;
+  height: 40px;
+  width: 100px;
+  font-size: 20px;
+  background-color: transparent;
+  color: white;
+  border-width: 2px;
+  background-color: #ff7110;
+  border-color: #ff7110;
+  border-radius: 3px;
+}
+
+.edit-a-ride-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.ride-local-check {
+    display: flex;
+    justify-content: row;
+}
+
+.ride-local-check-label {
+    margin-left: 5px;
+}
+
+.ride-current-username {
+  grid-area: ride-user;
+  font-size: 30px;
+  display: grid;
+
+}
+
+.ride-username-image-container {
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+
+#ride-username-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.ride-actual-username {
+  padding-top: 10px;
+}
+
+.rider-link {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  color: black;
+}
+
+.organized {
+  padding-top: 20px;
+  font-size: 20px;
 }

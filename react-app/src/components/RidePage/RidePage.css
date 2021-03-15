@@ -285,3 +285,13 @@
   opacity: 0.8;
   cursor: pointer;
 }
+
+.ride-local-check {
+    display: flex;
+    justify-content: row;
+}
+
+.ride-local-check-label {
+    /* padding-top: 5px; */
+    margin-left: 5px;
+}

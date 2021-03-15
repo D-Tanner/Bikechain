@@ -76,11 +76,11 @@ const RidePage = () => {
                 <div className="ride-info-date"><Moment format="MMM D" date={ride.date} /></div>
                 <div className="ride-info-local">
                   {ride.isLocal && (
-                    <div className="local-check">
+                    <div className="ride-local-check">
                       <div>
                         <CheckCircleIcon style={{ fontsize: 50, color: lightBlue[600] }}></CheckCircleIcon>
                       </div>
-                      <div className="local-check-label">
+                      <div className="ride-local-check-label">
                         Local
                   </div>
                     </div>)}
@@ -89,7 +89,7 @@ const RidePage = () => {
 
                   {ride && user && ride.user.id === user.user.id && (
                     <button
-                      className="edit-a-user"
+                      className="edit-a-ride-button"
                       onClick={() => history.push(`/rides/${ride.id}/edit`)}
                     >Edit</button>
                   )}

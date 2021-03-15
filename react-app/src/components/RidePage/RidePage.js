@@ -88,18 +88,20 @@ const RidePage = () => {
                 <div className="post-feed-container">
                   {posts.map((post) => (
                     <div className="each-post-in-feed">
-                      {<div className="posts-image-profile-page-container">
+
+                      <div className="posts-image-profile-page-container">
                         {!post.user.profileImage && <img className="posts-default-profile-image-page" src={"/default-profile-image.png"}></img>}
                         {post.user.profileImage && <img className="posts-profile-image-page" src={post.user.profileImage}></img>}
-                      </div>}
-                      <div>From {post.user.username}</div>
-                      <div>{post.content}</div>
-                      {user && <span>{post.user.id === user.user.id && <button
+                      </div>
+                      <div className="posts-username">{post.user.username}</div>
+
+                      <div className="posts-content">{post.content}</div>
+                      {user && post.user.id === user.user.id && <div className="edit-a-post-button-container"><button
                         className="edit-a-post-button"
                         onClick={() => {
                           setSelectedPost(post)
                           setShowEditPostModal((prev) => !prev)
-                        }}>Edit</button>}</span>}
+                        }}>Edit</button></div>}
                       <div>
                         {post.images.map((image) => (
                           <div className="images-in-post-container">

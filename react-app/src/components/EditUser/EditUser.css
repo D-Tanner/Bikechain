@@ -9,7 +9,9 @@
   cursor: pointer;
 }
 
-
+.edit-user-modal-container-width {
+  padding: 20px;
+}
 
 
 .edit-user-submit-cancel-container {

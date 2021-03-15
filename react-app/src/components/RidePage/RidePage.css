@@ -25,7 +25,7 @@
     'info info info info location location'
     'posts posts posts committed committed committed'
     'main main main main main main';
-  grid-template-rows: 3fr 1fr 4fr;
+  grid-template-rows: 300px 90px 1fr;
   grid-gap: 10px;
   background-color: #2196F3;
   padding: 10px;

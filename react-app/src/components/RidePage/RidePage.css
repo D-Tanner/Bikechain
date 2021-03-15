@@ -16,7 +16,7 @@
 .ride-posts {grid-area: posts;}
 .ride-committed {grid-area: committed;}
 .ride-main-feed { grid-area: main; }
-.ride-location { grid-area: location; width: 300px;}
+.ride-location { grid-area: location; width: 100px;}
 .ride-commit-button {grid-area: button}
 
 .ride-page-grid-container {
@@ -194,11 +194,6 @@
     max-width: 100%;
 }
 
-.profile-information {
-  /* display: flex; */
-  /* justify-content: center; */
-}
-
 .leave-a-ride-button {
   border: none;
   height: 40px;
@@ -216,4 +211,38 @@
 .leave-a-ride-button:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.ride-info-grid {
+  display: grid;
+  grid-template-areas:
+  'level level title title date'
+  'level level ride-content ride-content ride-content'
+  'level level ride-content ride-content ride-content'
+  'edit edit isLocal isLocal isLocal';
+}
+
+.ride-info-title {
+  grid-area: title;
+}
+.ride-info-content {
+  grid-area: ride-content;
+}
+.ride-info-date {
+  grid-area: date;
+}
+
+.ride-info-local {
+  grid-area: isLocal;
+}
+
+.ridepage-level-image-container {
+  grid-area: level;
+  width: 200px;
+  height: 200px;
+}
+
+#ridepage-level-image {
+  max-height: 100%;
+  max-width: 100%;
 }

@@ -8,6 +8,10 @@ import RidePost from "../RidePosts/RidePosts"
 import EditPost from "../EditPost/EditPost"
 import LoginForm from "../auth/LoginForm"
 import { getLevel, getImage, getDefaultImage } from '../../services/getImages'
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import Moment from "react-moment"
+import lightBlue from '@material-ui/core/colors/lightBlue'
+
 
 const RidePage = () => {
 
@@ -63,13 +67,34 @@ const RidePage = () => {
         <div className="ride-page-container">
           <div className="ride-page-grid-container">
             <div className="ride-info">
-              <div>{ride.title}</div>
-              <div>{ride.content}</div>
-              {ride && user && ride.user.id === user.user.id && (
-                <button
-                  onClick={() => history.push(`/rides/${ride.id}/edit`)}
-                >Edit</button>
-              )}
+              <div className="ride-info-grid">
+                <div className="ridepage-level-image-container">
+                  <img id="ridepage-level-image" src={getImage(ride.level)}></img>
+                </div>
+                <div className="ride-info-title">{ride.title}</div>
+                <div className="ride-info-content">{ride.content}</div>
+                <div className="ride-info-date"><Moment format="MMM D" date={ride.date} /></div>
+                <div className="ride-info-local">
+                  {ride.isLocal && (
+                    <div className="local-check">
+                      <div>
+                        <CheckCircleIcon style={{ fontsize: 50, color: lightBlue[600] }}></CheckCircleIcon>
+                      </div>
+                      <div className="local-check-label">
+                        Local
+                  </div>
+                    </div>)}
+                </div>
+                <div className="ride-info-edit">
+
+                  {ride && user && ride.user.id === user.user.id && (
+                    <button
+                      className="edit-a-user"
+                      onClick={() => history.push(`/rides/${ride.id}/edit`)}
+                    >Edit</button>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="ride-posts" id={postFeed ? "feed-selected" : ""}
               onClick={() => {

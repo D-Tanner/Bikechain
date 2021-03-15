@@ -20,6 +20,7 @@ const EditUser = () => {
   const [level, setLevel] = useState("");
   const [errors, setErrors] = useState([]);
   const [profileImage, setProfileImage] = useState(null)
+  const [profileImageName, setProfileImageName] = useState(null)
   const [riderImage, setRiderImage] = useState("")
 
   const {
@@ -36,9 +37,12 @@ const EditUser = () => {
     if (user) {
       if (user.user.profileImage) {
         const name = user.user.profileImage.split(".s3.amazonaws.com/")[1]
-        setProfileImage(name);
+        setProfileImageName(name)
+        // setProfileImage(user.user.profileImage);
       }
       setLevel(user.user.level)
+      setState(user.user.state)
+      setCity(user.user.city)
     }
   }, []);
 
@@ -54,7 +58,7 @@ const EditUser = () => {
 
   const editUserById = async (e) => {
     e.preventDefault();
-
+    console.log(profileImage)
     const updated = await editUser(user.user.id, city, state, level, profileImage);
     if (!updated.errors) {
       setUser(updated)
@@ -130,15 +134,15 @@ const EditUser = () => {
                     </div>
                     <div className="selected-image-label">
                       {profileImage.name}
-                      {!profileImage.name && profileImage}
+                      {!profileImage.name && profileImageName}
                     </div>
                   </div>
                 }
-                <input className="choose-profile-image" type="button" id="loadFile" value="Choose a Profile Image" onClick={chooseImage} />
+                <input className="choose-profile-image" type="button" id="loadFile" value="Choose a profile Image" onClick={chooseImage} />
                 <input placeholder="Choose a Profile Image" className="hide-this-button" id="file" type="file" name="image" onChange={updateProfileImage} />
               </div>
               <div className="location-field-container">
-                <select className="location-state" name="state" onChange={updateState} value={state} required>
+                <select className="location-state" name="state" onChange={updateState} value={state}>
                   <option value="" disabled selected>
                     State
                 </option>
@@ -157,7 +161,7 @@ const EditUser = () => {
                 </select>
               </div>
               <div className="level-of-rider-container-edit">
-                <select className="level-of-rider-edit" name="level" onChange={updateLevel} value={level} required>
+                <select className="level-of-rider-edit" name="level" onChange={updateLevel} value={level}>
                   <option value="" disabled selected>Level</option>
                   <option value="Novice">Novice</option>
                   <option value="Intermediate">Intermediate</option>

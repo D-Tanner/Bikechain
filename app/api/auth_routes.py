@@ -107,7 +107,7 @@ def edit_user(user_id):
     if 'level' in request.form:
         user.level = request.form['level']
 
-    profileImageUrl = None
+    profileImageUrl = user.profileImageUrl
     if 'profileImage' in request.files:
         image = request.files['profileImage']
         image.filename = secure_filename(image.filename)

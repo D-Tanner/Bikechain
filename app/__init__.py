@@ -94,6 +94,8 @@ def react_root(path):
         return app.send_static_file('advanced.png')
     elif path == 'advanced-plus.png':
         return app.send_static_file('advanced-plus.png')
+    elif path == 'default-profile-image.png':
+        return app.send_static_file('default-profile-image.png')
 
 
     return app.send_static_file('index.html')

@@ -22,15 +22,18 @@
   grid-area: content;
   display: flex;
   text-align: left;
-
+  padding-top: 10px;
+  font-size: 20px;
 }
 
 .ride-date {
   grid-area: date;
+  font-size: 20px;
 }
 
 .main-feed {
   overflow: scroll;
+  height: 650px;
 }
 
 .main-feed::-webkit-scrollbar {
@@ -38,13 +41,13 @@
 }
 
 .main-feed::-webkit-scrollbar-track {
-  background: rgb(38,38,38);        /* color of the tracking area */
+  background:white;        /* color of the tracking area */
 }
 
 .main-feed::-webkit-scrollbar-thumb {
-  background-color: #b4b4b498;    /* color of the scroll thumb */
+  background-color: #e0dccd;    /* color of the scroll thumb */
   border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid rgb(38,38,38);  /* creates padding around scroll thumb */
+  border: 1px solid rgb(216, 210, 210);  /* creates padding around scroll thumb */
 }
 
 
@@ -91,10 +94,10 @@
   border-bottom: 1px solid black;
   display: grid;
   grid-template-areas:
-    'profileImage level username username'
-    'profileImage location location location'
+    'level username username username'
+    'level location location location'
   ;
-  grid-template-columns: 1fr 1fr 3fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   padding: 20px;
 }
@@ -109,7 +112,7 @@
     width: 100%;
     height: 100%;
     left: 0;
-    top: 90px;
+    top: 130px;
     /* background: rgba(51,51,51,0.7); */
 }
 
@@ -121,11 +124,13 @@
 
 .item1:hover, .item2:hover, .item3:hover {
   cursor: pointer;
-  background-color: beige;
+  /* opacity: 0.6; */
 }
 
 #is-selected {
-  background-color: cadetblue;
+  border-bottom: 10px solid #ff7110;
+  /* background-color: #ff7110; */
+  /* color: white; */
 }
 
 .grid-container {
@@ -136,7 +141,8 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 10% 90%;
   grid-gap: 10px;
-  background-color: #2196F3;
+  /* background-color: #2196F3; */
+  /* background-color: #728696; */
   padding: 10px;
   height: 100%;
   width: 80%;
@@ -144,7 +150,8 @@
 }
 
 .grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  /* background-color: rgba(219, 190, 190, 0.8); */
   text-align: center;
   padding: 20px 0;
   font-size: 30px;

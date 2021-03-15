@@ -13,3 +13,7 @@ export const getLevel = (level) => {
   if (level === "Advanced") return (`${process.env.PUBLIC_URL}/advanced.png`)
   if (level === "Advanced+") return (`${process.env.PUBLIC_URL}/advanced-plus.png`)
 }
+
+export const getDefaultImage = () => {
+  return (`${process.env.PUBLIC_URL}/default-profile-image.png`)
+}

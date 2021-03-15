@@ -5,7 +5,7 @@ import { useParams, Link } from "react-router-dom"
 import "./ProfilePage.css"
 import { unFollowRider, followRider } from "../../services/rides"
 import EditUser from '../../components/EditUser/EditUser'
-import { getLevel, getImage } from '../../services/getImages'
+import { getLevel, getImage, getDefaultImage } from '../../services/getImages'
 
 const ProfilePage = () => {
 
@@ -33,7 +33,7 @@ const ProfilePage = () => {
       setRides(users.rides);
       setCommittedRides(users.committedRides);
       setFollowing(users.following);
-      // console.log(users)
+      console.log(users)
     })();
   }, [userId, showEditUserModal]);
 
@@ -86,7 +86,7 @@ const ProfilePage = () => {
           >Following</div>
           <div className="profile-info">
             {<div className="image-profile-page-container">
-              {!currentUser.profileImage && <img className="default-profile-image-page" src="/default-profile-image.png"></img>}
+              {!currentUser.profileImage && <img className="default-profile-image-page" src={"/default-profile-image.png"}></img>}
               {currentUser.profileImage && <img className="profile-image-page" src={currentUser.profileImage}></img>}
             </div>}
             <div className="current-username">
@@ -104,6 +104,7 @@ const ProfilePage = () => {
                 onClick={() => setShowEditUserModal(true)}>Edit</button>}
               {currentUser.id !== user.user.id && <div>{isFollowing ?
                 <button
+                  className="edit-a-user"
                   onClick={async () => {
                     const result = await unFollowRider(user.user.id, currentUser.id)
                     setIsFollowing(false)
@@ -111,6 +112,7 @@ const ProfilePage = () => {
                   }}
                 >Unfollow</button> :
                 <button
+                  className="edit-a-user"
                   onClick={async () => {
                     const result = await followRider(user.user.id, currentUser.id)
                     setIsFollowing(true)
@@ -124,15 +126,14 @@ const ProfilePage = () => {
             {ridePage && rides && (
               <div className='ride-feed-container'>{
                 rides.map((ride, idx) => (
-                  // console.log(ride.level)
                   < Link key={idx} to={`/rides/${ride.id}`} className="link">
                     <div className="ride-grid-container">
                       <div className="level-image-feed">
-                        <img id="level-image-feed" src={getImage(ride.level)}>
-                        </img>
+                        <img id="level-image-feed" src={getImage(ride.level)}></img>
                       </div>
                       <div className="ride-title">{ride.title}</div>
-                      <div className="ride-content">{ride.content}</div>
+                      {user.user.id === currentUser.id && <div className="ride-content">From You</div>}
+                      {user.user.id !== currentUser.id && <div className="ride-content">From {currentUser.username}</div>}
                       <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>
                     </div>
                   </Link>
@@ -146,9 +147,12 @@ const ProfilePage = () => {
 
                   <Link key={idx} to={`/rides/${ride.id}`} className="link">
                     <div className="ride-grid-container">
+                      <div className="level-image-feed">
+                        <img id="level-image-feed" src={getImage(ride.level)}></img>
+                      </div>
                       <div className="ride-level-image"></div>
                       <div className="ride-title">{ride.title}</div>
-                      <div className="ride-content">{ride.content}</div>
+                      <div className="ride-content">From {ride.user.username}</div>
                       <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>
                     </div>
                   </Link>
@@ -156,7 +160,6 @@ const ProfilePage = () => {
               }
               </div>
             )}
-
             {followingPage && following && (
               <div className='ride-feed-container'>{
                 following.map((user, idx) => (
@@ -172,8 +175,14 @@ const ProfilePage = () => {
                     }}
                   >
                     <div className="following-grid-container">
-                      <div className="profile-image"></div>
-                      <div className="user-level">{user.level}</div>
+                      {/* <div className="profile-image">
+
+                      </div> */}
+                      <div className="user-level">
+                        <div className="level-image-feed">
+                          <img id="level-image-feed" src={getLevel(user.level)}></img>
+                        </div>
+                      </div>
                       <div className="user-username">{user.username}</div>
                       <div className="user-location">{user.city}, {user.state}</div>
                     </div>

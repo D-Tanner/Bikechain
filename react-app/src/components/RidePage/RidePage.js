@@ -88,8 +88,12 @@ const RidePage = () => {
                 <div className="post-feed-container">
                   {posts.map((post) => (
                     <div className="each-post-in-feed">
-                      <div>{post.content}</div>
+                      {<div className="posts-image-profile-page-container">
+                        {!post.user.profileImage && <img className="posts-default-profile-image-page" src={"/default-profile-image.png"}></img>}
+                        {post.user.profileImage && <img className="posts-profile-image-page" src={post.user.profileImage}></img>}
+                      </div>}
                       <div>From {post.user.username}</div>
+                      <div>{post.content}</div>
                       {user && <span>{post.user.id === user.user.id && <button
                         className="edit-a-post-button"
                         onClick={() => {

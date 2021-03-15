@@ -8,8 +8,15 @@
 }
 
 .popup-container {
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    width: 300px;
+    padding: 10px;
+    /* display: flex; */
+    /* justify-content: column; */
+}
+
+.popup-container > div {
+    margin-top: 20px;
 }
 
 .date-range-container {
@@ -67,4 +74,14 @@
     bottom: 12px;
     right: 12px;
 
+}
+
+.local-check {
+    display: flex;
+    justify-content: row;
+}
+
+.local-check-label {
+    padding-top: 5px;
+    margin-left: 5px;
 }

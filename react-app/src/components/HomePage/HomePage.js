@@ -15,7 +15,7 @@ import 'react-nice-dates/build/style.css'
 import { enGB } from 'date-fns/locale'
 import { getLevel, getImage, getDefaultImage } from '../../services/getImages'
 import Moment from "react-moment"
-
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 
 
@@ -204,7 +204,16 @@ const HomePage = () => {
               <div className="homepage-pop-title">{selectedRide.title}</div>
               <div className="homepage-pop-username">From {selectedRide.user.username}</div>
               <div className="homepage-pop-ride-date"><Moment format="MMM D" date={selectedRide.date} /></div>
-              <Link className="popup-link" to={`rides/${selectedRide.id}`}>See more</Link>
+              {selectedRide.isLocal && (
+                <div className="local-check">
+                  <div>
+                    <CheckCircleIcon style={{ fontsize: 50, color: lightBlue[600] }}></CheckCircleIcon>
+                  </div>
+                  <div className="local-check-label">
+                    Local
+                  </div>
+                </div>)}
+              < Link className="popup-link" to={`rides/${selectedRide.id}`}>See more</Link>
             </div>
           </Popup>}
         </ReactMapGL>

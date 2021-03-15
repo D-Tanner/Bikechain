@@ -116,25 +116,28 @@ const RidePage = () => {
                 </div>}
               {committedFeed && <div>
                 {ride.committedRiders.map((rider, idx) => (
-                  <Link key={idx}
-                    to={user !== null && `/profile/${rider.id}`}
-                    onClick={() => {
-                      if (user === null) {
-                        setShowLoginModal(true)
-                      }
-                    }}
-                    className="link"
-                  >
-                    <div className="committed-riders-grid-container">
-                      <div className="user-level">
-                        <div className="level-image-feed">
-                          <img id="level-image-feed" src={getLevel(rider.level)}></img>
+                  <div className="give-riders-space">
+
+                    <Link key={idx}
+                      to={user !== null && `/profile/${rider.id}`}
+                      onClick={() => {
+                        if (user === null) {
+                          setShowLoginModal(true)
+                        }
+                      }}
+                      className="link"
+                    >
+                      <div className="committed-riders-grid-container">
+                        <div className="user-level">
+                          <div className="level-image-feed">
+                            <img id="level-image-feed" src={getLevel(rider.level)}></img>
+                          </div>
                         </div>
+                        <div className="user-username">{rider.username}</div>
+                        <div className="user-location">{rider.city}, {rider.state}</div>
                       </div>
-                      <div className="user-username">{rider.username}</div>
-                      <div className="user-location">{rider.city}, {rider.state}</div>
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 ))}
               </div>}
             </div>
@@ -144,6 +147,7 @@ const RidePage = () => {
                   <div>
 
                     <button
+                      className="leave-a-ride-button"
                       onClick={async () => {
                         const result = await unCommitToRide(user.user.id, ride.id)
                         setIsCommitted(false)
@@ -152,7 +156,9 @@ const RidePage = () => {
                     >Leave Ride</button>
                   </div>
                   <div>
-                    <button onClick={() => setShowPostModal(prev => !prev)}>Post</button>
+                    <button
+                      className="leave-a-ride-button"
+                      onClick={() => setShowPostModal(prev => !prev)}>Post</button>
                   </div>
                 </div>
               }
@@ -160,6 +166,7 @@ const RidePage = () => {
                 <div>
                   <div>
                     <button
+                      className="leave-a-ride-button"
                       onClick={async () => {
                         const result = await commitToRide(user.user.id, ride.id)
                         setIsCommitted(true)

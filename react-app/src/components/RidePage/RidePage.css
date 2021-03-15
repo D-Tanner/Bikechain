@@ -16,13 +16,13 @@
 .ride-posts {grid-area: posts;}
 .ride-committed {grid-area: committed;}
 .ride-main-feed { grid-area: main; }
-.ride-location { grid-area: location; }
+.ride-location { grid-area: location; width: 300px;}
 .ride-commit-button {grid-area: button}
 
 .ride-page-grid-container {
   display: grid;
   grid-template-areas:
-    'info info info info location location'
+    'info info info info info location'
     'posts posts posts committed committed committed'
     'main main main main main main';
   grid-template-rows: 300px 90px 1fr;
@@ -74,9 +74,14 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   padding: 20px;
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
 }
+
+.give-riders-space {
+  margin-bottom: 20px;
+}
+
 
 .committed-riders-grid-container:hover {
   background-color: blanchedalmond;
@@ -98,7 +103,6 @@
 .edit-a-post-button-container {
     grid-area: edit;
     display: flex;
-    /* align-items: center; */
     justify-content: flex-end;
 }
 
@@ -193,4 +197,23 @@
 .profile-information {
   /* display: flex; */
   /* justify-content: center; */
+}
+
+.leave-a-ride-button {
+  border: none;
+  height: 40px;
+  width: 150px;
+  font-size: 20px;
+  background-color: transparent;
+  color: white;
+  margin-bottom: 20px;
+  border-width: 2px;
+  background-color: #ff7110;
+  border-color: #ff7110;
+  border-radius: 3px;
+}
+
+.leave-a-ride-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }

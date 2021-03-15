@@ -102,7 +102,7 @@ const EditUser = () => {
   };
 
   const deleteImage = (e) => {
-    setProfileImage(null)
+    setProfileImage("deleted")
     setProfileImageName(null)
   }
 

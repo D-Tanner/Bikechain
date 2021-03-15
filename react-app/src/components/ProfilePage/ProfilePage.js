@@ -17,7 +17,7 @@ const ProfilePage = () => {
   const [followingPage, setFollowingPage] = useState(false)
   const [isFollowing, setIsFollowing] = useState(false)
   const { user, setUser, showEditUserModal, setShowEditUserModal, } = useModalContext();
-
+  const [riderImage, setRiderImage] = useState('')
 
   const { userId } = useParams();
 
@@ -45,6 +45,13 @@ const ProfilePage = () => {
           setIsFollowing(true)
         }
       })
+    }
+    if (currentUser) {
+      if (currentUser.level === "Novice") setRiderImage("/novice.png")
+      if (currentUser.level === "Intermediate") setRiderImage("/intermediate.png")
+      if (currentUser.level === "Intermediate+") setRiderImage("/intermediate-plus.png")
+      if (currentUser.level === "Advanced") setRiderImage("/advanced.png")
+      if (currentUser.level === "Advanced+") setRiderImage("/advanced-plus.png")
     }
     console.log(user)
   }, [currentUser, user])
@@ -84,11 +91,18 @@ const ProfilePage = () => {
               {!currentUser.profileImage && <img className="default-profile-image-page" src="/default-profile-image.png"></img>}
               {currentUser.profileImage && <img className="profile-image-page" src={currentUser.profileImage}></img>}
             </div>}
-            <div>{currentUser.username}</div>
-            <div>{currentUser.city}, {currentUser.state}</div>
-            <div>{currentUser.level}</div>
+            <div className="current-username">
+              <div className="username-image-container">
+                <img id="username-image" src={riderImage}></img>
+              </div>
+              <div>
+                {currentUser.username}
+              </div>
+            </div>
+            <div className="current-location">{currentUser.city}, {currentUser.state}</div>
+            <div className="current-level">{currentUser.level}</div>
             {currentUser && user && (<div>
-              {currentUser.id === user.user.id && <button
+              {currentUser.id === user.user.id && <button className="edit-a-user"
                 onClick={() => setShowEditUserModal(true)}>Edit</button>}
               {currentUser.id !== user.user.id && <div>{isFollowing ?
                 <button

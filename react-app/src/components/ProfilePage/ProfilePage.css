@@ -173,7 +173,46 @@
         width: 300px;
 }
 
-/* .profile-info {
+.edit-a-user {
   display: flex;
+  border: none;
+  height: 40px;
+  width: 100px;
+  font-size: 20px;
+  background-color: transparent;
+  color: white;
+  border-width: 2px;
+  background-color: #ff7110;
+  border-color: #ff7110;
+  border-radius: 3px;
+  display: inline-block;
+}
 
-} */
+.edit-a-user:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.current-location,
+.current-level {
+  font-size: 25px;
+  color: #5e5e5e;
+}
+
+.current-username {
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  /* padding-top: 10px; */
+}
+
+.username-image-container {
+  height: 70px;
+  width: 70px;
+  margin-right: 17px;
+}
+
+#username-image {
+  max-width: 100%;
+  max-height: 100%;
+}

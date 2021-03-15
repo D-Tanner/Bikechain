@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom"
 import "./ProfilePage.css"
 import { unFollowRider, followRider } from "../../services/rides"
 import EditUser from '../../components/EditUser/EditUser'
+import { getLevel, getImage } from '../../services/getImages'
 
 const ProfilePage = () => {
 
@@ -32,6 +33,7 @@ const ProfilePage = () => {
       setRides(users.rides);
       setCommittedRides(users.committedRides);
       setFollowing(users.following);
+      console.log(users)
     })();
   }, [userId, showEditUserModal]);
 
@@ -47,15 +49,11 @@ const ProfilePage = () => {
       })
     }
     if (currentUser) {
-      if (currentUser.level === "Novice") setRiderImage("/novice.png")
-      if (currentUser.level === "Intermediate") setRiderImage("/intermediate.png")
-      if (currentUser.level === "Intermediate+") setRiderImage("/intermediate-plus.png")
-      if (currentUser.level === "Advanced") setRiderImage("/advanced.png")
-      if (currentUser.level === "Advanced+") setRiderImage("/advanced-plus.png")
+      const result = getLevel(currentUser.level)
+      setRiderImage(result)
     }
     console.log(user)
   }, [currentUser, user])
-
 
 
   return (
@@ -95,7 +93,7 @@ const ProfilePage = () => {
               <div className="username-image-container">
                 <img id="username-image" src={riderImage}></img>
               </div>
-              <div>
+              <div className="actual-username">
                 {currentUser.username}
               </div>
             </div>
@@ -126,10 +124,13 @@ const ProfilePage = () => {
             {ridePage && rides && (
               <div className='ride-feed-container'>{
                 rides.map((ride, idx) => (
-
-                  <Link key={idx} to={`/rides/${ride.id}`} className="link">
+                  // console.log(ride.level)
+                  < Link key={idx} to={`/rides/${ride.id}`} className="link">
                     <div className="ride-grid-container">
-                      <div className="level-image"></div>
+                      <div className="level-image-feed">
+                        <img id="level-image-feed" src={getImage(ride.level)}>
+                        </img>
+                      </div>
                       <div className="ride-title">{ride.title}</div>
                       <div className="ride-content">{ride.content}</div>
                       <div className="ride-date"><Moment format="MMM D" date={ride.date} /></div>

@@ -216,3 +216,18 @@
   max-width: 100%;
   max-height: 100%;
 }
+
+.actual-username {
+  padding-top: 10px;
+}
+
+.level-image-feed {
+  grid-area: image;
+  height: 70px;
+  width: 70px;
+}
+
+#level-image-feed {
+    max-width: 100%;
+  max-height: 100%;
+}

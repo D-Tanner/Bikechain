@@ -6,6 +6,7 @@ import { updatePost, deleteImage, deletePost } from "../../services/rides"
 import { editUser } from "../../services/auth"
 import DeleteIcon from "@material-ui/icons/Delete"
 import CloseIcon from '@material-ui/icons/Close';
+import { getImage, getLevel } from "../../services/getImages"
 
 import csc from "country-state-city";
 import "./EditUser.css"
@@ -48,11 +49,8 @@ const EditUser = () => {
 
   useEffect(() => {
     if (level) {
-      if (level === "Novice") setRiderImage("/novice.png")
-      if (level === "Intermediate") setRiderImage("/intermediate.png")
-      if (level === "Intermediate+") setRiderImage("/intermediate-plus.png")
-      if (level === "Advanced") setRiderImage("/advanced.png")
-      if (level === "Advanced+") setRiderImage("/advanced-plus.png")
+      const result = getLevel(level)
+      setRiderImage(result)
     }
   }, [level])
 

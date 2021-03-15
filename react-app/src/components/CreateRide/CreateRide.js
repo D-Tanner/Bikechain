@@ -12,6 +12,7 @@ import lightBlue from '@material-ui/core/colors/lightBlue'
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'react-nice-dates/build/style.css'
 import "./CreateRide.css"
+import { getImage, getLevel } from "../../services/getImages"
 
 
 
@@ -42,11 +43,8 @@ const CreateRide = ({ user }) => {
 
   useEffect(() => {
     if (level) {
-      if (level === "Easiest") setRideImage(`${process.env.PUBLIC_URL}/easiest.png`)
-      if (level === "Easy") setRideImage("/easy.png")
-      if (level === "More Difficult") setRideImage("/more-difficult.png")
-      if (level === "Very Difficult") setRideImage("/very-difficult.png")
-      if (level === "Extremely Difficult") setRideImage("/extremely-difficult.png")
+      const result = getImage(level)
+      setRideImage(result)
     }
   }, [level])
 

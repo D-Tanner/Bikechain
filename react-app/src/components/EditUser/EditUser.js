@@ -95,11 +95,15 @@ const EditUser = () => {
 
   const updateProfileImage = (e) => {
     const file = e.target.files[0];
-    if (file) setProfileImage(file);
+    if (file) {
+      setProfileImageName(file.name)
+      setProfileImage(file)
+    };
   };
 
   const deleteImage = (e) => {
     setProfileImage(null)
+    setProfileImageName(null)
   }
 
 
@@ -123,7 +127,7 @@ const EditUser = () => {
                 ))}
               </div>
               <div>
-                {profileImage &&
+                {profileImageName &&
                   <div className="selecting-images-container">
 
                     <div
@@ -133,8 +137,8 @@ const EditUser = () => {
                       <DeleteIcon />
                     </div>
                     <div className="selected-image-label">
-                      {profileImage.name}
-                      {!profileImage.name && profileImageName}
+                      {profileImageName}
+
                     </div>
                   </div>
                 }

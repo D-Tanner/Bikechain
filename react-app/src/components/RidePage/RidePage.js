@@ -53,6 +53,7 @@ const RidePage = () => {
   }, [ride])
 
 
+
   return (
     <>
       {showPostModal && <RidePost rideId={rideId} />}
@@ -84,15 +85,24 @@ const RidePage = () => {
             >Committed Riders ({ride.committedRiders.length})</div>
             <div className="ride-main-feed">
               {postFeed && posts &&
-                <div>
+                <div className="post-feed-container">
                   {posts.map((post) => (
-                    <div>
+                    <div className="each-post-in-feed">
                       <div>{post.content}</div>
                       <div>From {post.user.username}</div>
-                      {user && <span>{post.user.id === user.user.id && <button onClick={() => {
-                        setSelectedPost(post)
-                        setShowEditPostModal((prev) => !prev)
-                      }}>Edit</button>}</span>}
+                      {user && <span>{post.user.id === user.user.id && <button
+                        className="edit-a-post-button"
+                        onClick={() => {
+                          setSelectedPost(post)
+                          setShowEditPostModal((prev) => !prev)
+                        }}>Edit</button>}</span>}
+                      <div>
+                        {post.images.map((image) => (
+                          <div className="images-in-post-container">
+                            <img className="images-in-post" src={image.imageUrl}></img>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   ))}
                 </div>}
@@ -107,16 +117,7 @@ const RidePage = () => {
                     }}
                     className="link"
                   >
-                    {/* <div className="following-grid-container">
-                      <div className="profile-image"></div>
-                      <div className="user-level">{rider.level}</div>
-                      <div className="user-username">{rider.username}</div>
-                      <div className="user-location">{rider.city}, {rider.state}</div>
-                    </div> */}
                     <div className="committed-riders-grid-container">
-                      {/* <div className="profile-image">
-
-                      </div> */}
                       <div className="user-level">
                         <div className="level-image-feed">
                           <img id="level-image-feed" src={getLevel(rider.level)}></img>

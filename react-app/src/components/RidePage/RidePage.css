@@ -81,3 +81,51 @@
 .committed-riders-grid-container:hover {
   background-color: blanchedalmond;
 }
+
+.edit-a-post-button {
+  display: flex;
+  border: none;
+  height: 40px;
+  width: 100px;
+  font-size: 20px;
+  background-color: transparent;
+  color: white;
+  border-width: 2px;
+  background-color: #ff7110;
+  border-color: #ff7110;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.edit-a-post-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.post-feed-container {
+  width: 80%;
+}
+
+.each-post-in-feed {
+  border: 1px solid black;
+  margin-bottom: 30px;
+}
+
+.images-in-post-container {
+  /* background-color: blue; */
+  height: 500px;
+  width: 500px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow:hidden;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+
+.images-in-post {
+        object-fit: cover;
+        object-position: center;
+        height: 500px;
+        width: 500px;
+}

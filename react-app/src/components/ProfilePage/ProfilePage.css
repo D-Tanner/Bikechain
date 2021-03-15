@@ -110,7 +110,7 @@
     height: 100%;
     left: 0;
     top: 90px;
-    background: rgba(51,51,51,0.7);
+    /* background: rgba(51,51,51,0.7); */
 }
 
 .item1 { grid-area: rides; }
@@ -148,4 +148,86 @@
   text-align: center;
   padding: 20px 0;
   font-size: 30px;
+}
+
+.image-profile-page-container {
+  /* background-color: blue; */
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow:hidden;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.default-profile-image-page {
+  max-height: 100%;
+  max-width: 100%;
+}
+.profile-image-page {
+        object-fit: cover;
+        object-position: center;
+        height: 300px;
+        width: 300px;
+}
+
+.edit-a-user {
+  display: flex;
+  border: none;
+  height: 40px;
+  width: 100px;
+  font-size: 20px;
+  background-color: transparent;
+  color: white;
+  border-width: 2px;
+  background-color: #ff7110;
+  border-color: #ff7110;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.edit-a-user:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.current-location,
+.current-level {
+  font-size: 25px;
+  color: #5e5e5e;
+}
+
+.current-username {
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  /* padding-top: 10px; */
+}
+
+.username-image-container {
+  height: 70px;
+  width: 70px;
+  margin-right: 17px;
+}
+
+#username-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.actual-username {
+  padding-top: 10px;
+}
+
+.level-image-feed {
+  grid-area: image;
+  height: 70px;
+  width: 70px;
+}
+
+#level-image-feed {
+    max-width: 100%;
+  max-height: 100%;
 }

@@ -6,6 +6,7 @@ import { updatePost, deleteImage, deletePost } from "../../services/rides"
 import { editUser } from "../../services/auth"
 import DeleteIcon from "@material-ui/icons/Delete"
 import CloseIcon from '@material-ui/icons/Close';
+import { getImage, getLevel } from "../../services/getImages"
 
 import csc from "country-state-city";
 import "./EditUser.css"
@@ -20,6 +21,7 @@ const EditUser = () => {
   const [level, setLevel] = useState("");
   const [errors, setErrors] = useState([]);
   const [profileImage, setProfileImage] = useState(null)
+  const [profileImageName, setProfileImageName] = useState(null)
   const [riderImage, setRiderImage] = useState("")
 
   const {
@@ -36,26 +38,25 @@ const EditUser = () => {
     if (user) {
       if (user.user.profileImage) {
         const name = user.user.profileImage.split(".s3.amazonaws.com/")[1]
-        setProfileImage(name);
+        setProfileImageName(name)
+        // setProfileImage(user.user.profileImage);
       }
       setLevel(user.user.level)
+      setState(user.user.state)
+      setCity(user.user.city)
     }
   }, []);
 
   useEffect(() => {
     if (level) {
-      if (level === "Novice") setRiderImage("/novice.png")
-      if (level === "Intermediate") setRiderImage("/intermediate.png")
-      if (level === "Intermediate+") setRiderImage("/intermediate-plus.png")
-      if (level === "Advanced") setRiderImage("/advanced.png")
-      if (level === "Advanced+") setRiderImage("/advanced-plus.png")
+      const result = getLevel(level)
+      setRiderImage(result)
     }
   }, [level])
 
-
   const editUserById = async (e) => {
     e.preventDefault();
-
+    // console.log(profileImage)
     const updated = await editUser(user.user.id, city, state, level, profileImage);
     if (!updated.errors) {
       setUser(updated)
@@ -92,11 +93,15 @@ const EditUser = () => {
 
   const updateProfileImage = (e) => {
     const file = e.target.files[0];
-    if (file) setProfileImage(file.name);
+    if (file) {
+      setProfileImageName(file.name)
+      setProfileImage(file)
+    };
   };
 
   const deleteImage = (e) => {
-    setProfileImage(null)
+    setProfileImage("deleted")
+    setProfileImageName(null)
   }
 
 
@@ -120,7 +125,7 @@ const EditUser = () => {
                 ))}
               </div>
               <div>
-                {profileImage &&
+                {profileImageName &&
                   <div className="selecting-images-container">
 
                     <div
@@ -130,15 +135,16 @@ const EditUser = () => {
                       <DeleteIcon />
                     </div>
                     <div className="selected-image-label">
-                      {profileImage}
+                      {profileImageName}
+
                     </div>
                   </div>
                 }
-                <input className="choose-profile-image" type="button" id="loadFile" value="Choose a Profile Image" onClick={chooseImage} />
+                <input className="choose-profile-image" type="button" id="loadFile" value="Choose a profile Image" onClick={chooseImage} />
                 <input placeholder="Choose a Profile Image" className="hide-this-button" id="file" type="file" name="image" onChange={updateProfileImage} />
               </div>
               <div className="location-field-container">
-                <select className="location-state" name="state" onChange={updateState} value={state} required>
+                <select className="location-state" name="state" onChange={updateState} value={state}>
                   <option value="" disabled selected>
                     State
                 </option>
@@ -157,7 +163,7 @@ const EditUser = () => {
                 </select>
               </div>
               <div className="level-of-rider-container-edit">
-                <select className="level-of-rider-edit" name="level" onChange={updateLevel} value={level} required>
+                <select className="level-of-rider-edit" name="level" onChange={updateLevel} value={level}>
                   <option value="" disabled selected>Level</option>
                   <option value="Novice">Novice</option>
                   <option value="Intermediate">Intermediate</option>

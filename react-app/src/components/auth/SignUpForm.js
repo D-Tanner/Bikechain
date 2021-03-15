@@ -6,6 +6,7 @@ import csc from "country-state-city";
 import DeleteIcon from "@material-ui/icons/Delete"
 import CloseIcon from '@material-ui/icons/Close';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import { getImage, getLevel } from "../../services/getImages"
 
 import "./SignUpForm.css"
 
@@ -35,11 +36,8 @@ const SignUpForm = () => {
 
   useEffect(() => {
     if (level) {
-      if (level === "Novice") setRiderImage("/novice.png")
-      if (level === "Intermediate") setRiderImage("/intermediate.png")
-      if (level === "Intermediate+") setRiderImage("/intermediate-plus.png")
-      if (level === "Advanced") setRiderImage("/advanced.png")
-      if (level === "Advanced+") setRiderImage("/advanced-plus.png")
+      const result = getLevel(level)
+      setRiderImage(result)
     }
   }, [level])
 

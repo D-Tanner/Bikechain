@@ -110,7 +110,7 @@
     height: 100%;
     left: 0;
     top: 90px;
-    background: rgba(51,51,51,0.7);
+    /* background: rgba(51,51,51,0.7); */
 }
 
 .item1 { grid-area: rides; }
@@ -149,3 +149,22 @@
   padding: 20px 0;
   font-size: 30px;
 }
+
+.image-profile-page-container {
+  /* background-color: blue; */
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.default-profile-image-page {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+/* .profile-info {
+  display: flex;
+
+} */

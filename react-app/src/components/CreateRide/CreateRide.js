@@ -42,7 +42,7 @@ const CreateRide = ({ user }) => {
 
   useEffect(() => {
     if (level) {
-      if (level === "Easiest") setRideImage("/easiest.png")
+      if (level === "Easiest") setRideImage(`${process.env.PUBLIC_URL}/easiest.png`)
       if (level === "Easy") setRideImage("/easy.png")
       if (level === "More Difficult") setRideImage("/more-difficult.png")
       if (level === "Very Difficult") setRideImage("/very-difficult.png")

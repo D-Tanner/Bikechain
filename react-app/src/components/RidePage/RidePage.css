@@ -217,8 +217,8 @@
   display: grid;
   grid-template-areas:
   'level level title title date'
-  'level level ride-content ride-content ride-content'
-  'level level ride-content ride-content ride-content'
+  'level level ride-content ride-content ride-user'
+  'level level ride-content ride-content ride-user'
   'edit-ride edit-ride isLocal isLocal isLocal';
   grid-template-columns: 100px 100px 1fr 1fr 1fr;
 }
@@ -292,6 +292,39 @@
 }
 
 .ride-local-check-label {
-    /* padding-top: 5px; */
     margin-left: 5px;
+}
+
+.ride-current-username {
+  grid-area: ride-user;
+  font-size: 30px;
+  display: grid;
+
+}
+
+.ride-username-image-container {
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+
+#ride-username-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.ride-actual-username {
+  padding-top: 10px;
+}
+
+.rider-link {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  color: black;
+}
+
+.organized {
+  padding-top: 20px;
+  font-size: 20px;
 }

@@ -133,7 +133,10 @@
 }
 
 .posts-content {
-  grid-area: content
+  grid-area: content;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
 }
 
 .images-in-post-container {
@@ -145,9 +148,15 @@
   overflow:hidden;
   margin: 0 auto;
   margin-bottom: 10px;
-  grid-area: pic;
+  margin-top: 10px;
 }
 
+.center-post-images {
+  grid-area: pic;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .images-in-post {
         object-fit: cover;

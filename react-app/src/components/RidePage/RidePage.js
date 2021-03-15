@@ -102,11 +102,13 @@ const RidePage = () => {
                           setSelectedPost(post)
                           setShowEditPostModal((prev) => !prev)
                         }}>Edit</button></div>}
-                      <div>
+                      <div className="center-post-images">
                         {post.images.map((image) => (
+                          // <div className="center-post-images">
                           <div className="images-in-post-container">
                             <img className="images-in-post" src={image.imageUrl}></img>
                           </div>
+                          // </div>
                         ))}
                       </div>
                     </div>

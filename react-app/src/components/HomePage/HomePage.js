@@ -13,6 +13,8 @@ import Geocoder from 'react-map-gl-geocoder'
 import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 import { enGB } from 'date-fns/locale'
+import { getLevel, getImage, getDefaultImage } from '../../services/getImages'
+import Moment from "react-moment"
 
 
 
@@ -196,8 +198,13 @@ const HomePage = () => {
             anchor="bottom"
           >
             <div className="popup-container">
-              <div>{selectedRide.title}</div>
-              <Link to={`rides/${selectedRide.id}`}>See more</Link>
+              <div className="homepage-username-image-container">
+                <img id="homepage-username-image" src={getImage(selectedRide.level)}></img>
+              </div>
+              <div className="homepage-pop-title">{selectedRide.title}</div>
+              <div className="homepage-pop-username">From {selectedRide.user.username}</div>
+              <div className="homepage-pop-ride-date"><Moment format="MMM D" date={selectedRide.date} /></div>
+              <Link className="popup-link" to={`rides/${selectedRide.id}`}>See more</Link>
             </div>
           </Popup>}
         </ReactMapGL>

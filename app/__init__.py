@@ -74,6 +74,28 @@ def react_root(path):
         return app.send_static_file('favicon.ico')
     elif path == 'logo.png':
         return app.send_static_file('logo.png')
+    elif path == 'easiest.png':
+        return app.send_static_file('easiest.png')
+    elif path == 'easy.png':
+        return app.send_static_file('easy.png')
+    elif path == 'more-difficult.png':
+        return app.send_static_file('more-difficult.png')
+    elif path == 'very-difficult.png':
+        return app.send_static_file('very-difficult.png')
+    elif path == 'extremely-difficult.png':
+        return app.send_static_file('extremely-difficult.png')
+    elif path == 'novice.png':
+        return app.send_static_file('novice.png')
+    elif path == 'intermediate.png':
+        return app.send_static_file('intermediate.png')
+    elif path == 'intermediate-plus.png':
+        return app.send_static_file('intermediate-plus.png')
+    elif path == 'advanced.png':
+        return app.send_static_file('advanced.png')
+    elif path == 'advanced-plus.png':
+        return app.send_static_file('advanced-plus.png')
+
+
     return app.send_static_file('index.html')
 
 

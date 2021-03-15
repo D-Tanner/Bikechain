@@ -7,6 +7,7 @@ import "../ProfilePage/ProfilePage.css"
 import RidePost from "../RidePosts/RidePosts"
 import EditPost from "../EditPost/EditPost"
 import LoginForm from "../auth/LoginForm"
+import { getLevel, getImage, getDefaultImage } from '../../services/getImages'
 
 const RidePage = () => {
 
@@ -32,8 +33,6 @@ const RidePage = () => {
     (async () => {
       const ride = await getRideById(rideId)
       setRide(ride)
-      // console.log(ride)
-      // console.log(user)
     })();
   }, [showPostModal, showEditPostModal])
 
@@ -82,7 +81,7 @@ const RidePage = () => {
                 setCommittedFeed(true)
                 setPostFeed(false)
               }}
-            >Committed Riders</div>
+            >Committed Riders ({ride.committedRiders.length})</div>
             <div className="ride-main-feed">
               {postFeed && posts &&
                 <div>
@@ -108,9 +107,21 @@ const RidePage = () => {
                     }}
                     className="link"
                   >
-                    <div className="following-grid-container">
+                    {/* <div className="following-grid-container">
                       <div className="profile-image"></div>
                       <div className="user-level">{rider.level}</div>
+                      <div className="user-username">{rider.username}</div>
+                      <div className="user-location">{rider.city}, {rider.state}</div>
+                    </div> */}
+                    <div className="committed-riders-grid-container">
+                      {/* <div className="profile-image">
+
+                      </div> */}
+                      <div className="user-level">
+                        <div className="level-image-feed">
+                          <img id="level-image-feed" src={getLevel(rider.level)}></img>
+                        </div>
+                      </div>
                       <div className="user-username">{rider.username}</div>
                       <div className="user-location">{rider.city}, {rider.state}</div>
                     </div>

@@ -4,7 +4,6 @@
     height: 90%;
     left: 0;
     top: 90px;
-    /* background: rgba(51,51,51,0.7); */
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -35,26 +34,19 @@
   height: 100%;
 }
 
-/* .ride-main-feed {
-  height: 100%;
-}
-
-.ride-posts, .ride-committed {
-  height: 10%;
-} */
 
 .ride-page-container::-webkit-scrollbar {
   width: 9px;               /* width of the entire scrollbar */
 }
 
 .ride-page-container::-webkit-scrollbar-track {
-  background: rgb(38,38,38);        /* color of the tracking area */
+  background:white;        /* color of the tracking area */
 }
 
 .ride-page-container::-webkit-scrollbar-thumb {
-  background-color: #b4b4b498;    /* color of the scroll thumb */
+  background-color: #e0dccd;    /* color of the scroll thumb */
   border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid rgb(38,38,38);  /* creates padding around scroll thumb */
+  border: 1px solid rgb(216, 210, 210);  /* creates padding around scroll thumb */
 }
 
 .ride-page-grid-container > div {
@@ -66,9 +58,26 @@
 
 .ride-committed:hover, .ride-posts:hover {
   cursor: pointer;
-  background-color: beige;
 }
 
 #feed-selected {
-  background-color: cadetblue;
+  border-bottom: 10px solid #ff7110;
+}
+
+.committed-riders-grid-container {
+  border-bottom: 1px solid black;
+  display: grid;
+  grid-template-areas:
+    'level username username username'
+    'level location location location'
+  ;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 20px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.committed-riders-grid-container:hover {
+  background-color: blanchedalmond;
 }

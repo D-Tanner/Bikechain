@@ -76,7 +76,7 @@ const RidePage = () => {
                 <div className="ride-info-date"><Moment format="MMM D" date={ride.date} /></div>
                 <div className="ride-current-username">
                   <div className="organized">Organized By: </div>
-                  <Link to={`profile/${ride.user.id}`} className="rider-link">
+                  <Link to={`/profile/${ride.user.id}`} className="rider-link">
                     <div className="ride-username-image-container">
                       <img id="ride-username-image" src={getLevel(ride.user.level)}></img>
                     </div>

@@ -29,7 +29,7 @@
   grid-gap: 10px;
   /* background-color: #2196F3; */
   padding: 10px;
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
   height: 100%;
 }
@@ -53,7 +53,7 @@
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   padding: 20px 0;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .ride-committed:hover, .ride-posts:hover {
@@ -219,7 +219,7 @@
   'level level title title date'
   'level level ride-content ride-content ride-user'
   'level level ride-content ride-content ride-user'
-  'edit-ride edit-ride isLocal isLocal isLocal';
+  'edit-ride edit-ride isLocal isLocal ride-user';
   grid-template-columns: 100px 100px 1fr 1fr 1fr;
 }
 
@@ -321,10 +321,16 @@
   text-decoration: none;
   display: flex;
   justify-content: center;
+  align-items: center;
   color: black;
 }
 
 .organized {
-  padding-top: 20px;
+  /* padding-top: 30px; */
   font-size: 20px;
+  top: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
 }

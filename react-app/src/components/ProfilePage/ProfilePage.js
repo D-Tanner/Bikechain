@@ -68,7 +68,7 @@ const ProfilePage = () => {
               setFollowingPage(false)
             }}
           >
-            {currentUser.id === user.user.id ? "Your rides" : "Their rides"}
+            {currentUser.id === user.user.id ? "Leading" : "Leading"}
           </div>
           <div className="item2" id={commitPage ? "is-selected" : ""}
             onClick={() => {
@@ -76,14 +76,14 @@ const ProfilePage = () => {
               setCommitPage(true)
               setFollowingPage(false)
             }}
-          >Committments</div>
+          >Following</div>
           <div className="item3" id={followingPage ? "is-selected" : ""}
             onClick={() => {
               setRidePage(false)
               setCommitPage(false)
               setFollowingPage(true)
             }}
-          >Following</div>
+          >Friends</div>
           <div className="profile-info">
             {<div className="image-profile-page-container">
               {!currentUser.profileImage && <img className="default-profile-image-page" src={"/default-profile-image.png"}></img>}
@@ -110,7 +110,7 @@ const ProfilePage = () => {
                     setIsFollowing(false)
                     setUser(result)
                   }}
-                >Unfollow</button> :
+                >Add Friend</button> :
                 <button
                   className="edit-a-user"
                   onClick={async () => {
@@ -118,7 +118,7 @@ const ProfilePage = () => {
                     setIsFollowing(true)
                     setUser(result)
                   }}
-                >Follow</button>
+                >Remove Friend</button>
               }</div>}
             </div>)}
           </div>

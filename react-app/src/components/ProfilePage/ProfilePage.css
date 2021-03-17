@@ -154,7 +154,7 @@
   /* background-color: rgba(219, 190, 190, 0.8); */
   text-align: center;
   padding: 20px 0;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .image-profile-page-container {
@@ -184,7 +184,7 @@
   display: flex;
   border: none;
   height: 40px;
-  width: 100px;
+  width: 150px;
   font-size: 20px;
   background-color: transparent;
   color: white;
@@ -203,6 +203,7 @@
 .current-location,
 .current-level {
   font-size: 25px;
+  padding: 5px;
   color: #5e5e5e;
 }
 

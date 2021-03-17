@@ -13,7 +13,7 @@ import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
 import 'react-nice-dates/build/style.css'
 import "../CreateRide/CreateRide.css"
 import "./EditRide.css"
-import { getImage, getLevel } from "../../services/getImages"
+import { getImage } from "../../services/getImages"
 
 
 

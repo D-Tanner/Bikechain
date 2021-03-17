@@ -5,9 +5,7 @@ import "./Navigation.css"
 import LoginForm from "../auth/LoginForm"
 import SignUpForm from "../auth/SignUpForm"
 import LogoutButton from '../auth/LogoutButton';
-import RidePost from "../RidePosts/RidePosts"
 import { useModalContext } from "../../context/Modal"
-import { authenticate } from '../../services/auth';
 
 
 const Navigation = () => {
@@ -20,15 +18,13 @@ const Navigation = () => {
     setAuthenticated,
     showLoginModal,
     setShowLoginModal,
-    showPostModal,
-    setShowPostModal,
+
     showSignUpModal,
     setShowSignUpModal,
-    showSearchBarModal,
-    setShowSearchBarModal,
+
   } = useModalContext();
 
-  // console.log(user)
+
   return (
     <>
       {showLoginModal && <LoginForm />}
@@ -67,7 +63,7 @@ const Navigation = () => {
                 <button
                   className="nav-signup"
                   onClick={() => {
-                    // console.log(showSignUpModal)
+
                     setShowLoginModal(false);
                     setShowSignUpModal((prev) => !prev);
                   }}

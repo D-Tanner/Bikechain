@@ -5,8 +5,7 @@ import { Modal, useModalContext } from "../../context/Modal"
 import csc from "country-state-city";
 import DeleteIcon from "@material-ui/icons/Delete"
 import CloseIcon from '@material-ui/icons/Close';
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
-import { getImage, getLevel } from "../../services/getImages"
+import { getLevel } from "../../services/getImages"
 
 import "./SignUpForm.css"
 
@@ -23,7 +22,7 @@ const SignUpForm = () => {
   const [profileImage, setProfileImage] = useState(null)
   const [riderImage, setRiderImage] = useState("")
   const {
-    user,
+
     setUser,
     authenticated,
     setAuthenticated,
@@ -120,7 +119,7 @@ const SignUpForm = () => {
         <Modal onClose={() => setShowSignUpModal(false)}>
           <div className="signup-modal-container-width">
             <div className="level-rider-image-container">
-              {level && <img id="rider-image" src={riderImage}></img>}
+              {level && <img id="rider-image" src={riderImage} alt=""></img>}
             </div>
             <form onSubmit={onSignUp}>
               <div className="close-button-container">

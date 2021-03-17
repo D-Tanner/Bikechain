@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, useParams, useHistory } from "react-router-dom";
-import { login } from "../../services/auth";
 import { Modal, useModalContext } from "../../context/Modal"
-import { updatePost, deleteImage, deletePost } from "../../services/rides"
 import { editUser } from "../../services/auth"
 import DeleteIcon from "@material-ui/icons/Delete"
 import CloseIcon from '@material-ui/icons/Close';
-import { getImage, getLevel } from "../../services/getImages"
+import { getLevel } from "../../services/getImages"
 
 import csc from "country-state-city";
 import "./EditUser.css"
@@ -111,7 +108,7 @@ const EditUser = () => {
         <Modal onClose={() => setShowEditUserModal(false)}>
           <div className="edit-user-modal-container-width">
             <div className="level-rider-image-container">
-              {level && <img id="rider-image" src={riderImage}></img>}
+              {level && <img id="rider-image" src={riderImage} alt=""></img>}
             </div>
             <form onSubmit={editUserById} className="create-post-form">
               <div className="edit-user-close-button-container">

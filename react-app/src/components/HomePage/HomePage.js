@@ -188,7 +188,7 @@ const HomePage = () => {
           >
             <div className="popup-container">
               <div className="homepage-username-image-container">
-                <img id="homepage-username-image" src={getImage(selectedRide.level)}></img>
+                <img id="homepage-username-image" src={getImage(selectedRide.level)} alt=""></img>
               </div>
               <div className="homepage-pop-title">{selectedRide.title}</div>
               <div className="homepage-pop-username">From {selectedRide.user.username}</div>

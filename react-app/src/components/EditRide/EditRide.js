@@ -93,10 +93,10 @@ const EditRide = ({ user }) => {
     setIsLocal((prev) => !prev)
   }
 
-  const updateDate = (date) => {
-    const x = document.getElementById("input-date-value")
-    setDate(x.value)
-  }
+  // const updateDate = (date) => {
+  //   const x = document.getElementById("input-date-value")
+  //   setDate(x.value)
+  // }
 
   const [viewport, setViewport] = useState({
     latitude: 39.703683999394386,
@@ -140,7 +140,7 @@ const EditRide = ({ user }) => {
               <h1>Update Your Ride!</h1>
             </div>
             <div className="level-ride-image-container">
-              {level && <img id="ride-image" src={rideImage}></img>}
+              {level && <img id="ride-image" src={rideImage} alt=""></img>}
             </div>
             <div></div>
           </div>

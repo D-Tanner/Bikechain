@@ -1,17 +1,13 @@
 import React, { useState } from "react";
-import { Redirect, useParams, useHistory } from "react-router-dom";
-import { login } from "../../services/auth";
 import { Modal, useModalContext } from "../../context/Modal"
-import { createPost, getRideById } from "../../services/rides"
+import { createPost } from "../../services/rides"
 import DeleteIcon from "@material-ui/icons/Delete"
 import CloseIcon from '@material-ui/icons/Close';
 
 import "./RidePosts.css"
 
 const PostForm = ({ rideId }) => {
-  const history = useHistory();
   const [content, setContent] = useState()
-  const [description, setDescription] = useState("")
 
   const [images, setAdditionalImages] = useState([])
   const [errors, setErrors] = useState([]);

@@ -1,11 +1,10 @@
 import React from "react";
 import { logout } from "../../services/auth";
-import { Modal, useModalContext } from "../../context/Modal"
+import { useModalContext } from "../../context/Modal"
 import { useHistory } from "react-router-dom"
 const LogoutButton = () => {
   const history = useHistory();
   const {
-    user,
     setUser,
     setAuthenticated,
   } = useModalContext();

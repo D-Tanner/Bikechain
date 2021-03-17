@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Modal, useModalContext } from "../../context/Modal"
 import ReactMapGL, { Marker, Popup, NavigationControl } from 'react-map-gl';
 import { getRides } from '../../services/rides'
 import { getMapToken } from '../../services/auth'
@@ -13,22 +12,13 @@ import Geocoder from 'react-map-gl-geocoder'
 import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 import { enGB } from 'date-fns/locale'
-import { getLevel, getImage, getDefaultImage } from '../../services/getImages'
+import { getImage } from '../../services/getImages'
 import Moment from "react-moment"
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 
 
 const HomePage = () => {
-
-  const {
-    user,
-    authenticated,
-    setAuthenticated,
-  } = useModalContext();
-
-
-
 
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
@@ -43,7 +33,6 @@ const HomePage = () => {
     longitude: -105.0444,
     zoom: 8
   });
-
 
 
   useEffect(() => {
@@ -199,7 +188,7 @@ const HomePage = () => {
           >
             <div className="popup-container">
               <div className="homepage-username-image-container">
-                <img id="homepage-username-image" src={getImage(selectedRide.level)}></img>
+                <img id="homepage-username-image" src={getImage(selectedRide.level)} alt=""></img>
               </div>
               <div className="homepage-pop-title">{selectedRide.title}</div>
               <div className="homepage-pop-username">From {selectedRide.user.username}</div>

@@ -9,8 +9,6 @@ import HomePage from "./components/HomePage/HomePage"
 import EditRide from "./components/EditRide/EditRide"
 import ProfilePage from "./components/ProfilePage/ProfilePage"
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UsersList from "./components/UsersList";
-import User from "./components/User";
 import { authenticate } from "./services/auth";
 import { useModalContext } from "./context/Modal";
 
@@ -36,7 +34,7 @@ function App() {
       }
       setLoaded(true);
     })();
-  }, []);
+  }, [setAuthenticated, setUser]);
 
 
   if (!loaded) {

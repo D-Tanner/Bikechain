@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Modal, useModalContext } from "../../context/Modal"
+import React, { useState, useEffect } from "react";
+import { useModalContext } from "../../context/Modal"
 import { useParams, Link, useHistory } from "react-router-dom"
 import { unCommitToRide, commitToRide, getRideById } from "../../services/rides"
 import "./RidePage.css"
 import "../ProfilePage/ProfilePage.css"
 import RidePost from "../RidePosts/RidePosts"
 import EditPost from "../EditPost/EditPost"
-import LoginForm from "../auth/LoginForm"
-import { getLevel, getImage, getDefaultImage } from '../../services/getImages'
+import { getLevel, getImage } from '../../services/getImages'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Moment from "react-moment"
 import lightBlue from '@material-ui/core/colors/lightBlue'
@@ -20,7 +19,6 @@ const RidePage = () => {
   const { user,
     showPostModal,
     setShowPostModal,
-    showLoginModal,
     setShowLoginModal,
     showEditPostModal,
     setShowEditPostModal,
@@ -38,7 +36,7 @@ const RidePage = () => {
       const ride = await getRideById(rideId)
       setRide(ride)
     })();
-  }, [showPostModal, showEditPostModal])
+  }, [showPostModal, showEditPostModal, rideId])
 
   useEffect(() => {
     if (ride) {
@@ -69,7 +67,7 @@ const RidePage = () => {
             <div className="ride-info">
               <div className="ride-info-grid">
                 <div className="ridepage-level-image-container">
-                  <img id="ridepage-level-image" src={getImage(ride.level)}></img>
+                  <img id="ridepage-level-image" src={getImage(ride.level)} alt=""></img>
                 </div>
                 <div className="ride-info-title">{ride.title}</div>
                 <div className="ride-info-content">{ride.content}</div>
@@ -78,7 +76,7 @@ const RidePage = () => {
                   <div className="organized">Organized By: </div>
                   <Link to={`/profile/${ride.user.id}`} className="rider-link">
                     <div className="ride-username-image-container">
-                      <img id="ride-username-image" src={getLevel(ride.user.level)}></img>
+                      <img id="ride-username-image" src={getLevel(ride.user.level)} alt=""></img>
                     </div>
                     <div className="ride-actual-username">
                       {ride.user.username}
@@ -127,8 +125,8 @@ const RidePage = () => {
                     <div className="each-post-in-feed">
 
                       <div className="posts-image-profile-page-container">
-                        {!post.user.profileImage && <img className="posts-default-profile-image-page" src={"/default-profile-image.png"}></img>}
-                        {post.user.profileImage && <img className="posts-profile-image-page" src={post.user.profileImage}></img>}
+                        {!post.user.profileImage && <img className="posts-default-profile-image-page" src={"/default-profile-image.png"} alt=""></img>}
+                        {post.user.profileImage && <img className="posts-profile-image-page" src={post.user.profileImage} alt=""></img>}
                       </div>
                       <div className="posts-username">{post.user.username}</div>
 
@@ -143,7 +141,7 @@ const RidePage = () => {
                         {post.images.map((image) => (
                           // <div className="center-post-images">
                           <div className="images-in-post-container">
-                            <img className="images-in-post" src={image.imageUrl}></img>
+                            <img className="images-in-post" src={image.imageUrl} alt=""></img>
                           </div>
                           // </div>
                         ))}
@@ -167,7 +165,7 @@ const RidePage = () => {
                       <div className="committed-riders-grid-container">
                         <div className="user-level">
                           <div className="level-image-feed">
-                            <img id="level-image-feed" src={getLevel(rider.level)}></img>
+                            <img id="level-image-feed" src={getLevel(rider.level)} alt=""></img>
                           </div>
                         </div>
                         <div className="user-username">{rider.username}</div>

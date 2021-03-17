@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, useParams, useHistory } from "react-router-dom";
-import { login } from "../../services/auth";
 import { Modal, useModalContext } from "../../context/Modal"
 import { updatePost, deleteImage, deletePost } from "../../services/rides"
 import DeleteIcon from "@material-ui/icons/Delete"
@@ -10,7 +8,6 @@ import "./EditPost.css"
 
 const EditPostForm = ({ post }) => {
 
-  const history = useHistory();
   const [content, setContent] = useState(post.content)
 
   const [images, setAdditionalImages] = useState([])
@@ -20,8 +17,6 @@ const EditPostForm = ({ post }) => {
 
   const {
     user,
-    showPostModal,
-    setShowPostModal,
     showEditPostModal,
     setShowEditPostModal,
   } = useModalContext();

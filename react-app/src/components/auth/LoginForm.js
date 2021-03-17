@@ -11,7 +11,6 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
 
   const {
-    user,
     setUser,
     authenticated,
     setAuthenticated,

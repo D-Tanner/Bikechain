@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Moment from "react-moment"
-import { Modal, useModalContext } from "../../context/Modal"
+import { useModalContext } from "../../context/Modal"
 import { useParams, Link } from "react-router-dom"
 import "./ProfilePage.css"
 import { unFollowRider, followRider } from "../../services/rides"
 import EditUser from '../../components/EditUser/EditUser'
-import { getLevel, getImage, getDefaultImage } from '../../services/getImages'
+import { getLevel, getImage, } from '../../services/getImages'
 
 const ProfilePage = () => {
 
@@ -86,12 +86,12 @@ const ProfilePage = () => {
           >Friends</div>
           <div className="profile-info">
             {<div className="image-profile-page-container">
-              {!currentUser.profileImage && <img className="default-profile-image-page" src={"/default-profile-image.png"}></img>}
-              {currentUser.profileImage && <img className="profile-image-page" src={currentUser.profileImage}></img>}
+              {!currentUser.profileImage && <img className="default-profile-image-page" src={"/default-profile-image.png"} alt=""></img>}
+              {currentUser.profileImage && <img className="profile-image-page" src={currentUser.profileImage} alt=""></img>}
             </div>}
             <div className="current-username">
               <div className="username-image-container">
-                <img id="username-image" src={riderImage}></img>
+                <img id="username-image" src={riderImage} alt=""></img>
               </div>
               <div className="actual-username">
                 {currentUser.username}
@@ -129,7 +129,7 @@ const ProfilePage = () => {
                   < Link key={idx} to={`/rides/${ride.id}`} className="link">
                     <div className="ride-grid-container">
                       <div className="level-image-feed">
-                        <img id="level-image-feed" src={getImage(ride.level)}></img>
+                        <img id="level-image-feed" src={getImage(ride.level)} alt=""></img>
                       </div>
                       <div className="ride-title">{ride.title}</div>
                       {user.user.id === currentUser.id && <div className="ride-content">From You</div>}
@@ -148,7 +148,7 @@ const ProfilePage = () => {
                   <Link key={idx} to={`/rides/${ride.id}`} className="link">
                     <div className="ride-grid-container">
                       <div className="level-image-feed">
-                        <img id="level-image-feed" src={getImage(ride.level)}></img>
+                        <img id="level-image-feed" src={getImage(ride.level)} alt=""></img>
                       </div>
                       <div className="ride-level-image"></div>
                       <div className="ride-title">{ride.title}</div>
@@ -180,7 +180,7 @@ const ProfilePage = () => {
                       </div> */}
                       <div className="user-level">
                         <div className="level-image-feed">
-                          <img id="level-image-feed" src={getLevel(user.level)}></img>
+                          <img id="level-image-feed" src={getLevel(user.level)} alt=""></img>
                         </div>
                       </div>
                       <div className="user-username">{user.username}</div>

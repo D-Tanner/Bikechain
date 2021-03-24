@@ -67,9 +67,7 @@
   background-color: blanchedalmond;
 }
 
-.profile-image {
-  grid-area: profileImage;
-}
+
 
 .user-level {
   grid-area: level;
@@ -94,14 +92,34 @@
   border-bottom: 1px solid black;
   display: grid;
   grid-template-areas:
-    'level username username username'
-    'level location location location'
+    'level profileImage username username'
+    'level profileImage location location'
   ;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 80px 80px 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   padding: 20px;
 }
 
+.profile-image-container {
+    grid-area: profileImage;
+  display: flex;
+  text-align: left;
+
+}
+
+.profile-image-in-feed {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#profile-image-in-feed {
+  max-height: 100%;
+}
 .following-grid-container:hover {
   background-color: blanchedalmond;
 }
@@ -166,7 +184,6 @@
   background-repeat: no-repeat;
   overflow:hidden;
   margin: 0 auto;
-  margin-bottom: 10px;
 }
 
 .default-profile-image-page {
@@ -231,8 +248,8 @@
 
 .level-image-feed {
   grid-area: image;
-  height: 70px;
-  width: 70px;
+  height: 80px;
+  width: 80px;
 }
 
 #level-image-feed {

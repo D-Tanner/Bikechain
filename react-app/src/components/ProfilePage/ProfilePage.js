@@ -174,12 +174,16 @@ const ProfilePage = () => {
                     }}
                   >
                     <div className="following-grid-container">
-                      {/* <div className="profile-image">
 
-                      </div> */}
                       <div className="user-level">
                         <div className="level-image-feed">
                           <img id="level-image-feed" src={getLevel(user.level)} alt=""></img>
+                        </div>
+                      </div>
+                      <div className="profile-image-container">
+                        <div className="profile-image-in-feed">
+
+                          {user.profileImage && <img id="profile-image-in-feed" src={user.profileImage} alt=""></img>}
                         </div>
                       </div>
                       <div className="user-username">{user.username}</div>

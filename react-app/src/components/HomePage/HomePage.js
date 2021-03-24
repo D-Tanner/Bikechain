@@ -150,6 +150,7 @@ const HomePage = () => {
         <ReactMapGL
           {...viewport} width="100%" height="100%"
           ref={mapRef}
+          maxZoom={10}
           onClick={() => setPopup(false)}
           mapStyle="mapbox://styles/dft609/cklyko9gp16fx17qkfkqteipz"
           mapboxApiAccessToken={mapToken}

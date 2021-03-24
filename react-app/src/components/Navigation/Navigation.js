@@ -72,6 +72,7 @@ const Navigation = () => {
                 )}
               </div>
             </div>}
+            {/* {authenticated && <div className="nav-logged-in-container"> */}
             {authenticated && <div>
               <LogoutButton
                 className="nav-logout"
@@ -89,6 +90,7 @@ const Navigation = () => {
                   }
                 }}>Your Profile</button>
             </div>}
+            {/* </div>} */}
             {authenticated && <div className="nav-create-a-ride-container">
               <button
                 className="nav-create-a-ride"

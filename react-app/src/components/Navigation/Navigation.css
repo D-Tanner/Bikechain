@@ -22,6 +22,18 @@
   align-items: center;
 }
 
+/* .navigation-login-button {
+  padding-left: 100px;
+} */
+.navigation-login-button {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+}
+/* .nav-login {
+  padding-left: 100px;
+} */
+
 #navigation-button-container {
   text-align: center;
 }

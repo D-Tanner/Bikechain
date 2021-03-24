@@ -45,7 +45,7 @@ const Navigation = () => {
           </div>
           <div className="navigation-second-fraction">
 
-            <div>
+            {!authenticated && <div className="navigation-login-button">
               {!authenticated && (
                 <button
                   className="nav-login"
@@ -57,21 +57,21 @@ const Navigation = () => {
                   Login
                 </button>
               )}
-            </div>
-            <div>
-              {!authenticated && (
-                <button
-                  className="nav-signup"
-                  onClick={() => {
+              <div>
+                {!authenticated && (
+                  <button
+                    className="nav-signup"
+                    onClick={() => {
 
-                    setShowLoginModal(false);
-                    setShowSignUpModal((prev) => !prev);
-                  }}
-                >
-                  Sign Up
-                </button>
-              )}
-            </div>
+                      setShowLoginModal(false);
+                      setShowSignUpModal((prev) => !prev);
+                    }}
+                  >
+                    Sign Up
+                  </button>
+                )}
+              </div>
+            </div>}
             {authenticated && <div>
               <LogoutButton
                 className="nav-logout"

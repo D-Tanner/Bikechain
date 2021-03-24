@@ -169,9 +169,9 @@ const RidePage = () => {
                           </div>
                         </div>
                         <div className="ride-profile-image-container">
-                          <div className="ride-profile-image-in-feed">
-                            {rider.profileImage && <img id="ride-profile-image-in-feed" src={rider.profileImage} alt=""></img>}
-                          </div>
+                          {/* <div className="ride-profile-image-in-feed"> */}
+                          {rider.profileImage && <img id="ride-profile-image-in-feed" src={rider.profileImage} alt=""></img>}
+                          {/* </div> */}
                         </div>
                         <div className="user-username">{rider.username}</div>
                         <div className="user-location">{rider.city}, {rider.state}</div>

@@ -81,6 +81,10 @@ const HomePage = () => {
     }
   }, [startDate, endDate])
 
+  useEffect(() => {
+    console.log(viewport)
+  }, [viewport])
+
   const navControlStyle = {
     left: 10,
     top: 10,
@@ -122,7 +126,6 @@ const HomePage = () => {
             endDate={endDate}
             onStartDateChange={setStartDate}
             onEndDateChange={setEndDate}
-            // minimumDate={new Date()}
             minimumLength={1}
             format='dd MMM yyyy'
             locale={enGB}
@@ -158,6 +161,7 @@ const HomePage = () => {
             mapboxApiAccessToken={mapToken}
             position="top-right"
             marker={false}
+            zoom={8}
           />
 
           <NavigationControl style={navControlStyle} />
@@ -190,6 +194,7 @@ const HomePage = () => {
               <div className="homepage-username-image-container">
                 <img id="homepage-username-image" src={getImage(selectedRide.level)} alt=""></img>
               </div>
+              <div className="homepage-pop-level">{selectedRide.level}</div>
               <div className="homepage-pop-title">{selectedRide.title}</div>
               <div className="homepage-pop-username">From {selectedRide.user.username}</div>
               <div className="homepage-pop-ride-date"><Moment format="MMM D" date={selectedRide.date} /></div>

@@ -19,6 +19,7 @@
 .ride-location { grid-area: location; width: 100px;}
 .ride-commit-button {grid-area: button}
 
+
 .ride-page-grid-container {
   display: grid;
   grid-template-areas:
@@ -74,14 +75,21 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   padding: 20px;
-  width: 60%;
+  /* width: 60%; */
   margin: 0 auto;
 }
 
 .give-riders-space {
   margin-bottom: 20px;
+  justify-content: center;
+  /* display: flex; */
+  /* width: 70%; */
 }
 
+.committed-rider-feed-ride-page {
+  width: 70%;
+  margin: 0 auto;
+}
 
 .committed-riders-grid-container:hover {
   background-color: blanchedalmond;

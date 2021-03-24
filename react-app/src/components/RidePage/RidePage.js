@@ -149,7 +149,7 @@ const RidePage = () => {
                     </div>
                   ))}
                 </div>}
-              {committedFeed && <div>
+              {committedFeed && <div className="committed-rider-feed-ride-page">
                 {ride.committedRiders.map((rider, idx) => (
                   <div className="give-riders-space">
 
@@ -160,7 +160,7 @@ const RidePage = () => {
                           setShowLoginModal(true)
                         }
                       }}
-                      className="link"
+                      className="link ride-page-committed-link"
                     >
                       <div className="committed-riders-grid-container">
                         <div className="user-level">

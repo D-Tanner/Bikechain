@@ -26,9 +26,15 @@ const HomePage = () => {
   const [rides, setRides] = useState([])
   const [popup, setPopup] = useState(false)
   const [mapToken, setMapToken] = useState()
+  const [showRideResults, setShowRideResults] = useState(false)
 
   const [selectedRide, setSelectedRide] = useState(null)
   const [viewport, setViewport] = useState({
+    latitude: 39.703683999394386,
+    longitude: -105.0444,
+    zoom: 8
+  });
+  const [searchParams, setSearchParams] = useState({
     latitude: 39.703683999394386,
     longitude: -105.0444,
     zoom: 8
@@ -150,7 +156,6 @@ const HomePage = () => {
         <ReactMapGL
           {...viewport} width="100%" height="100%"
           ref={mapRef}
-          maxZoom={10}
           onClick={() => setPopup(false)}
           mapStyle="mapbox://styles/dft609/cklyko9gp16fx17qkfkqteipz"
           mapboxApiAccessToken={mapToken}
@@ -158,6 +163,8 @@ const HomePage = () => {
         >
           <Geocoder
             mapRef={mapRef}
+            // onLoading={() => setShowRideResults(true)}
+            // onClear={() => setShowRideResults(false)}
             onViewportChange={handleGeocoderViewportChange}
             mapboxApiAccessToken={mapToken}
             position="top-right"

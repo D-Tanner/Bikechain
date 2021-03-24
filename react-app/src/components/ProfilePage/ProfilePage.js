@@ -33,7 +33,6 @@ const ProfilePage = () => {
       setRides(users.rides);
       setCommittedRides(users.committedRides);
       setFollowing(users.following);
-      console.log(users)
     })();
   }, [userId, showEditUserModal]);
 

@@ -102,24 +102,27 @@
 }
 
 .profile-image-container {
-    grid-area: profileImage;
+  grid-area: profileImage;
   display: flex;
   text-align: left;
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background-position: center center;
+  background-repeat: no-repeat;
 
 }
 
-.profile-image-in-feed {
-    height: 70px;
-    width: 70px;
-    border-radius: 50%;
-    background-position: center center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-    margin: 0 auto;
-}
+
 
 #profile-image-in-feed {
-  max-height: 100%;
+  object-fit: cover;
+  object-position: center;
+  height: 70px;
+  width: 70px;
 }
 .following-grid-container:hover {
   background-color: blanchedalmond;

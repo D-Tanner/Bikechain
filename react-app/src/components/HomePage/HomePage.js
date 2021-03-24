@@ -87,9 +87,9 @@ const HomePage = () => {
     }
   }, [startDate, endDate])
 
-  useEffect(() => {
-    console.log(viewport)
-  }, [viewport])
+  // useEffect(() => {
+  //   console.log(viewport)
+  // }, [viewport])
 
   const navControlStyle = {
     left: 10,

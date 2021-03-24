@@ -149,7 +149,7 @@ const RidePage = () => {
                     </div>
                   ))}
                 </div>}
-              {committedFeed && <div>
+              {committedFeed && <div className="committed-rider-feed-ride-page">
                 {ride.committedRiders.map((rider, idx) => (
                   <div className="give-riders-space">
 
@@ -160,12 +160,17 @@ const RidePage = () => {
                           setShowLoginModal(true)
                         }
                       }}
-                      className="link"
+                      className="link ride-page-committed-link"
                     >
                       <div className="committed-riders-grid-container">
                         <div className="user-level">
                           <div className="level-image-feed">
                             <img id="level-image-feed" src={getLevel(rider.level)} alt=""></img>
+                          </div>
+                        </div>
+                        <div className="ride-profile-image-container">
+                          <div className="ride-profile-image-in-feed">
+                            {rider.profileImage && <img id="ride-profile-image-in-feed" src={rider.profileImage} alt=""></img>}
                           </div>
                         </div>
                         <div className="user-username">{rider.username}</div>

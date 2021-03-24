@@ -19,6 +19,7 @@
 .ride-location { grid-area: location; width: 100px;}
 .ride-commit-button {grid-area: button}
 
+
 .ride-page-grid-container {
   display: grid;
   grid-template-areas:
@@ -68,20 +69,47 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   display: grid;
   grid-template-areas:
-    'level username username username'
-    'level location location location'
+    'level rideProfileImage username username'
+    'level rideProfileImage location location'
   ;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 3fr 3fr;
   grid-template-rows: 1fr 1fr;
   padding: 20px;
-  width: 60%;
+  /* width: 60%; */
   margin: 0 auto;
+}
+
+.ride-profile-image-container {
+    grid-area: rideProfileImage;
+  display: flex;
+  text-align: left;
+}
+
+.ride-profile-image-in-feed {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#ride-profile-image-in-feed {
+  max-height: 100%;
 }
 
 .give-riders-space {
   margin-bottom: 20px;
+  justify-content: center;
+  /* display: flex; */
+  /* width: 70%; */
 }
 
+.committed-rider-feed-ride-page {
+  width: 70%;
+  margin: 0 auto;
+}
 
 .committed-riders-grid-container:hover {
   background-color: blanchedalmond;
@@ -216,10 +244,10 @@
 .ride-info-grid {
   display: grid;
   grid-template-areas:
-  'level level title title date'
+  'level level title title isLocal'
   'level level ride-content ride-content ride-user'
   'level level ride-content ride-content ride-user'
-  'edit-ride edit-ride isLocal isLocal ride-user';
+  'edit-ride edit-ride date date ride-user';
   grid-template-columns: 100px 100px 1fr 1fr 1fr;
 }
 
@@ -241,13 +269,17 @@
   font-size: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  /* margin-left: 20px; */
+  justify-content: flex-start;
+    margin-left: 20px;
+  font-size: 20px;
 
 }
 
 .ride-info-local {
   grid-area: isLocal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ride-info-edit {

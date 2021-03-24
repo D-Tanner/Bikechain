@@ -22,6 +22,28 @@
   align-items: center;
 }
 
+/* .nav-logout {
+  margin-left: 150px;
+} */
+.nav-logged-in-container {
+  display: flex;
+  justify-content: flex-end;
+  /* justify-content: space-between; */
+  width: 400px;
+}
+
+/* .navigation-login-button {
+  padding-left: 100px;
+} */
+.navigation-login-button {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+}
+/* .nav-login {
+  padding-left: 100px;
+} */
+
 #navigation-button-container {
   text-align: center;
 }
@@ -61,6 +83,8 @@
     font-size: 20px;
 }
 
+
+
 .nav-create-a-ride {
   display: flex;
   border: none;
@@ -89,6 +113,7 @@
     overflow: hidden;
     outline:none;
     font-size: 20px;
+    margin-left: 20px;
 }
 
 .nav-your-profile:hover,

@@ -26,9 +26,15 @@ const HomePage = () => {
   const [rides, setRides] = useState([])
   const [popup, setPopup] = useState(false)
   const [mapToken, setMapToken] = useState()
+  const [showRideResults, setShowRideResults] = useState(false)
 
   const [selectedRide, setSelectedRide] = useState(null)
   const [viewport, setViewport] = useState({
+    latitude: 39.703683999394386,
+    longitude: -105.0444,
+    zoom: 8
+  });
+  const [searchParams, setSearchParams] = useState({
     latitude: 39.703683999394386,
     longitude: -105.0444,
     zoom: 8
@@ -81,6 +87,10 @@ const HomePage = () => {
     }
   }, [startDate, endDate])
 
+  // useEffect(() => {
+  //   console.log(viewport)
+  // }, [viewport])
+
   const navControlStyle = {
     left: 10,
     top: 10,
@@ -122,7 +132,6 @@ const HomePage = () => {
             endDate={endDate}
             onStartDateChange={setStartDate}
             onEndDateChange={setEndDate}
-            // minimumDate={new Date()}
             minimumLength={1}
             format='dd MMM yyyy'
             locale={enGB}
@@ -154,15 +163,22 @@ const HomePage = () => {
         >
           <Geocoder
             mapRef={mapRef}
+            // onLoading={() => setShowRideResults(true)}
+            // onClear={() => setShowRideResults(false)}
+            // onLoading={() => console.log("loading")}
+            // onClear={() => console.log("cleared")}
             onViewportChange={handleGeocoderViewportChange}
             mapboxApiAccessToken={mapToken}
             position="top-right"
             marker={false}
+            zoom={8}
           />
 
           <NavigationControl style={navControlStyle} />
           {filteredRides.map((ride, idx) => (
             <Marker key={idx}
+              offsetLeft={-30}
+              offsetTop={-40}
               latitude={ride.latitude}
               longitude={ride.longitude}
             >
@@ -179,7 +195,8 @@ const HomePage = () => {
             longitude={selectedRide.longitude}
             closeButton={true}
             closeOnClick={false}
-            offsetLeft={25}
+            offsetLeft={-5}
+            offsetTop={-40}
             onClose={() => {
               setSelectedRide(null)
               setPopup(false)
@@ -190,9 +207,12 @@ const HomePage = () => {
               <div className="homepage-username-image-container">
                 <img id="homepage-username-image" src={getImage(selectedRide.level)} alt=""></img>
               </div>
+              <div className="homepage-pop-level">{selectedRide.level}</div>
               <div className="homepage-pop-title">{selectedRide.title}</div>
               <div className="homepage-pop-username">From {selectedRide.user.username}</div>
+
               <div className="homepage-pop-ride-date"><Moment format="MMM D" date={selectedRide.date} /></div>
+              {/* <div className="homepage-pop-bottom-line"> */}
               {selectedRide.isLocal && (
                 <div className="local-check">
                   <div>
@@ -203,6 +223,7 @@ const HomePage = () => {
                   </div>
                 </div>)}
               < Link className="popup-link" to={`rides/${selectedRide.id}`}>See more</Link>
+              {/* </div> */}
             </div>
           </Popup>}
         </ReactMapGL>

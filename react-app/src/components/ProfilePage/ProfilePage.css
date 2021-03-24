@@ -79,6 +79,7 @@
   grid-area: username;
   display: flex;
   text-align: left;
+  padding-left: 20px;
 }
 
 .user-location {
@@ -95,7 +96,7 @@
     'level profileImage username username'
     'level profileImage location location'
   ;
-  grid-template-columns: 80px 80px 1fr 1fr;
+  grid-template-columns: 85px 85px 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   padding: 20px;
 }

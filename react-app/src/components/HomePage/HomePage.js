@@ -165,6 +165,8 @@ const HomePage = () => {
             mapRef={mapRef}
             // onLoading={() => setShowRideResults(true)}
             // onClear={() => setShowRideResults(false)}
+            // onLoading={() => console.log("loading")}
+            // onClear={() => console.log("cleared")}
             onViewportChange={handleGeocoderViewportChange}
             mapboxApiAccessToken={mapToken}
             position="top-right"

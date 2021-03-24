@@ -210,7 +210,9 @@ const HomePage = () => {
               <div className="homepage-pop-level">{selectedRide.level}</div>
               <div className="homepage-pop-title">{selectedRide.title}</div>
               <div className="homepage-pop-username">From {selectedRide.user.username}</div>
+
               <div className="homepage-pop-ride-date"><Moment format="MMM D" date={selectedRide.date} /></div>
+              {/* <div className="homepage-pop-bottom-line"> */}
               {selectedRide.isLocal && (
                 <div className="local-check">
                   <div>
@@ -221,6 +223,7 @@ const HomePage = () => {
                   </div>
                 </div>)}
               < Link className="popup-link" to={`rides/${selectedRide.id}`}>See more</Link>
+              {/* </div> */}
             </div>
           </Popup>}
         </ReactMapGL>

@@ -69,14 +69,34 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   display: grid;
   grid-template-areas:
-    'level username username username'
-    'level location location location'
+    'level rideProfileImage username username'
+    'level rideProfileImage location location'
   ;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 3fr 3fr;
   grid-template-rows: 1fr 1fr;
   padding: 20px;
   /* width: 60%; */
   margin: 0 auto;
+}
+
+.ride-profile-image-container {
+    grid-area: rideProfileImage;
+  display: flex;
+  text-align: left;
+}
+
+.ride-profile-image-in-feed {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#ride-profile-image-in-feed {
+  max-height: 100%;
 }
 
 .give-riders-space {

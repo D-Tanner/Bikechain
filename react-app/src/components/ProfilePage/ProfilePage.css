@@ -146,13 +146,11 @@
 
 .item1:hover, .item2:hover, .item3:hover {
   cursor: pointer;
-  /* opacity: 0.6; */
 }
 
 #is-selected {
   border-bottom: 10px solid #ff7110;
-  /* background-color: #ff7110; */
-  /* color: white; */
+
 }
 
 .grid-container {
@@ -163,8 +161,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 10% 90%;
   grid-gap: 10px;
-  /* background-color: #2196F3; */
-  /* background-color: #728696; */
+
   padding: 10px;
   height: 100%;
   width: 75%;
@@ -172,15 +169,13 @@
 }
 
 .grid-container > div {
-  /* background-color: rgba(255, 255, 255, 0.8); */
-  /* background-color: rgba(219, 190, 190, 0.8); */
+
   text-align: center;
   padding: 20px 0;
   font-size: 25px;
 }
 
 .image-profile-page-container {
-  /* background-color: blue; */
   height: 300px;
   width: 300px;
   border-radius: 50%;
@@ -232,7 +227,6 @@
   font-size: 50px;
   display: flex;
   justify-content: center;
-  /* padding-top: 10px; */
 }
 
 .username-image-container {

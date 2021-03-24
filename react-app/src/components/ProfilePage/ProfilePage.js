@@ -181,9 +181,7 @@ const ProfilePage = () => {
                         </div>
                       </div>
                       <div className="profile-image-container">
-                        {/* <div className="profile-image-in-feed"> */}
                         {user.profileImage && <img id="profile-image-in-feed" src={user.profileImage} alt=""></img>}
-                        {/* </div> */}
                       </div>
                       <div className="user-username">{user.username}</div>
                       <div className="user-location">{user.city}, {user.state}</div>

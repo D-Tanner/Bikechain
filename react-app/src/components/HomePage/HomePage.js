@@ -185,7 +185,8 @@ const HomePage = () => {
             longitude={selectedRide.longitude}
             closeButton={true}
             closeOnClick={false}
-            offsetLeft={25}
+            offsetLeft={-5}
+            offsetTop={-40}
             onClose={() => {
               setSelectedRide(null)
               setPopup(false)

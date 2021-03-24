@@ -20,7 +20,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding-right: 50px;
+  /* padding-right: 50px; */
 }
 
 .navigation-second-fraction div {

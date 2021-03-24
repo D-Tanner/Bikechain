@@ -167,6 +167,8 @@ const HomePage = () => {
           <NavigationControl style={navControlStyle} />
           {filteredRides.map((ride, idx) => (
             <Marker key={idx}
+              offsetLeft={-30}
+              offsetTop={-40}
               latitude={ride.latitude}
               longitude={ride.longitude}
             >

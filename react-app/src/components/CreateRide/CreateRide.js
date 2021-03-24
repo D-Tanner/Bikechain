@@ -189,7 +189,7 @@ const CreateRide = ({ user }) => {
               ></input>
 
               <label className="main-label" for="local">
-                Are you a local? Feel comfortable taking others on this ride?
+                Know this trail? Feel comfortable taking others on this ride?
                 </label>
             </div>
             <div className="submit-cancel-container">

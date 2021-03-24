@@ -139,11 +139,9 @@ const RidePage = () => {
                         }}>Edit</button></div>}
                       <div className="center-post-images">
                         {post.images.map((image) => (
-                          // <div className="center-post-images">
                           <div className="images-in-post-container">
                             <img className="images-in-post" src={image.imageUrl} alt=""></img>
                           </div>
-                          // </div>
                         ))}
                       </div>
                     </div>
@@ -169,9 +167,7 @@ const RidePage = () => {
                           </div>
                         </div>
                         <div className="ride-profile-image-container">
-                          <div className="ride-profile-image-in-feed">
-                            {rider.profileImage && <img id="ride-profile-image-in-feed" src={rider.profileImage} alt=""></img>}
-                          </div>
+                          {rider.profileImage && <img id="ride-profile-image-in-feed" src={rider.profileImage} alt=""></img>}
                         </div>
                         <div className="user-username">{rider.username}</div>
                         <div className="user-location">{rider.city}, {rider.state}</div>

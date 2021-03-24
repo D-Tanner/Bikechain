@@ -18,8 +18,13 @@
 .navigation-second-fraction {
   grid-column-start: 3;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
+  padding-right: 50px;
+}
+
+.navigation-second-fraction div {
+  margin-left: 40px;
 }
 
 /* .nav-logout {

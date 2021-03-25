@@ -6,6 +6,7 @@ import "./RidePage.css"
 import "../ProfilePage/ProfilePage.css"
 import RidePost from "../RidePosts/RidePosts"
 import EditPost from "../EditPost/EditPost"
+import RideLocation from "../RideLocation/RideLocation"
 import { getLevel, getImage } from '../../services/getImages'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Moment from "react-moment"
@@ -22,6 +23,8 @@ const RidePage = () => {
     setShowLoginModal,
     showEditPostModal,
     setShowEditPostModal,
+    showRideLocationModal,
+    setShowRideLocationModal,
   } = useModalContext();
 
   const [ride, setRide] = useState();
@@ -60,7 +63,7 @@ const RidePage = () => {
     <>
       {showPostModal && <RidePost rideId={rideId} />}
       {showEditPostModal && <EditPost post={selectedPost} />}
-
+      {showRideLocationModal && ride && <RideLocation ride={ride} />}
       { ride &&
         <div className="ride-page-container">
           <div className="ride-page-grid-container">
@@ -94,6 +97,11 @@ const RidePage = () => {
                         Local
                   </div>
                     </div>)}
+                </div>
+                <div className="ride-info-location">
+                  <button
+                    onClick={() => setShowRideLocationModal(true)}
+                    className="ride-info-location-button">Where?</button>
                 </div>
                 <div className="ride-info-edit">
 

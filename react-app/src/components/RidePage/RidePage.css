@@ -249,8 +249,14 @@
   'level level title title isLocal'
   'level level ride-content ride-content ride-user'
   'level level ride-content ride-content ride-user'
-  'edit-ride edit-ride date date ride-user';
+  'edit-ride edit-ride date ride-location ride-user';
   grid-template-columns: 100px 100px 1fr 1fr 1fr;
+}
+
+.ride-info-location {
+  grid-area: ride-location;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .ride-info-title {

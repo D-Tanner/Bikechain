@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useModalContext } from "../../context/Modal"
 import { useParams, Link, useHistory } from "react-router-dom"
 import { unCommitToRide, commitToRide, getRideById } from "../../services/rides"
+import RoomIcon from '@material-ui/icons/Room';
+
 import "./RidePage.css"
 import "../ProfilePage/ProfilePage.css"
 import RidePost from "../RidePosts/RidePosts"
@@ -99,9 +101,11 @@ const RidePage = () => {
                     </div>)}
                 </div>
                 <div className="ride-info-location">
-                  <button
-                    onClick={() => setShowRideLocationModal(true)}
-                    className="ride-info-location-button">Where?</button>
+                  <div className="ride-info-location-container"
+                    onClick={() => setShowRideLocationModal(true)}>
+                    <div><RoomIcon /></div>
+                    <div className="ride-info-location-button">Where?</div>
+                  </div>
                 </div>
                 <div className="ride-info-edit">
 

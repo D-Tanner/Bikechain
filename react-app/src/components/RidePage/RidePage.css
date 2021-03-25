@@ -255,8 +255,23 @@
 
 .ride-info-location {
   grid-area: ride-location;
+}
+
+.ride-info-location-container {
   display: flex;
   justify-content: flex-start;
+  width: 50%;
+}
+
+.ride-info-location-container:hover {
+  opacity: 0.4;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.ride-info-location-button {
+  font-size: 20px;
+  padding-top: 5px;
 }
 
 .ride-info-title {

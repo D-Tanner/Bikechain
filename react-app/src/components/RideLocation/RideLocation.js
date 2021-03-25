@@ -26,7 +26,7 @@ const RideLocation = ({ ride }) => {
     (async () => {
       const token = await getMapToken()
       setMapToken(token.token)
-
+      console.log(ride)
     })();
   }, [])
 
@@ -49,30 +49,30 @@ const RideLocation = ({ ride }) => {
       {showRideLocationModal && ride && (
         <Modal onClose={() => setShowRideLocationModal(false)}>
           <div className="ride-location-container">
-            <div>
+            <div className="ride-location-close-button">
               <CloseIcon className="close-button-icon" onClick={() => setShowRideLocationModal((prev) => !prev)}></CloseIcon>
             </div>
-            <div>
-              <ReactMapGL
-                {...viewport} width="100%" height="100%"
-                ref={mapRef}
-                mapStyle="mapbox://styles/dft609/cklyko9gp16fx17qkfkqteipz"
-                mapboxApiAccessToken={mapToken}
-                onViewportChange={handleViewportChange}
-              >
-                <NavigationControl style={navControlStyle} />
+            {/* <div> */}
+            <ReactMapGL
+              {...viewport} width="100%" height="100%"
+              ref={mapRef}
+              mapStyle="mapbox://styles/dft609/cklyko9gp16fx17qkfkqteipz"
+              mapboxApiAccessToken={mapToken}
+              onViewportChange={handleViewportChange}
+            >
+              <NavigationControl style={navControlStyle} />
 
-                <Marker key={1}
-                  latitude={ride.latitude}
-                  longitude={ride.longitude}
-                  offsetLeft={-30}
-                  offsetTop={-40}
-                  draggable={true}>
-                  {/* <RoomIcon style={{ fontSize: 50, color: (isLocal) ? lightBlue[600] : deepOrange[600] }} /> */}
-                </Marker>
+              <Marker key={1}
+                latitude={ride.latitude}
+                longitude={ride.longitude}
+                offsetLeft={-30}
+                offsetTop={-40}
+                draggable={true}>
+                <RoomIcon style={{ fontSize: 50, color: (ride.isLocal) ? lightBlue[600] : deepOrange[600] }} />
+              </Marker>
 
-              </ReactMapGL>
-            </div>
+            </ReactMapGL>
+            {/* </div> */}
           </div>
         </Modal>
       )}

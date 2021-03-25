@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useModalContext } from "../../context/Modal"
 import { useParams, Link, useHistory } from "react-router-dom"
 import { unCommitToRide, commitToRide, getRideById } from "../../services/rides"
+import RoomIcon from '@material-ui/icons/Room';
+
 import "./RidePage.css"
 import "../ProfilePage/ProfilePage.css"
 import RidePost from "../RidePosts/RidePosts"
 import EditPost from "../EditPost/EditPost"
+import RideLocation from "../RideLocation/RideLocation"
 import { getLevel, getImage } from '../../services/getImages'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Moment from "react-moment"
@@ -22,6 +25,8 @@ const RidePage = () => {
     setShowLoginModal,
     showEditPostModal,
     setShowEditPostModal,
+    showRideLocationModal,
+    setShowRideLocationModal,
   } = useModalContext();
 
   const [ride, setRide] = useState();
@@ -60,7 +65,7 @@ const RidePage = () => {
     <>
       {showPostModal && <RidePost rideId={rideId} />}
       {showEditPostModal && <EditPost post={selectedPost} />}
-
+      {showRideLocationModal && ride && <RideLocation ride={ride} />}
       { ride &&
         <div className="ride-page-container">
           <div className="ride-page-grid-container">
@@ -73,15 +78,22 @@ const RidePage = () => {
                 <div className="ride-info-content">{ride.content}</div>
                 <div className="ride-info-date"><Moment format="MMM D" date={ride.date} /></div>
                 <div className="ride-current-username">
-                  <div className="organized">Organized By: </div>
-                  <Link to={`/profile/${ride.user.id}`} className="rider-link">
-                    <div className="ride-username-image-container">
-                      <img id="ride-username-image" src={getLevel(ride.user.level)} alt=""></img>
-                    </div>
-                    <div className="ride-actual-username">
-                      {ride.user.username}
-                    </div>
-                  </Link>
+                  <div>
+                    <div className="organized">Organized By: </div>
+
+                    <Link to={user ? `/profile/${ride.user.id}` : `/rides/${ride.id}`}
+                      className="rider-link">
+                      <div className="ride-username-container">
+
+                        <div className="ride-username-image-container">
+                          <img id="ride-username-image" src={getLevel(ride.user.level)} alt=""></img>
+                        </div>
+                        <div className="ride-actual-username">
+                          {ride.user.username}
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="ride-info-local">
@@ -94,6 +106,13 @@ const RidePage = () => {
                         Local
                   </div>
                     </div>)}
+                </div>
+                <div className="ride-info-location">
+                  <div className="ride-info-location-container"
+                    onClick={() => setShowRideLocationModal(true)}>
+                    <div><RoomIcon /></div>
+                    <div className="ride-info-location-button">Where?</div>
+                  </div>
                 </div>
                 <div className="ride-info-edit">
 

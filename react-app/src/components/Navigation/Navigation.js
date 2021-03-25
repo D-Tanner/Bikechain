@@ -21,6 +21,7 @@ const Navigation = () => {
 
     showSignUpModal,
     setShowSignUpModal,
+    setShowRideLocationModal,
 
   } = useModalContext();
 
@@ -50,6 +51,7 @@ const Navigation = () => {
                 <button
                   className="nav-login"
                   onClick={() => {
+                    setShowRideLocationModal(false)
                     setShowSignUpModal(false);
                     setShowLoginModal((prev) => !prev);
                   }}
@@ -62,7 +64,7 @@ const Navigation = () => {
                   <button
                     className="nav-signup"
                     onClick={() => {
-
+                      setShowRideLocationModal(false)
                       setShowLoginModal(false);
                       setShowSignUpModal((prev) => !prev);
                     }}

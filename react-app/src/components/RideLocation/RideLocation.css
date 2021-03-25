@@ -1,0 +1,9 @@
+.ride-location-container {
+  width: 600px;
+  height: 600px;
+}
+
+.ride-location-close-button {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -249,8 +249,29 @@
   'level level title title isLocal'
   'level level ride-content ride-content ride-user'
   'level level ride-content ride-content ride-user'
-  'edit-ride edit-ride date date ride-user';
+  'edit-ride edit-ride date ride-location ride-user';
   grid-template-columns: 100px 100px 1fr 1fr 1fr;
+}
+
+.ride-info-location {
+  grid-area: ride-location;
+}
+
+.ride-info-location-container {
+  display: flex;
+  justify-content: flex-start;
+  width: 50%;
+}
+
+.ride-info-location-container:hover {
+  opacity: 0.4;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.ride-info-location-button {
+  font-size: 20px;
+  padding-top: 5px;
 }
 
 .ride-info-title {
@@ -332,8 +353,10 @@
 .ride-current-username {
   grid-area: ride-user;
   font-size: 30px;
-  display: grid;
-
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  /* bottom: 0px; */
 }
 
 .ride-username-image-container {
@@ -348,7 +371,7 @@
 }
 
 .ride-actual-username {
-  padding-top: 10px;
+  padding-top: 8px;
 }
 
 .rider-link {
@@ -362,9 +385,20 @@
 .organized {
   /* padding-top: 30px; */
   font-size: 20px;
-  top: 10px;
+  /* padding-top: 40px; */
   display: flex;
   align-items: flex-end;
   justify-content: center;
+
+}
+.ride-username-container {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: row;
+}
+
+.ride-username-container:hover {
+  opacity: 0.4;
+  transition-duration: 0.2s;
 
 }

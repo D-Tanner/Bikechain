@@ -353,8 +353,10 @@
 .ride-current-username {
   grid-area: ride-user;
   font-size: 30px;
-  display: grid;
-
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  /* bottom: 0px; */
 }
 
 .ride-username-image-container {
@@ -383,7 +385,7 @@
 .organized {
   /* padding-top: 30px; */
   font-size: 20px;
-  top: 10px;
+  /* padding-top: 40px; */
   display: flex;
   align-items: flex-end;
   justify-content: center;

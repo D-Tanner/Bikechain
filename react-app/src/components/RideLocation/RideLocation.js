@@ -66,8 +66,7 @@ const RideLocation = ({ ride }) => {
                   latitude={ride.latitude}
                   longitude={ride.longitude}
                   offsetLeft={-30}
-                  offsetTop={-40}
-                  draggable={true}>
+                  offsetTop={-40}>
                   <RoomIcon style={{ fontSize: 50, color: (ride.isLocal) ? lightBlue[600] : deepOrange[600] }} />
                 </Marker>
 

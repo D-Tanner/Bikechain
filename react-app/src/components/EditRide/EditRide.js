@@ -213,13 +213,13 @@ const EditRide = ({ user }) => {
             <div className="submit-cancel-container-edit-ride">
               <button className="submit-button-edit-ride" type="submit">Update</button>
 
-              {!deleteConfirm && <button className="delete-button-edit-ride" onClick={() => setDeleteConfirm((prev) => !prev)}>Delete?</button>}
+              {/* {!deleteConfirm && <button className="delete-button-edit-ride" onClick={() => setDeleteConfirm((prev) => !prev)}>Delete?</button>}
               {deleteConfirm && (
                 <div className="confirmation-delete-edit-ride">
                   <button className="yes-confirm-delete" onClick={deleteProject}>Yes</button>
                   <button className="no-confirm-delete" onClick={() => setDeleteConfirm((prev) => !prev)}>No</button>
                 </div>
-              )}
+              )} */}
               <button className="cancel-button-edit-ride" onClick={() => history.push(`/rides/${rideId}`)}>Cancel</button>
             </div>
           </form>

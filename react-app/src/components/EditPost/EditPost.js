@@ -153,7 +153,7 @@ const EditPostForm = ({ post }) => {
 
                     ))
                   )}
-                <input className="choose-additional-image-button" type="button" id="loadFile" value="Choose a Additional Images" onClick={chooseAdditionalImage} />
+                <input className="choose-additional-image-button" type="button" id="loadFile" value="Choose Additional Images" onClick={chooseAdditionalImage} />
                 {/* <label for="image">   {additionalImages}</label> */}
                 <input className="hide-this-button" placeholder="Choose a Thumbnail Image" multiple="true" id="additionalFile" type="file" name="image" onChange={updateAdditionalImages} />
               </div>

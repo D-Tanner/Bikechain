@@ -5,8 +5,8 @@ function User() {
   const [user, setUser] = useState({});
   // Notice we use useParams here instead of getting the params
   // From props.
-  const { userId }  = useParams();
-
+  const { userId } = useParams();
+  //test change
   useEffect(() => {
     if (!userId) {
       return

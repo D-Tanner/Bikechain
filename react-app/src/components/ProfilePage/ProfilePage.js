@@ -109,7 +109,7 @@ const ProfilePage = () => {
                     setIsFollowing(false)
                     setUser(result)
                   }}
-                >Add Friend</button> :
+                >Remove Friend</button> :
                 <button
                   className="edit-a-user"
                   onClick={async () => {
@@ -117,7 +117,7 @@ const ProfilePage = () => {
                     setIsFollowing(true)
                     setUser(result)
                   }}
-                >Remove Friend</button>
+                >Add Friend</button>
               }</div>}
             </div>)}
           </div>
